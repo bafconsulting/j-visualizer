@@ -127,11 +127,10 @@
 
 <div class="box intro">
     <p>Visualizer ModuleView
-A Visualizer Module is a collection of data used for Visualization.
-It keeps access slightly standardized and offers several helpers to
-simplify data management.</p>
-<p>Each Module also has a collection of relevant ModuleViews - Objects that
-define and take care of how a given Module&#39;s data can be displayed.</p>
+Module Views encapsulate the functionality for drawing,
+coloring, and handling events on visualizations of the data
+provided by a Module. These are the &quot;visual&quot; side of
+data visualizations.</p>
 
 </div>
 
@@ -357,7 +356,7 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1855"><code>build&#x2F;js&#x2F;j-visualizer.js:1855</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1858"><code>build&#x2F;js&#x2F;j-visualizer.js:1858</code></a>
         
         </p>
 
@@ -466,7 +465,7 @@ withing the structure of its container object.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1973"><code>build&#x2F;js&#x2F;j-visualizer.js:1973</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1976"><code>build&#x2F;js&#x2F;j-visualizer.js:1976</code></a>
         
         </p>
 
@@ -585,7 +584,7 @@ The &quot;resizable mixin&quot; can help with this (more details in _resizable_m
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1944"><code>build&#x2F;js&#x2F;j-visualizer.js:1944</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1947"><code>build&#x2F;js&#x2F;j-visualizer.js:1947</code></a>
         
         </p>
 
@@ -706,7 +705,7 @@ ModuleView knows to perform its next operation with full calculations.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1782"><code>build&#x2F;js&#x2F;j-visualizer.js:1782</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1780"><code>build&#x2F;js&#x2F;j-visualizer.js:1780</code></a>
         
         </p>
 
@@ -721,7 +720,11 @@ ModuleView knows to perform its next operation with full calculations.</p>
 <p>This method is often called when a widget representing the ModuleView
 leaves a visualization (either being removed from a scene,
 or not being part of a new scene.)</p>
-<p>Each ModuleView should implement/override this function.</p>
+<p>Each ModuleView should implement/override this, and should
+provide (at least) the following functionality:</p>
+<pre class="code prettyprint"><code>- hide the container/elements (to prevent overlap/event-disruption),
+- unset isDrawn so that next time we know to fully redraw, etc.</code></pre>
+<p>Optionally, it should also empty the DOM Node/SVG to save memory</p>
 
     </div>
 
@@ -781,7 +784,7 @@ or not being part of a new scene.)</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1796"><code>build&#x2F;js&#x2F;j-visualizer.js:1796</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1799"><code>build&#x2F;js&#x2F;j-visualizer.js:1799</code></a>
         
         </p>
 
@@ -856,7 +859,7 @@ document.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1872"><code>build&#x2F;js&#x2F;j-visualizer.js:1872</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1875"><code>build&#x2F;js&#x2F;j-visualizer.js:1875</code></a>
         
         </p>
 
@@ -947,7 +950,7 @@ so the next redraw/execution is a fresh one (fully recalculated).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1930"><code>build&#x2F;js&#x2F;j-visualizer.js:1930</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1933"><code>build&#x2F;js&#x2F;j-visualizer.js:1933</code></a>
         
         </p>
 
@@ -1078,7 +1081,7 @@ to an expected format (as well as to determine whether a dimension changed).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1812"><code>build&#x2F;js&#x2F;j-visualizer.js:1812</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1815"><code>build&#x2F;js&#x2F;j-visualizer.js:1815</code></a>
         
         </p>
 
@@ -1205,7 +1208,7 @@ this particular ModuleView&#39;s container viewport.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1837"><code>build&#x2F;js&#x2F;j-visualizer.js:1837</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1840"><code>build&#x2F;js&#x2F;j-visualizer.js:1840</code></a>
         
         </p>
 
@@ -1312,7 +1315,7 @@ history to contain the selector that was used before this method was called.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1886"><code>build&#x2F;js&#x2F;j-visualizer.js:1886</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1889"><code>build&#x2F;js&#x2F;j-visualizer.js:1889</code></a>
         
         </p>
 
@@ -1433,7 +1436,7 @@ empty object.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1916"><code>build&#x2F;js&#x2F;j-visualizer.js:1916</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1919"><code>build&#x2F;js&#x2F;j-visualizer.js:1919</code></a>
         
         </p>
 
@@ -1543,7 +1546,7 @@ to an expected format (as well as to determine whether a dimension changed).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1741"><code>build&#x2F;js&#x2F;j-visualizer.js:1741</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1739"><code>build&#x2F;js&#x2F;j-visualizer.js:1739</code></a>
         
         </p>
 
@@ -1592,7 +1595,7 @@ upon filtering / limiting its viewable data.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1692"><code>build&#x2F;js&#x2F;j-visualizer.js:1692</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1690"><code>build&#x2F;js&#x2F;j-visualizer.js:1690</code></a>
         
         </p>
 
@@ -1644,7 +1647,7 @@ running any operation.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1732"><code>build&#x2F;js&#x2F;j-visualizer.js:1732</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1730"><code>build&#x2F;js&#x2F;j-visualizer.js:1730</code></a>
         
         </p>
 
@@ -1689,7 +1692,7 @@ running any operation.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1755"><code>build&#x2F;js&#x2F;j-visualizer.js:1755</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1753"><code>build&#x2F;js&#x2F;j-visualizer.js:1753</code></a>
         
         </p>
 
@@ -1738,7 +1741,7 @@ unchanged, often times the old Visualization can simply be shown.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1683"><code>build&#x2F;js&#x2F;j-visualizer.js:1683</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1681"><code>build&#x2F;js&#x2F;j-visualizer.js:1681</code></a>
         
         </p>
 
@@ -1783,7 +1786,7 @@ unchanged, often times the old Visualization can simply be shown.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1710"><code>build&#x2F;js&#x2F;j-visualizer.js:1710</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1708"><code>build&#x2F;js&#x2F;j-visualizer.js:1708</code></a>
         
         </p>
 
@@ -1830,7 +1833,7 @@ previously set as this instance of a ModuleView&#39;s containerSelector.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1723"><code>build&#x2F;js&#x2F;j-visualizer.js:1723</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1721"><code>build&#x2F;js&#x2F;j-visualizer.js:1721</code></a>
         
         </p>
 

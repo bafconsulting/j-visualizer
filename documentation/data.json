@@ -164,7 +164,7 @@
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
             "line": 1666,
-            "description": "Visualizer ModuleView\nA Visualizer Module is a collection of data used for Visualization.\nIt keeps access slightly standardized and offers several helpers to\nsimplify data management.\n\nEach Module also has a collection of relevant ModuleViews - Objects that\ndefine and take care of how a given Module's data can be displayed.",
+            "description": "Visualizer ModuleView\nModule Views encapsulate the functionality for drawing,\ncoloring, and handling events on visualizations of the data\nprovided by a Module. These are the \"visual\" side of\ndata visualizations.",
             "extends": "Ember.Object"
         },
         "Visualizer.ModuleView.ResizableMixin": {
@@ -179,7 +179,7 @@
             ],
             "namespace": "Visualizer.ModuleView",
             "file": "build/js/j-visualizer.js",
-            "line": 2004,
+            "line": 2007,
             "description": "ResizableMixin\nA helper mixin for ModuleViews which can have their size set manually.\nThis simplifies specifying size, padding, and position of a ModuleView\nviewport container, and allows values to be set either relatively\n(as a percentage of the Visualizer's World), or explicitly (e.g. \"50px\" or 50)",
             "extends": "Ember.Mixin"
         }
@@ -1556,7 +1556,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1683,
+            "line": 1681,
             "description": "module is a reference to the parent Module for this ModuleView instance.",
             "itemtype": "property",
             "name": "module",
@@ -1567,7 +1567,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1692,
+            "line": 1690,
             "description": "containerSelector is a string CSS selector used for finding\nthis ModuleView's window in a Visualization.\n\nOften unique, but occasionally multiple ModuleViews will be\nwritten to share a container.\n\nOften this property will be specified in a widget's parameters,\notherwise child classes to ModuleView should specify defaults.\nIf a widget does specify a `container` param, it will be set and used\nrunning any operation.",
             "itemtype": "property",
             "name": "containerSelector",
@@ -1578,7 +1578,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1710,
+            "line": 1708,
             "description": "previousSelectors is a list history of selectors that were\npreviously set as this instance of a ModuleView's containerSelector.\n\nThis may be useful for navigation, or for cleaning up after a visualization.",
             "itemtype": "property",
             "name": "previousSelectors",
@@ -1588,7 +1588,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1723,
+            "line": 1721,
             "description": "visualizer is a reference to the parent Visualizer instance.",
             "itemtype": "property",
             "name": "visualizer",
@@ -1599,7 +1599,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1732,
+            "line": 1730,
             "description": "data is a reference to the visible data for visualization.",
             "itemtype": "property",
             "name": "data",
@@ -1610,7 +1610,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1741,
+            "line": 1739,
             "description": "arrangedContent is a reference to all Module data (sorted/arranged).\nThis property should only seldom be accessed because it includes\ndata which is deemed irrelevant by the Module (filtered, etc.)\n\nIt may, however, be useful if a View decides to animate old data away\nupon filtering / limiting its viewable data.",
             "itemtype": "property",
             "name": "arrangedContent",
@@ -1621,7 +1621,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1755,
+            "line": 1753,
             "description": "dimensionsDidChange is a flag used by ModuleViews to decide how much\nprocessing is required when they run an operation.\n\nIf all dimensions, including visible data, width, and height, are\nunchanged, often times the old Visualization can simply be shown.\n\nSet to true by default, so that ModuleViews can have a proper first-draw.",
             "itemtype": "property",
             "name": "dimensionsDidChange",
@@ -1631,7 +1631,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1769,
+            "line": 1767,
             "description": "init is called upon creation of a Visualizer ModuleView Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init. By default it sets the parent Module reference.",
             "is_constructor": 1,
             "class": "Visualizer.ModuleView",
@@ -1639,8 +1639,8 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1782,
-            "description": "clear cleanses/hides the current ModuleView from the visualization.\n\nThis method is often called when a widget representing the ModuleView\nleaves a visualization (either being removed from a scene,\nor not being part of a new scene.)\n\nEach ModuleView should implement/override this function.",
+            "line": 1780,
+            "description": "clear cleanses/hides the current ModuleView from the visualization.\n\nThis method is often called when a widget representing the ModuleView\nleaves a visualization (either being removed from a scene,\nor not being part of a new scene.)\n\nEach ModuleView should implement/override this, and should\nprovide (at least) the following functionality:\n    - hide the container/elements (to prevent overlap/event-disruption),\n    - unset isDrawn so that next time we know to fully redraw, etc.\n\nOptionally, it should also empty the DOM Node/SVG to save memory",
             "itemtype": "method",
             "name": "clear",
             "return": {
@@ -1652,7 +1652,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1796,
+            "line": 1799,
             "description": "destroy totally removes the current ModuleView from the visualization.\nThis should entirely empty and remove any DOM-or-SVG Elements from the\ndocument.\n\nThis method is rarely called unless the Visualizer is being removed entirely.\n\nEach ModuleView should implement/override this function.",
             "itemtype": "method",
             "name": "destroy",
@@ -1665,7 +1665,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1812,
+            "line": 1815,
             "description": "run is used used to execute a widget's operation on a ModuleView.\nMany times additional parameters are passed, these assist in updating a\nModuleView by providing the widget's specifications (container, width,\nany data limitations, etc.)\n\nIf params includes a `container` key, its value will be used to define\nthis particular ModuleView's container viewport.",
             "itemtype": "method",
             "name": "run",
@@ -1691,7 +1691,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1837,
+            "line": 1840,
             "description": "updateSelector takes a new containerSelector parameter, and uses it to\nchange this ModuleView's viewport. It also updates the `previousSelectors`\nhistory to contain the selector that was used before this method was called.",
             "itemtype": "method",
             "name": "updateSelector",
@@ -1711,7 +1711,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1855,
+            "line": 1858,
             "description": "$container is a method which returns the ModuleView's container/viewport\nJQuery Object.\n\nIf a parameter is passed, $container will attempt to find that parameter\nwithing the structure of its container object.",
             "itemtype": "method",
             "name": "$container",
@@ -1732,7 +1732,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1872,
+            "line": 1875,
             "description": "hardReset clears out the ModuleView and tells it that dimensionsDidChange,\nso the next redraw/execution is a fresh one (fully recalculated).\n\nThis is automatically called when the ModuleView's data changes.",
             "itemtype": "method",
             "name": "hardReset",
@@ -1745,7 +1745,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1886,
+            "line": 1889,
             "description": "widgetParamedOutlineCSS provides an Object where keys/values map to CSS attributes\nrelevant to the container ONLY for manually specified dimensions/positions.\n\nThe point of this method is to provide access to data that can be used to set the\nstyle of the DOM element containing this ModuleView to the manually-set specifications.\n\nIf a developer opts to simply use a container's size/position, this will return an\nempty object.",
             "itemtype": "method",
             "name": "widgetParamedOutlineCSS",
@@ -1766,7 +1766,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1916,
+            "line": 1919,
             "description": "width getter/setter. Uses _updateDimension to coerce the set value\nto an expected format (as well as to determine whether a dimension changed).",
             "itemtype": "method",
             "name": "width",
@@ -1793,7 +1793,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1930,
+            "line": 1933,
             "description": "height getter/setter. Uses _updateDimension to coerce the set value\nto an expected format (as well as to determine whether a dimension changed).",
             "itemtype": "method",
             "name": "height",
@@ -1820,7 +1820,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1944,
+            "line": 1947,
             "description": "_updateDimension is used when setting width or height.\nIt accepts a key (which should be set to \"width\" or \"height\"),\nand a value.\n\nThe value is rounded down to the nearest integer to keep the DOM clean,\nand to keep determining changes simple.\n\nIf the value isn't the same as this ModuleView's previous value for the\nsame key property, dimensionsDidChange flag will be set true so that the\nModuleView knows to perform its next operation with full calculations.",
             "itemtype": "method",
             "name": "_updateDimension",
@@ -1847,7 +1847,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1973,
+            "line": 1976,
             "description": "_presetContainerAttrs is used when running an operation to ensure that\nrequired attributes based on the viewport (such as available width/height)\nfor visualization are set.\n\nIf width or height are manually specified, this will not update that attribute -\nin these cases, the ModuleView should know how to handle explicit dimensions.\nThe \"resizable mixin\" can help with this (more details in _resizable_mixin file)",
             "itemtype": "method",
             "name": "_presetContainerAttrs",
@@ -1868,7 +1868,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2020,
+            "line": 2023,
             "description": "run hijacks the ModuleView's run method to first attempt to update\nthe viewport's size based on the parameter specifications.\nAfter attempting to update the size/position of the viewport,\nthe ModuleView's run function is allowed to proceed.",
             "itemtype": "method",
             "name": "run",
@@ -1894,7 +1894,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2039,
+            "line": 2042,
             "description": "_updateSize scans the widget-sent params for manually-set\nsize/position values, uses these to set up the ModuleView's\nrelevant attributes.",
             "itemtype": "method",
             "name": "_updateSize",
@@ -1917,7 +1917,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2076,
+            "line": 2079,
             "description": "_tryUpdateValue given a sizing/position-defining key and value,\nthis method attempts to parse the value and, if it's a relative\npercentage or String, coerce it to an integer.\n\nAllows values to be explicit (e.g. 50, or \"50px\"), or relative\nto the Visualizer's World (e.g. \"50%\"). Parameter relativeReq is\nused to specify which of the World's parameters should be used to\ndetermine a relative size (e.g. \"left\" uses the World's \"width\").\n\nparams may also specify an amount of padding.",
             "itemtype": "method",
             "name": "_tryUpdateValue",
@@ -1975,7 +1975,7 @@
         },
         {
             "message": "Missing item type\ninit is called upon creation of a Visualizer ModuleView Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init. By default it sets the parent Module reference.",
-            "line": " build/js/j-visualizer.js:1769"
+            "line": " build/js/j-visualizer.js:1767"
         }
     ]
 }

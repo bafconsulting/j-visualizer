@@ -47,7 +47,7 @@ test('data', function() {
 
 //containerSelector and container history
 test('containerSelector and history', function() {
-  equal(_testModuleView.get('containerSelector'), '', "The default containerSelector is blank ('')");
+  equal(_testModuleView.get('containerSelector'), null, "The default containerSelector is null");
 
   ok(!_testModuleView.get('testCleared'), "Clear function not yet triggered...");
   _testModuleView.updateSelector(testSel1);

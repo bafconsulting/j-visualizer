@@ -1,11 +1,9 @@
 ###*
  # Visualizer ModuleView
- # A Visualizer Module is a collection of data used for Visualization.
- # It keeps access slightly standardized and offers several helpers to
- # simplify data management.
- #
- # Each Module also has a collection of relevant ModuleViews - Objects that
- # define and take care of how a given Module's data can be displayed.
+ # Module Views encapsulate the functionality for drawing,
+ # coloring, and handling events on visualizations of the data
+ # provided by a Module. These are the "visual" side of
+ # data visualizations.
  #
  # @class ModuleView
  # @namespace Visualizer
@@ -37,7 +35,7 @@
    # @type String
    # @required
   ###
-  containerSelector: '' # Should be set by child class...
+  containerSelector: null # MUST be set by child class or params...
 
   ###*
    # previousSelectors is a list history of selectors that were
@@ -116,7 +114,12 @@
    # leaves a visualization (either being removed from a scene,
    # or not being part of a new scene.)
    #
-   # Each ModuleView should implement/override this function.
+   # Each ModuleView should implement/override this, and should
+   # provide (at least) the following functionality:
+   #     - hide the container/elements (to prevent overlap/event-disruption),
+   #     - unset isDrawn so that next time we know to fully redraw, etc.
+   #
+   # Optionally, it should also empty the DOM Node/SVG to save memory
    #
    # @method clear
    # @return {void}
