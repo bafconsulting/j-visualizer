@@ -93,20 +93,6 @@
   injectDefaultWorld: ()->
     @$().empty().append $(defaultWorldTemplate)
 
-  ###*
-   # resizeSharedArea updates the height of the "shared area" DOM element
-   # within the Visualizer World.
-   #
-   # @deprecated @todo: remove this - this should be the work of ModuleViews...
-   #
-   # @method resizeSharedArea
-   # @return {void}
-  ###
-  resizeSharedArea: ( ()->
-    @$("#shared-area").css('height', "#{@get('height')}px")
-  ).observes('height')
-
-
 ###*
  # _handlePhasedButtonClick is called when an element with class phasedButton
  # is clicked. Adds a class 'disabledItem' to the element for 2 seconds;

@@ -966,20 +966,7 @@
      */
     injectDefaultWorld: function() {
       return this.$().empty().append($(defaultWorldTemplate));
-    },
-
-    /**
-      * resizeSharedArea updates the height of the &quot;shared area&quot; DOM element
-      * within the Visualizer World.
-      *
-      * @deprecated @todo: remove this - this should be the work of ModuleViews...
-      *
-      * @method resizeSharedArea
-      * @return {void}
-     */
-    resizeSharedArea: (function() {
-      return this.$(&quot;#shared-area&quot;).css(&#x27;height&#x27;, &quot;&quot; + (this.get(&#x27;height&#x27;)) + &quot;px&quot;);
-    }).observes(&#x27;height&#x27;)
+    }
   });
 
 
