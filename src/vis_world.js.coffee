@@ -91,6 +91,7 @@
    # @return {void}
   ###
   injectDefaultWorld: ()->
+    console?.warn?("INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.")
     @$().empty().append $(defaultWorldTemplate)
 
 ###*
@@ -117,5 +118,5 @@ defaultWorldTemplate = "
   <div id='static-area' class='static-area'>
     <div id='visualizer-loading-indicator'> </div>
   </div>
-  <div id='shared-area'> </div>
+  <div id='shared-area' class='shared-area'> </div>
 "

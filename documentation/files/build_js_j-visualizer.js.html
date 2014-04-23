@@ -965,6 +965,11 @@
       * @return {void}
      */
     injectDefaultWorld: function() {
+      if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
+        if (typeof console.warn === &quot;function&quot;) {
+          console.warn(&quot;INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.&quot;);
+        }
+      }
       return this.$().empty().append($(defaultWorldTemplate));
     }
   });
@@ -991,7 +996,7 @@
     });
   };
 
-  defaultWorldTemplate = &quot;&lt;div id=&#x27;static-area&#x27; class=&#x27;static-area&#x27;&gt; &lt;div id=&#x27;visualizer-loading-indicator&#x27;&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=&#x27;shared-area&#x27;&gt; &lt;/div&gt;&quot;;
+  defaultWorldTemplate = &quot;&lt;div id=&#x27;static-area&#x27; class=&#x27;static-area&#x27;&gt; &lt;div id=&#x27;visualizer-loading-indicator&#x27;&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=&#x27;shared-area&#x27; class=&#x27;shared-area&#x27;&gt; &lt;/div&gt;&quot;;
 
 }).call(this);
 
