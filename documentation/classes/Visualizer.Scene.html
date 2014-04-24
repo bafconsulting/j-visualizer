@@ -114,7 +114,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/build_js_j-visualizer.js.html#l564"><code>build&#x2F;js&#x2F;j-visualizer.js:564</code></a>
+            Defined in: <a href="../files/build_js_j-visualizer.js.html#l566"><code>build&#x2F;js&#x2F;j-visualizer.js:566</code></a>
         </div>
     
 
@@ -205,6 +205,13 @@ accessed through this Object.</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_fullRefreshWait">fullRefreshWait</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_identifier">identifier</a>
 
                                 
@@ -289,7 +296,7 @@ accessed through this Object.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l667"><code>build&#x2F;js&#x2F;j-visualizer.js:667</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l680"><code>build&#x2F;js&#x2F;j-visualizer.js:680</code></a>
         
         </p>
 
@@ -362,7 +369,7 @@ In essence it ensures that any Views that are not currently in use are cleansed.
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l725"><code>build&#x2F;js&#x2F;j-visualizer.js:725</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l745"><code>build&#x2F;js&#x2F;j-visualizer.js:745</code></a>
         
         </p>
 
@@ -436,7 +443,7 @@ and updating all current widgets.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l701"><code>build&#x2F;js&#x2F;j-visualizer.js:701</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l708"><code>build&#x2F;js&#x2F;j-visualizer.js:708</code></a>
         
         </p>
 
@@ -505,7 +512,7 @@ another ModuleView, a set of icons, to group themselves by common-words.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l609"><code>build&#x2F;js&#x2F;j-visualizer.js:609</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l611"><code>build&#x2F;js&#x2F;j-visualizer.js:611</code></a>
         
         </p>
 
@@ -551,7 +558,7 @@ Visualizer applications may find useful for describing a scene to users.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l619"><code>build&#x2F;js&#x2F;j-visualizer.js:619</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l621"><code>build&#x2F;js&#x2F;j-visualizer.js:621</code></a>
         
         </p>
 
@@ -561,14 +568,62 @@ Visualizer applications may find useful for describing a scene to users.</p>
     </div>
 
     <div class="description">
-        <p>drawWait is the debounce time waited before updating the scene.
-If a scene&#39;s reload is requested many times in rapid succession it will wait
+        <p>drawWait is the debounce time waited before running a single widget&#39;s update.
+If a widget&#39;s reload is requested many times in rapid succession it will wait
 until drawWait milliseconds after the last call before executing the reload.</p>
 
     </div>
 
     
         <p><strong>Default:</strong> 100</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_fullRefreshWait" class="property item">
+    <h3 class="name"><code>fullRefreshWait</code></h3>
+    <span class="type">Integer (milliseconds)</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l633"><code>build&#x2F;js&#x2F;j-visualizer.js:633</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>fullRefreshWait is an additional debounce time waited before
+totally updating the scene. This adds some</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 20</p>
     
 
     
@@ -600,7 +655,7 @@ until drawWait milliseconds after the last call before executing the reload.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l590"><code>build&#x2F;js&#x2F;j-visualizer.js:590</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l592"><code>build&#x2F;js&#x2F;j-visualizer.js:592</code></a>
         
         </p>
 
@@ -645,7 +700,7 @@ until drawWait milliseconds after the last call before executing the reload.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l644"><code>build&#x2F;js&#x2F;j-visualizer.js:644</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l657"><code>build&#x2F;js&#x2F;j-visualizer.js:657</code></a>
         
         </p>
 
@@ -694,7 +749,7 @@ which Views need to be cleared out, and which will be used in the next scene.</p
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l599"><code>build&#x2F;js&#x2F;j-visualizer.js:599</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l601"><code>build&#x2F;js&#x2F;j-visualizer.js:601</code></a>
         
         </p>
 
@@ -740,7 +795,7 @@ Visualizer applications may find useful for guiding users.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l581"><code>build&#x2F;js&#x2F;j-visualizer.js:581</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l583"><code>build&#x2F;js&#x2F;j-visualizer.js:583</code></a>
         
         </p>
 
@@ -785,7 +840,7 @@ Visualizer applications may find useful for guiding users.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l631"><code>build&#x2F;js&#x2F;j-visualizer.js:631</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l644"><code>build&#x2F;js&#x2F;j-visualizer.js:644</code></a>
         
         </p>
 

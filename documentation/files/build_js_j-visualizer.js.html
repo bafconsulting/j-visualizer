@@ -240,14 +240,16 @@
       * @return {void}
      */
     addModule: function(moduleClass, moduleKey, content) {
-      this.set(&quot;modules.&quot; + moduleKey, moduleClass.create({
+      var module;
+      module = moduleClass.create({
         visualizer: this,
         key: moduleKey
-      }));
+      });
+      this.set(&quot;modules.&quot; + moduleKey, module);
       if (content != null) {
         this.set(&quot;modules.&quot; + moduleKey + &quot;.content&quot;, content);
       }
-      return this.refresh();
+      return module.requestRedraw();
     },
 
     /**
@@ -725,8 +727,8 @@
     description: null,
 
     /**
-      * drawWait is the debounce time waited before updating the scene.
-      * If a scene&#x27;s reload is requested many times in rapid succession it will wait
+      * drawWait is the debounce time waited before running a single widget&#x27;s update.
+      * If a widget&#x27;s reload is requested many times in rapid succession it will wait
       * until drawWait milliseconds after the last call before executing the reload.
       *
       * @property drawWait
@@ -735,6 +737,17 @@
       * @required
      */
     drawWait: 100,
+
+    /**
+      * fullRefreshWait is an additional debounce time waited before
+      * totally updating the scene. This adds some
+      *
+      * @property fullRefreshWait
+      * @type Integer (milliseconds)
+      * @default 20
+      * @required
+     */
+    fullRefreshWait: 20,
 
     /**
       * widgets references a collection of &quot;widget&quot; Objects, each of which
@@ -781,29 +794,23 @@
       * @return {void}
      */
     clearUnusedViews: function() {
-      var module, moduleName, view, viewName, _ref, _results;
+      var module, moduleName, view, viewName, _ref, _ref1;
       _ref = this.get(&quot;visualizer.modules&quot;);
-      _results = [];
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _results.push((function() {
-          var _ref1, _results1;
-          _ref1 = module.get(&#x27;moduleViews&#x27;);
-          _results1 = [];
-          for (viewName in _ref1) {
-            if (!__hasProp.call(_ref1, viewName)) continue;
-            view = _ref1[viewName];
-            if (!this.get(&quot;requestedModuleViews.&quot; + moduleName + &quot;.&quot; + viewName)) {
-              _results1.push(typeof view.clear === &quot;function&quot; ? view.clear() : void 0);
-            } else {
-              _results1.push(void 0);
+        _ref1 = module.get(&#x27;moduleViews&#x27;);
+        for (viewName in _ref1) {
+          if (!__hasProp.call(_ref1, viewName)) continue;
+          view = _ref1[viewName];
+          if (!this.get(&quot;requestedModuleViews.&quot; + moduleName + &quot;.&quot; + viewName)) {
+            if (typeof view.clear === &quot;function&quot;) {
+              view.clear();
             }
           }
-          return _results1;
-        }).call(this));
+        }
       }
-      return _results;
+      return this;
     },
 
     /**
@@ -817,17 +824,30 @@
       * @return {void}
      */
     runWidgets: function(widgets) {
-      var moduleView, widget, _i, _len, _results;
+      var widget, _i, _len;
       if (widgets == null) {
         widgets = this.get(&#x27;widgets&#x27;);
       }
-      _results = [];
       for (_i = 0, _len = widgets.length; _i &lt; _len; _i++) {
         widget = widgets[_i];
-        moduleView = this.get(&quot;visualizer.modules.&quot; + widget.module + &quot;.moduleViews.&quot; + widget.view);
-        _results.push(moduleView != null ? moduleView.run(widget.operation, widget.params) : void 0);
+        this._runWidget(widget);
       }
-      return _results;
+      return this;
+    },
+    _runWidget: function(widget) {
+      var viewIdentifier;
+      if (widget == null) {
+        widget = {};
+      }
+      viewIdentifier = &quot;visualizer.modules.&quot; + widget.module + &quot;.moduleViews.&quot; + widget.view;
+      Visualizer.Utils.waitForRepeatingEvents(((function(_this) {
+        return function() {
+          var moduleView;
+          moduleView = _this.get(viewIdentifier);
+          return moduleView != null ? moduleView.run(widget.operation, widget.params) : void 0;
+        };
+      })(this)), this.get(&quot;drawWait&quot;), &quot;Scene Redraw for &quot; + viewIdentifier, this.get(&#x27;visualizer.timers&#x27;));
+      return this;
     },
 
     /**
@@ -846,7 +866,7 @@
           _this.clearUnusedViews();
           return _this.runWidgets();
         };
-      })(this)), this.get(&quot;drawWait&quot;), &quot;Scene Reload&quot;, this.get(&#x27;visualizer.timers&#x27;));
+      })(this)), this.get(&#x27;fullRefreshWait&#x27;), &quot;Full Scene Reload&quot;, this.get(&#x27;visualizer.timers&#x27;));
     }
   });
 
@@ -1679,6 +1699,22 @@
      */
     init: function() {
       return typeof this.setDefaultViews === &quot;function&quot; ? this.setDefaultViews() : void 0;
+    },
+
+    /**
+      * requestRedraw sends a request to the current scene
+      * to redraw the widgets relevant to this module (and no others).
+      *
+      * @method requestRedraw
+      * @return {void}
+     */
+    requestRedraw: function() {
+      var key, scene, _ref;
+      scene = this.get(&#x27;visualizer.currentScene&#x27;);
+      key = this.get(&#x27;key&#x27;);
+      if ((scene != null) &amp;&amp; (key != null)) {
+        return scene.runWidgets((_ref = scene.get(&#x27;widgets&#x27;)) != null ? _ref.filterBy(&#x27;module&#x27;, key) : void 0);
+      }
     },
 
     /**

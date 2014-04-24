@@ -111,9 +111,10 @@
    # @return {void}
   ###
   addModule: (moduleClass, moduleKey, content) ->
-    @set("modules.#{moduleKey}", moduleClass.create({visualizer: this, key: moduleKey}))
+    module = moduleClass.create({visualizer: this, key: moduleKey})
+    @set("modules.#{moduleKey}", module)
     @set("modules.#{moduleKey}.content", content) if content?
-    @refresh()
+    module.requestRedraw()
 
   ###*
    # refresh sends a request to the current scene to update the visualization

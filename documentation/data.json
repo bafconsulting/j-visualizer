@@ -59,7 +59,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 232,
+            "line": 234,
             "description": "Visualizer Colorer\nAn Object that manages the many colors of a visualization.",
             "todo": [
                 "refactor this file",
@@ -78,7 +78,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 564,
+            "line": 566,
             "description": "Visualizer Scene\nRepresents the Object used to manage data (Modules), and the way the data's viewed.\n\nThe visualization of data is a combined effort of all components contained in this project,\naccessed through this Object.",
             "extends": "Ember.Object"
         },
@@ -92,7 +92,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 748,
+            "line": 768,
             "description": "Visualizer World\nRepresents an Object used to manage an overview viewport for visualizations.",
             "extends": "Ember.Object"
         },
@@ -136,7 +136,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 1155,
+            "line": 1175,
             "description": "Visualizer Utils\nA collection of common utility functions used in the Visualizer."
         },
         "Visualizer.Module": {
@@ -149,7 +149,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 1474,
+            "line": 1494,
             "description": "Visualizer Module\nA Visualizer Module is a collection of data used for Visualization.\nIt keeps access slightly standardized and offers several helpers to\nsimplify data management.\n\nEach Module also has a collection of relevant ModuleViews - Objects that\ndefine and take care of how a given Module's data can be displayed.",
             "extends": "Ember.ArrayController"
         },
@@ -163,7 +163,7 @@
             "extension_for": [],
             "namespace": "Visualizer",
             "file": "build/js/j-visualizer.js",
-            "line": 1658,
+            "line": 1694,
             "description": "Visualizer ModuleView\nModule Views encapsulate the functionality for drawing,\ncoloring, and handling events on visualizations of the data\nprovided by a Module. These are the \"visual\" side of\ndata visualizations.",
             "extends": "Ember.Object"
         },
@@ -179,7 +179,7 @@
             ],
             "namespace": "Visualizer.ModuleView",
             "file": "build/js/j-visualizer.js",
-            "line": 1999,
+            "line": 2035,
             "description": "ResizableMixin\nA helper mixin for ModuleViews which can have their size set manually.\nThis simplifies specifying size, padding, and position of a ModuleView\nviewport container, and allows values to be set either relatively\n(as a percentage of the Visualizer's World), or explicitly (e.g. \"50px\" or 50)",
             "extends": "Ember.Mixin"
         }
@@ -301,7 +301,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 145,
+            "line": 147,
             "description": "refresh sends a request to the current scene to update the visualization\nbased on all current dimensions.\n\nThe scene will not be drawn unless the Visualizer's World is loaded (has a viewport).\n\nrefresh observes the world's state, and the current scene - it should automatically\nbe triggered when any of these things change to ensure an up-to-date Visualization.\n\nNote: because Ember Observers currently only watch Array collections (@each), not Object-maps,\nThis will (sadly) not currently watch 'modules.@each.dataset'...",
             "itemtype": "method",
             "name": "refresh",
@@ -313,7 +313,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 167,
+            "line": 169,
             "description": "useScenes updates the Visualizer's scenes collection with the inputScenes parameter.\nFor each item in inputScenes , a Visualizer.Scene object is created, with a\nreference to this instance of Visualizer as its visualizer parameter.",
             "itemtype": "method",
             "name": "useScenes",
@@ -332,7 +332,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 198,
+            "line": 200,
             "description": "setScene updates the Visualizer's currentScene property to reference the\nscene relevant to the method's _identifier parameter.",
             "itemtype": "method",
             "name": "setScene",
@@ -351,7 +351,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 210,
+            "line": 212,
             "description": "destroy cleans up the Visualizer (asking each Module to remove its Views, etc.)",
             "itemtype": "method",
             "name": "destroy",
@@ -363,7 +363,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 246,
+            "line": 248,
             "description": "visualizer is a reference to the parent Visualizer instance.",
             "itemtype": "property",
             "name": "visualizer",
@@ -374,7 +374,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 255,
+            "line": 257,
             "description": "init is called upon creation of a Visualizer Colorer Object.\nIt is responsible for the initial processing and setup of the Object.",
             "is_constructor": 1,
             "class": "Visualizer.Colorer",
@@ -382,7 +382,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 267,
+            "line": 269,
             "description": "freshColorPalette creates a new copy of\nthe main color scheme and returns it.",
             "itemtype": "method",
             "name": "freshColorPalette",
@@ -395,7 +395,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 279,
+            "line": 281,
             "description": "fixed accepts a keyword, and attempts to use the keyword\nto find a relevant color (e.g. \"positive\" may be \"green\").\n\nIf a valid keyword is passed and a relevant color isn't found,\na color is assigned from the rotating set.",
             "itemtype": "method",
             "name": "fixed",
@@ -415,7 +415,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 301,
+            "line": 303,
             "description": "uniquePalette is a collection of sets of remaining\ncolors. Often it will only have a main set, but some\napplications may have more complex coloring needs.",
             "itemtype": "property",
             "name": "uniquePalette",
@@ -426,7 +426,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 314,
+            "line": 316,
             "description": "_assignedUniq is a collection of sets of used colors\n(accessed by key).\nOften it will only have a main set, but some\napplications may have more complex coloring needs.",
             "itemtype": "property",
             "name": "uniquePalette",
@@ -437,7 +437,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 328,
+            "line": 330,
             "description": "unique is a function used to get a unique color for a\ngiven key within a given set (set defaults to \"main\").\n\nThis function has helper properties to handle assigning\nand unassigning colors, determining what the next color\nwill be, and so on.",
             "todo": [
                 "consider refactoring / making an Object instead of Function\n(Sorry for the currently complex code)"
@@ -467,7 +467,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 354,
+            "line": 356,
             "description": "_setUniqueProps sets up the helper sub-functions on the `unique` function.\n\nThis is complex, but allows the following syntax style:\n\n```javascript\n colorer.unique(\"Dylan\") => undefined\n colorer.unique.next() => \"green\"\n\n colorer.unique.assign(\"Dylan\") => undefined\n colorer.unique(\"Dylan\") => \"green\"\n colorer.unique.next() => \"purple\"\n\n colorer.unique.unassign(\"Dylan\") => undefined\n colorer.unique(\"Dylan\") => undefined\n```",
             "itemtype": "method",
             "name": "_setUniqueProps",
@@ -482,7 +482,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 377,
+            "line": 379,
             "description": "unique.next returns the next available color which can be\nassigned to a key.",
             "itemtype": "method",
             "name": "unique.next",
@@ -504,7 +504,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 395,
+            "line": 397,
             "description": "unique.assign attempts to assign a color to a key within a color set.",
             "itemtype": "method",
             "name": "unique.assign",
@@ -531,7 +531,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 417,
+            "line": 419,
             "description": "unique.unassign attempts to unassign a color to a key within a color set.\nThe color is returned to the palette so that it may be reused later.",
             "itemtype": "method",
             "name": "unique.unassign",
@@ -558,7 +558,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 446,
+            "line": 448,
             "description": "unique.resetSet removes colors from all keys within the given set,\nand also replenishes the palette.",
             "itemtype": "method",
             "name": "unique.resetSet",
@@ -578,7 +578,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 461,
+            "line": 463,
             "description": "unique._prepareSet creates and prepares a color set if it doesn't yet exist.",
             "itemtype": "method",
             "name": "unique._prepareSet",
@@ -598,7 +598,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 477,
+            "line": 479,
             "description": "_defaultAssigned is the default color to use for highlighting an item\n(when no other colors in the scheme apply - such as when you\nwish to have unique colors per-key but have no more colors available)",
             "itemtype": "property",
             "name": "_defaultAssigned",
@@ -608,7 +608,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 487,
+            "line": 489,
             "description": "_defaultUnassigned is the default color to use for\nnon-highlighted, but still colored, items.",
             "itemtype": "property",
             "name": "_defaultUnassigned",
@@ -618,7 +618,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 496,
+            "line": 498,
             "description": "_colorScheme is a collection of colors used in the visualization.",
             "itemtype": "property",
             "name": "_colorScheme",
@@ -628,7 +628,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 508,
+            "line": 510,
             "description": "_rotating_color returns an assigned color for a given key\nif available, otherwise assigns a color from the _colorScheme\n(unlike unique(), if all colors are used up, it\nstarts from the first color again.)",
             "itemtype": "method",
             "name": "_rotating_color",
@@ -648,7 +648,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 534,
+            "line": 536,
             "description": "_fixedVals is a collection of key => color pairs for\ncommonly used keys",
             "itemtype": "property",
             "name": "_fixedVals",
@@ -659,7 +659,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 581,
+            "line": 583,
             "description": "visualizer is a reference to the parent Visualizer instance.",
             "itemtype": "property",
             "name": "visualizer",
@@ -670,7 +670,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 590,
+            "line": 592,
             "description": "identifier is a string identifier uniquie to this instance of a Scene",
             "itemtype": "property",
             "name": "identifier",
@@ -681,7 +681,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 599,
+            "line": 601,
             "description": "title is simply a title for the scene, which some\nVisualizer applications may find useful for guiding users.",
             "itemtype": "property",
             "name": "title",
@@ -692,7 +692,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 609,
+            "line": 611,
             "description": "description is simply a description of the scene, which some\nVisualizer applications may find useful for describing a scene to users.",
             "itemtype": "property",
             "name": "description",
@@ -703,8 +703,8 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 619,
-            "description": "drawWait is the debounce time waited before updating the scene.\nIf a scene's reload is requested many times in rapid succession it will wait\nuntil drawWait milliseconds after the last call before executing the reload.",
+            "line": 621,
+            "description": "drawWait is the debounce time waited before running a single widget's update.\nIf a widget's reload is requested many times in rapid succession it will wait\nuntil drawWait milliseconds after the last call before executing the reload.",
             "itemtype": "property",
             "name": "drawWait",
             "type": "Integer (milliseconds)",
@@ -715,7 +715,19 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 631,
+            "line": 633,
+            "description": "fullRefreshWait is an additional debounce time waited before\ntotally updating the scene. This adds some",
+            "itemtype": "property",
+            "name": "fullRefreshWait",
+            "type": "Integer (milliseconds)",
+            "default": "20",
+            "required": 1,
+            "class": "Visualizer.Scene",
+            "namespace": "Visualizer"
+        },
+        {
+            "file": "build/js/j-visualizer.js",
+            "line": 644,
             "description": "widgets references a collection of \"widget\" Objects, each of which\nshould reference a Module, a ModuleView, an operation to call upon the ModuleView,\nand any additional parameters required (specifications for the ModuleView to follow).",
             "itemtype": "property",
             "name": "widgets",
@@ -726,7 +738,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 644,
+            "line": 657,
             "description": "requestedModuleViews is a computed property that returns\na dictionary of Modules -> ModuleViews , used to determine which views will be\nused by the scene. This is particularly useful when changing scenes to determine\nwhich Views need to be cleared out, and which will be used in the next scene.\n\nUsed as a searchable dictionary: `requestedModuleViews[moduleA][moduleViewA] => true`",
             "itemtype": "property",
             "name": "requestedModuleViews",
@@ -736,7 +748,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 667,
+            "line": 680,
             "description": "clearUnusedViews sends a \"clear\" request to each ModuleView used by the current\ninstance of Visualizer, which isn't used in any of this scene's widgets.\nIn essence it ensures that any Views that are not currently in use are cleansed.",
             "itemtype": "method",
             "name": "clearUnusedViews",
@@ -749,7 +761,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 701,
+            "line": 708,
             "description": "runWidgets iterated this scene's widgets, and requests that the ModuleView specified\nfor each widget executes the operation specified for each widget.\n\nFor example, it may tell one ModuleView, a word cloud, to draw itself, and\nanother ModuleView, a set of icons, to group themselves by common-words.",
             "itemtype": "method",
             "name": "runWidgets",
@@ -762,7 +774,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 725,
+            "line": 745,
             "description": "reload initiates the process of updating the visualization by cleaning out old Views\nand updating all current widgets.\n\nPrevents rapid-exectuion by delaying each request by an amount of time specified\n by property drawWait, and afterward only using the most recent request (as a debounce).",
             "itemtype": "method",
             "name": "reload",
@@ -775,7 +787,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 762,
+            "line": 782,
             "description": "loaded is a boolean variable indicating whether or the world is\nprepared to hold a visualization.\n\nCurrently it simply check's whether the world JQuery object exists",
             "itemtype": "property",
             "name": "loaded",
@@ -785,7 +797,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 773,
+            "line": 793,
             "description": "$ is a method which returns the world's JQuery Object, worldObj.\nIf a parameter is passed, $ will attempt to find that parameter\nwithing the structure of the worldObj.",
             "itemtype": "method",
             "name": "$",
@@ -805,7 +817,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 790,
+            "line": 810,
             "description": "resize recalculates the width, height, top, and left properties of the\nworldObj DOM Element\n\nThis method is automatically called when a World is created.",
             "itemtype": "method",
             "name": "resize",
@@ -818,7 +830,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 813,
+            "line": 833,
             "description": "_bindGlobalEvents binds this World's resize event to the window's resize,\nsuch that every time the window's size changes this World attempts to\nupdate its properties to reflect the new window.\n\nPrivate, since this method is automatically called when a World is created.",
             "itemtype": "method",
             "name": "_bindGlobalEvents",
@@ -833,7 +845,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 832,
+            "line": 852,
             "description": "_bindWorldEvents binds and generic event listeners that\noccur within the World's domain\n\nPrivate, since this method is automatically called when a World is created\nas well as when the worldObj changes to reference a new area.",
             "itemtype": "method",
             "name": "_bindWorldEvents",
@@ -848,7 +860,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 850,
+            "line": 870,
             "description": "injectDefaultWorld clears out the Visualizer World's contents, injects the basic\nvisualizer skeleton",
             "deprecated": true,
             "deprecationMessage": "@todo Deprecate this. ModuleViews should take care of this on a per-App basis...",
@@ -863,7 +875,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 870,
+            "line": 890,
             "description": "_handlePhasedButtonClick is called when an element with class phasedButton\nis clicked. Adds a class 'disabledItem' to the element for 2 seconds;\nif the element is clicked again before the class 'disabledItem' class expires,\nthe click will be ignored.",
             "itemtype": "method",
             "name": "_handlePhasedButtonClick",
@@ -878,7 +890,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 896,
+            "line": 916,
             "description": "removeInstancesOf removes traces of a provided value from an Array",
             "itemtype": "method",
             "name": "removeInstancesOf",
@@ -897,7 +909,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 920,
+            "line": 940,
             "description": "shuffleVals - Fisher-Yates algorithm for shuffling arrays\nin-place. (Essentially goes through each slot in array and\nswitches its value with one from a random slot...)",
             "itemtype": "method",
             "name": "shuffleVals",
@@ -910,7 +922,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 950,
+            "line": 970,
             "description": "values takes an Object and returns its values\n(similar to `.keys()`)",
             "itemtype": "method",
             "name": "values",
@@ -923,7 +935,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 972,
+            "line": 992,
             "description": "addExpiringClass adds a temporary class to a JQuery object.\nThe class has an expiry, after which it is removed.",
             "itemtype": "method",
             "name": "addExpiringClass",
@@ -952,7 +964,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1005,
+            "line": 1025,
             "description": "truncateTo ensures a string is no longer than a given size limit.\n(In the case that it is longer, a suffix can be given for truncation)",
             "itemtype": "method",
             "name": "truncateTo",
@@ -979,7 +991,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1034,
+            "line": 1054,
             "description": "advancedIndexOf searches the object String for a parameter\nsubstring, allows additional options (such as case-insensitivity).",
             "itemtype": "method",
             "name": "advancedIndexOf",
@@ -1005,7 +1017,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1061,
+            "line": 1081,
             "description": "includes searches the object String for a parameter\nsubstring, returns boolean, accepts optional parameter\nto specify whether the search should be case-insensitive.",
             "itemtype": "method",
             "name": "includes",
@@ -1032,7 +1044,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1081,
+            "line": 1101,
             "description": "beginsWith searches the start of the object String for a parameter\nsubstring, returns boolean, accepts optional parameter\nto specify whether the search should be case-insensitive.",
             "itemtype": "method",
             "name": "beginsWith",
@@ -1059,7 +1071,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1101,
+            "line": 1121,
             "description": "capitalizeLetter is a String capitalize function adapted from\nhttp://stackoverflow.com/a/3291856/624590 .\nCapitalizes the letter at position n of the object String.",
             "itemtype": "method",
             "name": "capitalizeLetter",
@@ -1081,7 +1093,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1123,
+            "line": 1143,
             "description": "titleize creates a title-formatted copy of a String",
             "itemtype": "method",
             "name": "titleize",
@@ -1094,7 +1106,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1139,
+            "line": 1159,
             "description": "removeInitialUnderscore removes the first leading underscore from a String",
             "itemtype": "method",
             "name": "removeInitialUnderscore",
@@ -1107,7 +1119,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1168,
+            "line": 1188,
             "description": "existsWithValue checks if a values isn't null/undefined",
             "itemtype": "method",
             "name": "existsWithValue",
@@ -1127,7 +1139,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1179,
+            "line": 1199,
             "description": "waitForRepeatingEvents is a debounce-like function for preventing\nmultiple execution. It should be called with a function and an\namount of time to wait. It can also be provided a timer name so as\nto namespace the blocked items. It can also be called with an Object\ntimer set to allow different objects to not prevent the execution of\nfunctions in others.",
             "itemtype": "method",
             "name": "waitForRepeatingEvents",
@@ -1162,7 +1174,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1211,
+            "line": 1231,
             "description": "minVal takes two parameters, returns the smaller",
             "itemtype": "method",
             "name": "minVal",
@@ -1187,7 +1199,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1227,
+            "line": 1247,
             "description": "maxVal takes two parameters, returns the larger",
             "itemtype": "method",
             "name": "maxVal",
@@ -1212,7 +1224,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1243,
+            "line": 1263,
             "description": "boundedVal takes three parameters: an item, the lower bound,\nand the upper bound. If the item is between the bounds,\nthe item is returned, otherwise the failed bound is returned.",
             "itemtype": "method",
             "name": "boundedVal",
@@ -1242,7 +1254,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1264,
+            "line": 1284,
             "description": "randBetween provides a random number between two values.",
             "itemtype": "method",
             "name": "randBetween",
@@ -1271,7 +1283,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1282,
+            "line": 1302,
             "description": "randIntBetween provides a random (rounded) Integer between two values.",
             "itemtype": "method",
             "name": "randIntBetween",
@@ -1296,7 +1308,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1294,
+            "line": 1314,
             "description": "isArray returns a flag of whether the parameter is of type Array",
             "itemtype": "method",
             "name": "isArray",
@@ -1316,7 +1328,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1305,
+            "line": 1325,
             "description": "relativeSizeString parses an input size for either an explicit\nvalue, or a value in relationship to some parent value.\nE.g. \"50%\" of 900 = 450, \"50\" = 50, \"50px\" = 50",
             "itemtype": "method",
             "name": "relativeSizeString",
@@ -1341,7 +1353,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1325,
+            "line": 1345,
             "description": "intersectionSafe is simple intersection code, iterates along two\nsorted arrays incrementing the index of the smaller value\n(if values are equal, it is part of intersection, and so store position and iterate both).\nReturns array of indices of intersecting values with respect to the first array passed.\n\nintersectionSafe is modified from code found on StackOverflow at:\nhttp://stackoverflow.com/a/1885660/624590",
             "itemtype": "method",
             "name": "intersectionSafe",
@@ -1366,7 +1378,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1358,
+            "line": 1378,
             "description": "intersectionCount is a modified form of intersectionSafe that simply\nincrements a counter instead of building an intersection Array.\n(Faster because increments rather than pushing values to array,\nalso more memory efficient; JSPerf suggests 100% performance increase\n- beneficial for large datasets...)",
             "itemtype": "method",
             "name": "intersectionCount",
@@ -1391,7 +1403,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1389,
+            "line": 1409,
             "description": "cloneArray creates a copy of an Array.",
             "deprecated": true,
             "deprecationMessage": "use Array.copy instead.",
@@ -1413,7 +1425,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1491,
+            "line": 1511,
             "description": "visualizer is a reference to the parent Visualizer instance.",
             "itemtype": "property",
             "name": "visualizer",
@@ -1424,7 +1436,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1500,
+            "line": 1520,
             "description": "maxLength is an integer size of how much data should be displayed.\nSometimes a project will collect more data than is practical to display\nto the user (either because it will be confusing, or otherwise too slow);\nthis property represents that limit.",
             "itemtype": "property",
             "name": "maxLength",
@@ -1435,7 +1447,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1512,
+            "line": 1532,
             "description": "content is the full set of data (in Array , Ember.Array) form that is\navailable to this Module.\n\nNote: this attribute should only be accessed from the\ndata-management side of your app; it's where you dump data, and it's\nwhat you generally access for front-end filtering. This Module's\nModuleViews should not access the content, however - they should access\nthe dataset (which is a subset of content).",
             "itemtype": "property",
             "name": "content",
@@ -1446,7 +1458,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1530,
+            "line": 1550,
             "description": "dataset is the subset of content used for current visualization.\nIt can potentially be the exact same data as content, in full,\nbut it can also be a limited/truncated version (often using the\nmaxLength property). It may also filtered down by properties, etc.\n\nModuleViews should only look here for their Module data.",
             "itemtype": "property",
             "name": "dataset",
@@ -1457,7 +1469,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1545,
+            "line": 1565,
             "description": "moduleViews an object dictionary/map of Visualizer ModuleView objects,\neach of which must be relevant to this particular Module's data structuring.\n\nFor example, if this Module is a set of words with frequencies, a WordCloud\nmay be an applicable ModuleView.",
             "itemtype": "property",
             "name": "moduleViews",
@@ -1468,7 +1480,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1560,
+            "line": 1580,
             "description": "init is called upon creation of a Visualizer Module Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init.\n\nIf the Module defines a setDefaultViews function (to prepopulate its\nModuleViews), that function will be called automatically.",
             "is_constructor": 1,
             "class": "Visualizer.Module",
@@ -1476,7 +1488,20 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1576,
+            "line": 1596,
+            "description": "requestRedraw sends a request to the current scene\nto redraw the widgets relevant to this module (and no others).",
+            "itemtype": "method",
+            "name": "requestRedraw",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Visualizer.Module",
+            "namespace": "Visualizer"
+        },
+        {
+            "file": "build/js/j-visualizer.js",
+            "line": 1612,
             "description": "forceLimit sorts the current data by a provided key, and selects only the\nfirst maxLength (property) items for this Module's dataset, ensuring that\nthe limit to the viewed-data's size is enforced.",
             "todo": [
                 "consider implementing a n-item max-heap data structure instead of sorting"
@@ -1501,7 +1526,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1598,
+            "line": 1634,
             "description": "groupedBy creates a cached property on the Module to retrieve its data\nin the form of a two-dimensional Array, where the sub arrays contain\nthis Module's dataset split into sets that share a common (passed) property.\n\nThe outside Array is sorted by length, so the largest groups are at the start.\n\nSince the result is cached, it will only be recomputed when the dataset changes,\nkeeping this efficient. The first time you use groupBy for any given property\nafter the data changes (or is created) runs O(nlogn), but each subsequent access\nis simply O(1) as it simply grabs the previous data. Say what??? :P",
             "itemtype": "method",
             "name": "groupedBy",
@@ -1521,7 +1546,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1630,
+            "line": 1666,
             "description": "_groupedBy groups the Module's dataset by a given property, returning\nan unsorted, two-dimensional array.\n\nThis method should not be called explicitly, instead developers should\ngo through the `groupedBy` method (no leading underscore), which\ncaches the groups (making redraws far more efficient)",
             "itemtype": "method",
             "name": "_groupedBy",
@@ -1541,7 +1566,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1673,
+            "line": 1709,
             "description": "module is a reference to the parent Module for this ModuleView instance.",
             "itemtype": "property",
             "name": "module",
@@ -1552,7 +1577,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1682,
+            "line": 1718,
             "description": "containerSelector is a string CSS selector used for finding\nthis ModuleView's window in a Visualization.\n\nOften unique, but occasionally multiple ModuleViews will be\nwritten to share a container.\n\nOften this property will be specified in a widget's parameters,\notherwise child classes to ModuleView should specify defaults.\nIf a widget does specify a `container` param, it will be set and used\nrunning any operation.",
             "itemtype": "property",
             "name": "containerSelector",
@@ -1563,7 +1588,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1700,
+            "line": 1736,
             "description": "previousSelectors is a list history of selectors that were\npreviously set as this instance of a ModuleView's containerSelector.\n\nThis may be useful for navigation, or for cleaning up after a visualization.",
             "itemtype": "property",
             "name": "previousSelectors",
@@ -1573,7 +1598,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1713,
+            "line": 1749,
             "description": "visualizer is a reference to the parent Visualizer instance.",
             "itemtype": "property",
             "name": "visualizer",
@@ -1584,7 +1609,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1722,
+            "line": 1758,
             "description": "data is a reference to the visible data for visualization.",
             "itemtype": "property",
             "name": "data",
@@ -1595,7 +1620,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1731,
+            "line": 1767,
             "description": "arrangedContent is a reference to all Module data (sorted/arranged).\nThis property should only seldom be accessed because it includes\ndata which is deemed irrelevant by the Module (filtered, etc.)\n\nIt may, however, be useful if a View decides to animate old data away\nupon filtering / limiting its viewable data.",
             "itemtype": "property",
             "name": "arrangedContent",
@@ -1606,7 +1631,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1745,
+            "line": 1781,
             "description": "dimensionsDidChange is a flag used by ModuleViews to decide how much\nprocessing is required when they run an operation.\n\nIf all dimensions, including visible data, width, and height, are\nunchanged, often times the old Visualization can simply be shown.\n\nSet to true by default, so that ModuleViews can have a proper first-draw.",
             "itemtype": "property",
             "name": "dimensionsDidChange",
@@ -1616,7 +1641,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1759,
+            "line": 1795,
             "description": "init is called upon creation of a Visualizer ModuleView Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init. By default it sets the parent Module reference.",
             "is_constructor": 1,
             "class": "Visualizer.ModuleView",
@@ -1624,7 +1649,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1772,
+            "line": 1808,
             "description": "clear cleanses/hides the current ModuleView from the visualization.\n\nThis method is often called when a widget representing the ModuleView\nleaves a visualization (either being removed from a scene,\nor not being part of a new scene.)\n\nEach ModuleView should implement/override this, and should\nprovide (at least) the following functionality:\n    - hide the container/elements (to prevent overlap/event-disruption),\n    - unset isDrawn so that next time we know to fully redraw, etc.\n\nOptionally, it should also empty the DOM Node/SVG to save memory",
             "itemtype": "method",
             "name": "clear",
@@ -1637,7 +1662,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1791,
+            "line": 1827,
             "description": "destroy totally removes the current ModuleView from the visualization.\nThis should entirely empty and remove any DOM-or-SVG Elements from the\ndocument.\n\nThis method is rarely called unless the Visualizer is being removed entirely.\n\nEach ModuleView should implement/override this function.",
             "itemtype": "method",
             "name": "destroy",
@@ -1650,7 +1675,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1807,
+            "line": 1843,
             "description": "run is used used to execute a widget's operation on a ModuleView.\nMany times additional parameters are passed, these assist in updating a\nModuleView by providing the widget's specifications (container, width,\nany data limitations, etc.)\n\nIf params includes a `container` key, its value will be used to define\nthis particular ModuleView's container viewport.",
             "itemtype": "method",
             "name": "run",
@@ -1676,7 +1701,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1832,
+            "line": 1868,
             "description": "updateSelector takes a new containerSelector parameter, and uses it to\nchange this ModuleView's viewport. It also updates the `previousSelectors`\nhistory to contain the selector that was used before this method was called.",
             "itemtype": "method",
             "name": "updateSelector",
@@ -1696,7 +1721,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1850,
+            "line": 1886,
             "description": "$container is a method which returns the ModuleView's container/viewport\nJQuery Object.\n\nIf a parameter is passed, $container will attempt to find that parameter\nwithing the structure of its container object.",
             "itemtype": "method",
             "name": "$container",
@@ -1717,7 +1742,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1867,
+            "line": 1903,
             "description": "hardReset clears out the ModuleView and tells it that dimensionsDidChange,\nso the next redraw/execution is a fresh one (fully recalculated).\n\nThis is automatically called when the ModuleView's data changes.",
             "itemtype": "method",
             "name": "hardReset",
@@ -1730,7 +1755,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1881,
+            "line": 1917,
             "description": "widgetParamedOutlineCSS provides an Object where keys/values map to CSS attributes\nrelevant to the container ONLY for manually specified dimensions/positions.\n\nThe point of this method is to provide access to data that can be used to set the\nstyle of the DOM element containing this ModuleView to the manually-set specifications.\n\nIf a developer opts to simply use a container's size/position, this will return an\nempty object.",
             "itemtype": "method",
             "name": "widgetParamedOutlineCSS",
@@ -1751,7 +1776,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1911,
+            "line": 1947,
             "description": "width getter/setter. Uses _updateDimension to coerce the set value\nto an expected format (as well as to determine whether a dimension changed).",
             "itemtype": "method",
             "name": "width",
@@ -1778,7 +1803,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1925,
+            "line": 1961,
             "description": "height getter/setter. Uses _updateDimension to coerce the set value\nto an expected format (as well as to determine whether a dimension changed).",
             "itemtype": "method",
             "name": "height",
@@ -1805,7 +1830,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1939,
+            "line": 1975,
             "description": "_updateDimension is used when setting width or height.\nIt accepts a key (which should be set to \"width\" or \"height\"),\nand a value.\n\nThe value is rounded down to the nearest integer to keep the DOM clean,\nand to keep determining changes simple.\n\nIf the value isn't the same as this ModuleView's previous value for the\nsame key property, dimensionsDidChange flag will be set true so that the\nModuleView knows to perform its next operation with full calculations.",
             "itemtype": "method",
             "name": "_updateDimension",
@@ -1832,7 +1857,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 1968,
+            "line": 2004,
             "description": "_presetContainerAttrs is used when running an operation to ensure that\nrequired attributes based on the viewport (such as available width/height)\nfor visualization are set.\n\nIf width or height are manually specified, this will not update that attribute -\nin these cases, the ModuleView should know how to handle explicit dimensions.\nThe \"resizable mixin\" can help with this (more details in _resizable_mixin file)",
             "itemtype": "method",
             "name": "_presetContainerAttrs",
@@ -1853,7 +1878,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2015,
+            "line": 2051,
             "description": "run hijacks the ModuleView's run method to first attempt to update\nthe viewport's size based on the parameter specifications.\nAfter attempting to update the size/position of the viewport,\nthe ModuleView's run function is allowed to proceed.",
             "itemtype": "method",
             "name": "run",
@@ -1879,7 +1904,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2034,
+            "line": 2070,
             "description": "_updateSize scans the widget-sent params for manually-set\nsize/position values, uses these to set up the ModuleView's\nrelevant attributes.",
             "itemtype": "method",
             "name": "_updateSize",
@@ -1902,7 +1927,7 @@
         },
         {
             "file": "build/js/j-visualizer.js",
-            "line": 2071,
+            "line": 2107,
             "description": "_tryUpdateValue given a sizing/position-defining key and value,\nthis method attempts to parse the value and, if it's a relative\npercentage or String, coerce it to an integer.\n\nAllows values to be explicit (e.g. 50, or \"50px\"), or relative\nto the Visualizer's World (e.g. \"50%\"). Parameter relativeReq is\nused to specify which of the World's parameters should be used to\ndetermine a relative size (e.g. \"left\" uses the World's \"width\").\n\nparams may also specify an amount of padding.",
             "itemtype": "method",
             "name": "_tryUpdateValue",
@@ -1952,15 +1977,15 @@
         },
         {
             "message": "Missing item type\ninit is called upon creation of a Visualizer Colorer Object.\nIt is responsible for the initial processing and setup of the Object.",
-            "line": " build/js/j-visualizer.js:255"
+            "line": " build/js/j-visualizer.js:257"
         },
         {
             "message": "Missing item type\ninit is called upon creation of a Visualizer Module Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init.\n\nIf the Module defines a setDefaultViews function (to prepopulate its\nModuleViews), that function will be called automatically.",
-            "line": " build/js/j-visualizer.js:1560"
+            "line": " build/js/j-visualizer.js:1580"
         },
         {
             "message": "Missing item type\ninit is called upon creation of a Visualizer ModuleView Object.\nIt is responsible for the initial processing and setup of the Object.\n\nAny preprocessing that is required to make the Module valid should be\ndone, at latest, on init. By default it sets the parent Module reference.",
-            "line": " build/js/j-visualizer.js:1759"
+            "line": " build/js/j-visualizer.js:1795"
         }
     ]
 }

@@ -100,3 +100,23 @@ test('groupedBy', function() {
   ok(['13', '31'].indexOf(thirdGroupedReduced) > -1, "Since none of the first group's types \
                                                       really changed, the groups are the same.");
 });
+
+// requestRedraw
+asyncTest('requestRedraw', 2, function() {
+  var _specWait = (_vis.get('currentScene.drawWait') + _vis.get('currentScene.fullRefreshWait')) * 1.1;
+  var redrawModule = _vis.get('modules.0');
+  var ignoredModule = _vis.get('modules.2');
+  var _viewVal = 'moduleViews.specView.val';
+
+  Ember.run.later(this, function () {
+    var prevRedrawModuleVal = redrawModule.get(_viewVal);
+    var prevIgnoredModuleVal = ignoredModule.get(_viewVal);
+
+    redrawModule.requestRedraw();
+    Ember.run.later(this, function () {
+      equal(redrawModule.get(_viewVal), prevRedrawModuleVal+1, "The test module view value has been incremented");
+      equal(ignoredModule.get(_viewVal), prevIgnoredModuleVal, "The unrelated module's view value is unchanged.");
+      start();
+    }, _specWait);
+  }, _specWait);
+});

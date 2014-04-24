@@ -8,7 +8,7 @@ module("Visualizer.Scene Unit Test", {
     _vis = getSpecVisualizer();
     _defaultScene = _vis.get('currentScene');
     _specDrawWait = 30;
-    _specWait = (_specDrawWait*1.1);
+    _specWait = (_specDrawWait + _defaultScene.get('fullRefreshWait'))*1.1;
   },
 
   /**
@@ -45,34 +45,41 @@ test('requestedModuleViews', function() {
 });
 
 
+
 // drawWait
-asyncTest('drawWait', 3, function() {
+// default value:
+test('drawWait default', function() {
   var _defaultWaitTime = 100;
-
-  var initialValue = _vis.get('modules.0.moduleViews.specView.val');
   equal(_defaultScene.get('drawWait'), _defaultWaitTime, "default drawWait time is 100");
+});
 
-  // Let's tone down the drawWait value to make the tests run more quickly...
-  _defaultScene.set('drawWait', _specDrawWait)
+// drawWait is used:
+asyncTest('drawWait is used', 2, function() {
+  Ember.run.later(this, function () { // Allow the initial run (when adding the module) to occur first...
 
-  _defaultScene.reload();
-  _defaultScene.reload(); // Repeated call!
-  _defaultScene.reload(); // Repeated call!
-  _defaultScene.reload(); // Repeated call!
+    var initialValue = _vis.get('modules.0.moduleViews.specView.val');
+    // Let's tone down the drawWait value to make the tests run more quickly...
+    _defaultScene.set('drawWait', _specDrawWait)
 
-  Ember.run.later(this, function () {
-    var newValue = _vis.get('modules.0.moduleViews.specView.val');
-    equal(newValue, initialValue+1, "Although reload was called four times in succession, \
-                                     only one triggered because drawWait time hadn't passed");
+    _defaultScene.reload();
+    _defaultScene.reload(); // Repeated call!
+    _defaultScene.reload(); // Repeated call!
+    _defaultScene.reload(); // Repeated call!
 
-    _defaultScene.reload(); // Try reloading again again...
     Ember.run.later(this, function () {
-      var finalValue = _vis.get('modules.0.moduleViews.specView.val');
-      equal(finalValue, newValue+1, "However, it can be reloaded again after the drawWait time passes.");
+      var newValue = _vis.get('modules.0.moduleViews.specView.val');
+      equal(newValue, initialValue+1, "Although reload was called four times in succession, \
+                                       only one triggered because drawWait time hadn't passed");
 
-      start();
+      _defaultScene.reload(); // Try reloading again again...
+      Ember.run.later(this, function () {
+        var finalValue = _vis.get('modules.0.moduleViews.specView.val');
+        equal(finalValue, newValue+1, "However, it can be reloaded again after the drawWait time passes.");
+
+        start();
+      }, _specWait);
+
     }, _specWait);
-
   }, _specWait);
 });
 
@@ -83,33 +90,35 @@ asyncTest('drawWait', 3, function() {
 // Any widget that gets cleared (leaves a scene) results in a value of 0.
 */
 asyncTest('reload (runWidgets and clear)', 6, function() {
-  var getViewValues = function(){
-    return {
-      0: _vis.get('modules.0.moduleViews.specView.val'),
-      1: _vis.get('modules.1.moduleViews.specView.val'),
-      2: _vis.get('modules.2.moduleViews.specView.val'),
+  Ember.run.later(this, function () { // Allow the initial run (when adding the module) to occur first...
+    var getViewValues = function(){
+      return {
+        0: _vis.get('modules.0.moduleViews.specView.val'),
+        1: _vis.get('modules.1.moduleViews.specView.val'),
+        2: _vis.get('modules.2.moduleViews.specView.val'),
+      };
     };
-  };
-  var initialValues = getViewValues();
-  // Let's tone down the drawWait value to make the tests run more quickly...
-  _defaultScene.set('drawWait', _specDrawWait)
-  _defaultScene.reload();
-  Ember.run.later(this, function () {
-    var newValues = getViewValues();
-    equal(newValues[0], initialValues[0]+1, "View 0 incremented");
-    equal(newValues[2], initialValues[2]+2, "View 2 increased by 2 (using the params)"); // Tests that params work, too!
-    equal(newValues[1], 0, "View 1 value was cleared!");
-
-    // Switch scenes, wait for the automatic reload:
-    _vis.setScene('2');
+    var initialValues = getViewValues();
+    // Let's tone down the drawWait value to make the tests run more quickly...
+    _defaultScene.set('drawWait', _specDrawWait)
+    _defaultScene.reload();
     Ember.run.later(this, function () {
-      var finalValues = getViewValues();
-      equal(finalValues[1], newValues[1]+1, "View 1 value was incremented");
-      equal(finalValues[0], 0, "View 0 was cleared!");
-      equal(finalValues[2], 0, "View 2 was cleared!");
+      var newValues = getViewValues();
+      equal(newValues[0], initialValues[0]+1, "View 0 incremented");
+      equal(newValues[2], initialValues[2]+2, "View 2 increased by 2 (using the params)"); // Tests that params work, too!
+      equal(newValues[1], 0, "View 1 value was cleared!");
 
-      start();
+      // Switch scenes, wait for the automatic reload:
+      _vis.setScene('2');
+      Ember.run.later(this, function () {
+        var finalValues = getViewValues();
+        equal(finalValues[1], newValues[1]+1, "View 1 value was incremented");
+        equal(finalValues[0], 0, "View 0 was cleared!");
+        equal(finalValues[2], 0, "View 2 was cleared!");
+
+        start();
+      }, _specWait);
+
     }, _specWait);
-
   }, _specWait);
 });
