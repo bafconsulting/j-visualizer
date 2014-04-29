@@ -1,115 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>build/js/j-visualizer.js - j-visualizer</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../assets/css/logo.png" title="j-visualizer"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/jQuery.fn.html">jQuery.fn</a></li>
-            
-                <li><a href="../classes/NativeClass.Array.html">NativeClass.Array</a></li>
-            
-                <li><a href="../classes/NativeClass.String.html">NativeClass.String</a></li>
-            
-                <li><a href="../classes/Visualizer.html">Visualizer</a></li>
-            
-                <li><a href="../classes/Visualizer.Colorer.html">Visualizer.Colorer</a></li>
-            
-                <li><a href="../classes/Visualizer.Module.html">Visualizer.Module</a></li>
-            
-                <li><a href="../classes/Visualizer.ModuleView.html">Visualizer.ModuleView</a></li>
-            
-                <li><a href="../classes/Visualizer.ModuleView.ResizableMixin.html">Visualizer.ModuleView.ResizableMixin</a></li>
-            
-                <li><a href="../classes/Visualizer.Scene.html">Visualizer.Scene</a></li>
-            
-                <li><a href="../classes/Visualizer.Utils.html">Visualizer.Utils</a></li>
-            
-                <li><a href="../classes/Visualizer.World.html">Visualizer.World</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: build/js/j-visualizer.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 
 /**
   * Visualizer Object
-  * Represents the Object used to manage data (Modules), and the way that the data&#x27;s viewed.
+  * Represents the Object used to manage data (Modules), and the way that the data's viewed.
   *
   * The visualization of data is a combined effort of all components contained in this project,
   * accessed through this Object.
@@ -197,7 +89,7 @@
      */
     init: function(world) {
       this.useWorld(world);
-      return this.set(&quot;color&quot;, Visualizer.Colorer.create({
+      return this.set("color", Visualizer.Colorer.create({
         visualizer: this
       }));
     },
@@ -205,14 +97,14 @@
     /**
       * useWorld creates a Visualizer.World object, using the a JQuery Object
       * created with the sent parameter. This created object is set as the
-      * Visualizer Object&#x27;s world property.
+      * Visualizer Object's world property.
       *
       * @method useWorld
       * @param world Used for setting up the Visualizer.World Object
       * @return {void}
      */
     useWorld: function(world) {
-      return this.set(&#x27;world&#x27;, Visualizer.World.create({
+      return this.set('world', Visualizer.World.create({
         worldObj: $(world),
         visualizer: this
       }));
@@ -220,18 +112,18 @@
 
     /**
       * Alias for Visualizer.World method: injectDefaultWorld
-      * @deprecated Use (visualizer).get(&#x27;world&#x27;).injectDefaultWorld()
+      * @deprecated Use (visualizer).get('world').injectDefaultWorld()
      */
     injectWorld: function() {
-      return this.get(&#x27;world&#x27;).injectDefaultWorld();
+      return this.get('world').injectDefaultWorld();
     },
 
     /**
       * addModule creates a Visualizer.Module object specified by the moduleClass parameter,
       * using a provided key (to allow differentiation and access). If (optional) content
-      * parameter is provided, it will be set as the module&#x27;s content.
+      * parameter is provided, it will be set as the module's content.
       *
-      * After the module&#x27;s creation, the Visualizer object is refreshed.
+      * After the module's creation, the Visualizer object is refreshed.
       *
       * @method addModule
       * @param {Module} moduleClass Class of a Visualizer.Module Object to be created
@@ -245,9 +137,9 @@
         visualizer: this,
         key: moduleKey
       });
-      this.set(&quot;modules.&quot; + moduleKey, module);
+      this.set("modules." + moduleKey, module);
       if (content != null) {
-        this.set(&quot;modules.&quot; + moduleKey + &quot;.content&quot;, content);
+        this.set("modules." + moduleKey + ".content", content);
       }
       return module.requestRedraw();
     },
@@ -256,26 +148,26 @@
       * refresh sends a request to the current scene to update the visualization
       * based on all current dimensions.
       *
-      * The scene will not be drawn unless the Visualizer&#x27;s World is loaded (has a viewport).
+      * The scene will not be drawn unless the Visualizer's World is loaded (has a viewport).
       *
-      * refresh observes the world&#x27;s state, and the current scene - it should automatically
+      * refresh observes the world's state, and the current scene - it should automatically
       * be triggered when any of these things change to ensure an up-to-date Visualization.
       *
       * Note: because Ember Observers currently only watch Array collections (@each), not Object-maps,
-      * This will (sadly) not currently watch &#x27;modules.@each.dataset&#x27;...
+      * This will (sadly) not currently watch 'modules.@each.dataset'...
       *
       * @method refresh
       * @return {void}
      */
     refresh: (function() {
       var _ref;
-      if (this.get(&#x27;world.loaded&#x27;)) {
-        return (_ref = this.get(&#x27;currentScene&#x27;)) != null ? _ref.reload() : void 0;
+      if (this.get('world.loaded')) {
+        return (_ref = this.get('currentScene')) != null ? _ref.reload() : void 0;
       }
-    }).observes(&#x27;currentScene&#x27;, &#x27;world.worldObj&#x27;, &#x27;world.loaded&#x27;, &#x27;world.width&#x27;, &#x27;world.height&#x27;),
+    }).observes('currentScene', 'world.worldObj', 'world.loaded', 'world.width', 'world.height'),
 
     /**
-      * useScenes updates the Visualizer&#x27;s scenes collection with the inputScenes parameter.
+      * useScenes updates the Visualizer's scenes collection with the inputScenes parameter.
       * For each item in inputScenes , a Visualizer.Scene object is created, with a
       * reference to this instance of Visualizer as its visualizer parameter.
       *
@@ -289,32 +181,32 @@
         inputScenes = [];
       }
       if (!Visualizer.Utils.isArray(inputScenes)) {
-        if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-          if (typeof console.log === &quot;function&quot;) {
-            console.log(&quot;Object({})-type input for useScenes is deprecated - please pass an Array instead...&quot;);
+        if (typeof console !== "undefined" && console !== null) {
+          if (typeof console.log === "function") {
+            console.log("Object({})-type input for useScenes is deprecated - please pass an Array instead...");
           }
         }
         inputScenes = inputScenes.visualizer_scenes;
       }
       _results = [];
-      for (_i = 0, _len = inputScenes.length; _i &lt; _len; _i++) {
+      for (_i = 0, _len = inputScenes.length; _i < _len; _i++) {
         scene = inputScenes[_i];
         scene.visualizer = this;
-        _results.push(this.set(&quot;scenes.&quot; + scene.identifier, Visualizer.Scene.create(scene)));
+        _results.push(this.set("scenes." + scene.identifier, Visualizer.Scene.create(scene)));
       }
       return _results;
     },
 
     /**
-      * setScene updates the Visualizer&#x27;s currentScene property to reference the
-      * scene relevant to the method&#x27;s _identifier parameter.
+      * setScene updates the Visualizer's currentScene property to reference the
+      * scene relevant to the method's _identifier parameter.
       *
       * @method setScene
       * @param {String} _identifier The key identifier of a scene to use.
       * @return {void}
      */
     setScene: function(_identifier) {
-      return this.set(&#x27;currentScene&#x27;, this.get(&quot;scenes.&quot; + _identifier));
+      return this.set('currentScene', this.get("scenes." + _identifier));
     },
 
     /**
@@ -325,12 +217,12 @@
      */
     destroy: function() {
       var module, moduleName, _ref, _results;
-      _ref = this.get(&#x27;modules&#x27;);
+      _ref = this.get('modules');
       _results = [];
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _results.push(typeof module.destroy === &quot;function&quot; ? module.destroy() : void 0);
+        _results.push(typeof module.destroy === "function" ? module.destroy() : void 0);
       }
       return _results;
     }
@@ -369,8 +261,8 @@
       * @constructor
      */
     init: function() {
-      this.get(&quot;_assignedUniq&quot;);
-      this.get(&quot;uniquePalette&quot;);
+      this.get("_assignedUniq");
+      this.get("uniquePalette");
       return this._setUniqueProps();
     },
 
@@ -383,14 +275,14 @@
       * @return {Array} A collection of colors
      */
     freshColorPalette: function() {
-      return this.get(&quot;_colorScheme&quot;).copy();
+      return this.get("_colorScheme").copy();
     },
 
     /**
       * fixed accepts a keyword, and attempts to use the keyword
-      * to find a relevant color (e.g. &quot;positive&quot; may be &quot;green&quot;).
+      * to find a relevant color (e.g. "positive" may be "green").
       *
-      * If a valid keyword is passed and a relevant color isn&#x27;t found,
+      * If a valid keyword is passed and a relevant color isn't found,
       * a color is assigned from the rotating set.
       *
       * @method fixed
@@ -399,12 +291,12 @@
      */
     fixed: function(key) {
       if (key == null) {
-        key = &quot;&quot;;
+        key = "";
       }
-      if ((key != null) &amp;&amp; (key = &quot;&quot; + key.toLowerCase()).length) {
-        return this.get(&quot;_fixedVals.&quot; + key) || this._rotating_color(key);
+      if ((key != null) && (key = "" + key.toLowerCase()).length) {
+        return this.get("_fixedVals." + key) || this._rotating_color(key);
       } else {
-        return this.get(&#x27;_defaultVal&#x27;);
+        return this.get('_defaultVal');
       }
     },
 
@@ -437,7 +329,7 @@
 
     /**
       * unique is a function used to get a unique color for a
-      * given key within a given set (set defaults to &quot;main&quot;).
+      * given key within a given set (set defaults to "main").
       *
       * This function has helper properties to handle assigning
       * and unassigning colors, determining what the next color
@@ -448,35 +340,35 @@
       *
       * @method unique
       * @param {String} key The key for which a color is to be found
-      * @param {String} [set=&#x27;main&#x27;] The color set used to search get a color
+      * @param {String} [set='main'] The color set used to search get a color
       * @return {String} A color or undefined...
      */
     unique: function(key, set) {
       if (key == null) {
-        key = &quot;&quot;;
+        key = "";
       }
       if (set == null) {
-        set = &quot;main&quot;;
+        set = "main";
       }
-      return this.get(&quot;_assignedUniq.&quot; + set + &quot;.&quot; + key);
+      return this.get("_assignedUniq." + set + "." + key);
     },
 
     /**
-      * _setUniqueProps sets up the helper sub-functions on the &#x60;unique&#x60; function.
+      * _setUniqueProps sets up the helper sub-functions on the `unique` function.
       *
       * This is complex, but allows the following syntax style:
       *
-      * &#x60;&#x60;&#x60;javascript
-      *  colorer.unique(&quot;Dylan&quot;) =&gt; undefined
-      *  colorer.unique.next() =&gt; &quot;green&quot;
+      * ```javascript
+      *  colorer.unique("Dylan") => undefined
+      *  colorer.unique.next() => "green"
       *
-      *  colorer.unique.assign(&quot;Dylan&quot;) =&gt; undefined
-      *  colorer.unique(&quot;Dylan&quot;) =&gt; &quot;green&quot;
-      *  colorer.unique.next() =&gt; &quot;purple&quot;
+      *  colorer.unique.assign("Dylan") => undefined
+      *  colorer.unique("Dylan") => "green"
+      *  colorer.unique.next() => "purple"
       *
-      *  colorer.unique.unassign(&quot;Dylan&quot;) =&gt; undefined
-      *  colorer.unique(&quot;Dylan&quot;) =&gt; undefined
-      * &#x60;&#x60;&#x60;
+      *  colorer.unique.unassign("Dylan") => undefined
+      *  colorer.unique("Dylan") => undefined
+      * ```
       *
       * @method _setUniqueProps
       * @return {void}
@@ -489,16 +381,16 @@
         * assigned to a key.
         *
         * @method unique.next
-        * @param {String} [set=&#x27;main&#x27;] The color set used to search get a color
+        * @param {String} [set='main'] The color set used to search get a color
         * @return {String} A color
        */
       this.unique.next = (function(_this) {
         return function(set) {
           if (set == null) {
-            set = &quot;main&quot;;
+            set = "main";
           }
           _this.unique._prepareSet(set);
-          return _this.get(&quot;uniquePalette.&quot; + set + &quot;.0&quot;);
+          return _this.get("uniquePalette." + set + ".0");
         };
       })(this);
 
@@ -507,19 +399,19 @@
         *
         * @method unique.assign
         * @param {String} key The key for which a color is to be assigned
-        * @param {String} [set=&#x27;main&#x27;] The color set used to search get a color
+        * @param {String} [set='main'] The color set used to search get a color
         * @return {void}
        */
       this.unique.assign = (function(_this) {
         return function(key, set) {
           var _poppedColor;
           if (set == null) {
-            set = &quot;main&quot;;
+            set = "main";
           }
           _this.unique._prepareSet(set);
-          if ((key != null) &amp;&amp; (_this.unique(key, set) == null)) {
-            _poppedColor = _this.get(&quot;uniquePalette.&quot; + set).shift() || _this.get(&quot;_defaultAssigned&quot;);
-            return _this.set(&quot;_assignedUniq.&quot; + set + &quot;.&quot; + key, _poppedColor);
+          if ((key != null) && (_this.unique(key, set) == null)) {
+            _poppedColor = _this.get("uniquePalette." + set).shift() || _this.get("_defaultAssigned");
+            return _this.set("_assignedUniq." + set + "." + key, _poppedColor);
           }
         };
       })(this);
@@ -530,24 +422,24 @@
         *
         * @method unique.unassign
         * @param {String} key The key for which a color is to be unassigned
-        * @param {String} [set=&#x27;main&#x27;] The color set used to search get a color
+        * @param {String} [set='main'] The color set used to search get a color
         * @return {void}
        */
       this.unique.unassign = (function(_this) {
         return function(key, set) {
           var _color;
           if (set == null) {
-            set = &quot;main&quot;;
+            set = "main";
           }
           _this.unique._prepareSet(set);
           if (key != null) {
             _color = _this.unique(key, set);
-            if ((_color != null) &amp;&amp; (_color !== _this.get(&quot;_defaultUnassigned&quot;))) {
-              if (_color !== _this.get(&quot;_defaultAssigned&quot;)) {
-                _this.get(&quot;uniquePalette.&quot; + set).push(_color);
+            if ((_color != null) && (_color !== _this.get("_defaultUnassigned"))) {
+              if (_color !== _this.get("_defaultAssigned")) {
+                _this.get("uniquePalette." + set).push(_color);
               }
-              delete _this.get(&quot;_assignedUniq.&quot; + set)[key];
-              return _this.get(&quot;uniquePalette.&quot; + set + &quot;.0&quot;);
+              delete _this.get("_assignedUniq." + set)[key];
+              return _this.get("uniquePalette." + set + ".0");
             }
           }
         };
@@ -563,13 +455,13 @@
        */
       this.unique.resetSet = (function(_this) {
         return function(set) {
-          _this.get(&quot;_assignedUniq&quot;)[set] = {};
-          return _this.get(&quot;uniquePalette&quot;)[set] = _this.freshColorPalette().shuffleVals();
+          _this.get("_assignedUniq")[set] = {};
+          return _this.get("uniquePalette")[set] = _this.freshColorPalette().shuffleVals();
         };
       })(this);
 
       /**
-        * unique._prepareSet creates and prepares a color set if it doesn&#x27;t yet exist.
+        * unique._prepareSet creates and prepares a color set if it doesn't yet exist.
         *
         * @method unique._prepareSet
         * @param {String} set The color set used to search get a color
@@ -577,7 +469,7 @@
        */
       return this.unique._prepareSet = (function(_this) {
         return function(set) {
-          if (_this.get(&quot;uniquePalette.&quot; + set) == null) {
+          if (_this.get("uniquePalette." + set) == null) {
             return _this.unique.resetSet(set);
           }
         };
@@ -592,7 +484,7 @@
       * @property _defaultAssigned
       * @type String (a color)
      */
-    _defaultAssigned: &quot;#5895B2&quot;,
+    _defaultAssigned: "#5895B2",
 
     /**
       * _defaultUnassigned is the default color to use for
@@ -601,7 +493,7 @@
       * @property _defaultUnassigned
       * @type String (a color)
      */
-    _defaultUnassigned: &quot;#8da3b0&quot;,
+    _defaultUnassigned: "#8da3b0",
 
     /**
       * _colorScheme is a collection of colors used in the visualization.
@@ -609,7 +501,7 @@
       * @property _colorScheme
       * @type Array (of color Strings)
      */
-    _colorScheme: [&quot;#3498DB&quot;, &quot;#9B59B6&quot;, &quot;#F2CA27&quot;, &quot;#34495E&quot;, &quot;#1ABC9C&quot;, &quot;#E74C3C&quot;, &quot;#95A5A6&quot;, &quot;#ECF0F1&quot;, &quot;#2ECC71&quot;, &quot;#5895B2&quot;],
+    _colorScheme: ["#3498DB", "#9B59B6", "#F2CA27", "#34495E", "#1ABC9C", "#E74C3C", "#95A5A6", "#ECF0F1", "#2ECC71", "#5895B2"],
     _rotating_color_val: Ember.computed(function() {
       return {};
     }),
@@ -628,43 +520,43 @@
     _rotating_color: function(key) {
       var color, _scheme;
       if (key != null) {
-        if (!(color = this.get(&quot;_rotating_color_val.&quot; + key))) {
-          _scheme = this.get(&#x27;_colorScheme&#x27;);
+        if (!(color = this.get("_rotating_color_val." + key))) {
+          _scheme = this.get('_colorScheme');
           color = _scheme[(this._rotating_keys_used++) % _scheme.length];
-          this.set(&quot;_rotating_color_val.&quot; + key, color);
+          this.set("_rotating_color_val." + key, color);
         }
         return color;
       }
     },
     _defaultVal: Ember.computed(function() {
       var _ref;
-      return ((_ref = window.colors) != null ? _ref.defaultSingle : void 0) || this.get(&#x27;_defaultAssigned&#x27;);
+      return ((_ref = window.colors) != null ? _ref.defaultSingle : void 0) || this.get('_defaultAssigned');
     }),
 
     /**
-      * _fixedVals is a collection of key =&gt; color pairs for
+      * _fixedVals is a collection of key => color pairs for
       * commonly used keys
       *
       * @property _fixedVals
-      * @type Object (key =&gt; String (color) pairs)
+      * @type Object (key => String (color) pairs)
       * @required
      */
     _fixedVals: {
-      blog: &quot;#28cfc5&quot;,
-      board: &quot;#FB913F&quot;,
-      twitter: &quot;#2AA9E0&quot;,
-      facebook: &quot;#4D69A2&quot;,
-      google: &quot;#DD4C39&quot;,
-      youtube: &quot;#E14D42&quot;,
-      instagram: &quot;#FFCB33&quot;,
-      linkedin: &quot;#1E87BD&quot;,
-      male: &quot;#29A0CE&quot;,
-      unisex: &quot;#d6dadb&quot;,
-      female: &quot;#FC4482&quot;,
-      positive: &quot;#74B81D&quot;,
-      negative: &quot;#E74C3C&quot;,
-      neutral: &quot;#A8CEE0&quot;,
-      unknown: &quot;#d6dadb&quot;
+      blog: "#28cfc5",
+      board: "#FB913F",
+      twitter: "#2AA9E0",
+      facebook: "#4D69A2",
+      google: "#DD4C39",
+      youtube: "#E14D42",
+      instagram: "#FFCB33",
+      linkedin: "#1E87BD",
+      male: "#29A0CE",
+      unisex: "#d6dadb",
+      female: "#FC4482",
+      positive: "#74B81D",
+      negative: "#E74C3C",
+      neutral: "#A8CEE0",
+      unknown: "#d6dadb"
     }
   });
 
@@ -673,7 +565,7 @@
 
 /**
   * Visualizer Scene
-  * Represents the Object used to manage data (Modules), and the way the data&#x27;s viewed.
+  * Represents the Object used to manage data (Modules), and the way the data's viewed.
   *
   * The visualization of data is a combined effort of all components contained in this project,
   * accessed through this Object.
@@ -727,8 +619,8 @@
     description: null,
 
     /**
-      * drawWait is the debounce time waited before running a single widget&#x27;s update.
-      * If a widget&#x27;s reload is requested many times in rapid succession it will wait
+      * drawWait is the debounce time waited before running a single widget's update.
+      * If a widget's reload is requested many times in rapid succession it will wait
       * until drawWait milliseconds after the last call before executing the reload.
       *
       * @property drawWait
@@ -750,7 +642,7 @@
     fullRefreshWait: 20,
 
     /**
-      * widgets references a collection of &quot;widget&quot; Objects, each of which
+      * widgets references a collection of "widget" Objects, each of which
       * should reference a Module, a ModuleView, an operation to call upon the ModuleView,
       * and any additional parameters required (specifications for the ModuleView to follow).
       *
@@ -764,11 +656,11 @@
 
     /**
       * requestedModuleViews is a computed property that returns
-      * a dictionary of Modules -&gt; ModuleViews , used to determine which views will be
+      * a dictionary of Modules -> ModuleViews , used to determine which views will be
       * used by the scene. This is particularly useful when changing scenes to determine
       * which Views need to be cleared out, and which will be used in the next scene.
       *
-      * Used as a searchable dictionary: &#x60;requestedModuleViews[moduleA][moduleViewA] =&gt; true&#x60;
+      * Used as a searchable dictionary: `requestedModuleViews[moduleA][moduleViewA] => true`
       *
       * @property requestedModuleViews
       * @type Object
@@ -776,18 +668,18 @@
     requestedModuleViews: (function() {
       var moduleKey, moduleList, widget, _i, _len, _name, _ref;
       moduleList = {};
-      _ref = this.get(&#x27;widgets&#x27;);
-      for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
+      _ref = this.get('widgets');
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         widget = _ref[_i];
         moduleKey = (moduleList[_name = widget.module] != null ? moduleList[_name] : moduleList[_name] = {});
         moduleKey[widget.view] = true;
       }
       return moduleList;
-    }).property(&#x27;widgets.@each&#x27;),
+    }).property('widgets.@each'),
 
     /**
-      * clearUnusedViews sends a &quot;clear&quot; request to each ModuleView used by the current
-      * instance of Visualizer, which isn&#x27;t used in any of this scene&#x27;s widgets.
+      * clearUnusedViews sends a "clear" request to each ModuleView used by the current
+      * instance of Visualizer, which isn't used in any of this scene's widgets.
       * In essence it ensures that any Views that are not currently in use are cleansed.
       *
       * @method clearUnusedViews
@@ -795,16 +687,16 @@
      */
     clearUnusedViews: function() {
       var module, moduleName, view, viewName, _ref, _ref1;
-      _ref = this.get(&quot;visualizer.modules&quot;);
+      _ref = this.get("visualizer.modules");
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _ref1 = module.get(&#x27;moduleViews&#x27;);
+        _ref1 = module.get('moduleViews');
         for (viewName in _ref1) {
           if (!__hasProp.call(_ref1, viewName)) continue;
           view = _ref1[viewName];
-          if (!this.get(&quot;requestedModuleViews.&quot; + moduleName + &quot;.&quot; + viewName)) {
-            if (typeof view.clear === &quot;function&quot;) {
+          if (!this.get("requestedModuleViews." + moduleName + "." + viewName)) {
+            if (typeof view.clear === "function") {
               view.clear();
             }
           }
@@ -814,7 +706,7 @@
     },
 
     /**
-      * runWidgets iterated this scene&#x27;s widgets, and requests that the ModuleView specified
+      * runWidgets iterated this scene's widgets, and requests that the ModuleView specified
       * for each widget executes the operation specified for each widget.
       *
       * For example, it may tell one ModuleView, a word cloud, to draw itself, and
@@ -826,9 +718,9 @@
     runWidgets: function(widgets) {
       var widget, _i, _len;
       if (widgets == null) {
-        widgets = this.get(&#x27;widgets&#x27;);
+        widgets = this.get('widgets');
       }
-      for (_i = 0, _len = widgets.length; _i &lt; _len; _i++) {
+      for (_i = 0, _len = widgets.length; _i < _len; _i++) {
         widget = widgets[_i];
         this._runWidget(widget);
       }
@@ -836,7 +728,7 @@
     },
 
     /**
-      * _runWidget runs the current scene&#x27;s operation for a single widget.
+      * _runWidget runs the current scene's operation for a single widget.
       * Waits for repeating events to prevent multiple refreshes on the
       * same dimensions/parameters.
       *
@@ -849,13 +741,13 @@
       if (widget == null) {
         widget = {};
       }
-      viewIdentifier = &quot;visualizer.modules.&quot; + widget.module + &quot;.moduleViews.&quot; + widget.view;
+      viewIdentifier = "visualizer.modules." + widget.module + ".moduleViews." + widget.view;
       return Visualizer.Utils.waitForRepeatingEvents(((function(_this) {
         return function() {
           var _ref;
           return (_ref = _this.get(viewIdentifier)) != null ? _ref.run(widget.operation, widget.params) : void 0;
         };
-      })(this)), this.get(&quot;drawWait&quot;), &quot;Scene Redraw for &quot; + viewIdentifier, this.get(&#x27;visualizer.timers&#x27;));
+      })(this)), this.get("drawWait"), "Scene Redraw for " + viewIdentifier, this.get('visualizer.timers'));
     },
 
     /**
@@ -874,7 +766,7 @@
           _this.clearUnusedViews();
           return _this.runWidgets();
         };
-      })(this)), this.get(&#x27;fullRefreshWait&#x27;), &quot;Full Scene Reload&quot;, this.get(&#x27;visualizer.timers&#x27;));
+      })(this)), this.get('fullRefreshWait'), "Full Scene Reload", this.get('visualizer.timers'));
     }
   });
 
@@ -899,15 +791,15 @@
       * loaded is a boolean variable indicating whether or the world is
       * prepared to hold a visualization.
       *
-      * Currently it simply check&#x27;s whether the world JQuery object exists
+      * Currently it simply check's whether the world JQuery object exists
       *
       * @property loaded
       * @type Boolean
      */
-    loaded: Ember.computed.gt(&#x27;worldObj.length&#x27;, 0),
+    loaded: Ember.computed.gt('worldObj.length', 0),
 
     /**
-      * $ is a method which returns the world&#x27;s JQuery Object, worldObj.
+      * $ is a method which returns the world's JQuery Object, worldObj.
       * If a parameter is passed, $ will attempt to find that parameter
       * withing the structure of the worldObj.
       *
@@ -917,9 +809,9 @@
      */
     $: function(selector) {
       if (selector != null) {
-        return this.get(&#x27;worldObj&#x27;).find(selector);
+        return this.get('worldObj').find(selector);
       } else {
-        return this.get(&#x27;worldObj&#x27;);
+        return this.get('worldObj');
       }
     },
 
@@ -934,9 +826,9 @@
      */
     resize: (function() {
       var $worldObj, offset, _height;
-      $worldObj = this.get(&#x27;worldObj&#x27;);
+      $worldObj = this.get('worldObj');
       if ($worldObj.length) {
-        offset = this.get(&#x27;worldObj&#x27;).offset();
+        offset = this.get('worldObj').offset();
         return this.setProperties({
           width: $worldObj.innerWidth(),
           height: (_height = $worldObj.innerHeight()),
@@ -944,11 +836,11 @@
           left: offset.left
         });
       }
-    }).observes(&#x27;worldObj&#x27;).on(&#x27;init&#x27;),
+    }).observes('worldObj').on('init'),
 
     /**
-      * _bindGlobalEvents binds this World&#x27;s resize event to the window&#x27;s resize,
-      * such that every time the window&#x27;s size changes this World attempts to
+      * _bindGlobalEvents binds this World's resize event to the window's resize,
+      * such that every time the window's size changes this World attempts to
       * update its properties to reflect the new window.
       *
       * Private, since this method is automatically called when a World is created.
@@ -958,16 +850,16 @@
       * @private
      */
     _bindGlobalEvents: (function() {
-      return $(window).on(&quot;resize&quot;, (function(_this) {
+      return $(window).on("resize", (function(_this) {
         return function() {
           return _this.resize();
         };
       })(this));
-    }).on(&#x27;init&#x27;),
+    }).on('init'),
 
     /**
       * _bindWorldEvents binds and generic event listeners that
-      * occur within the World&#x27;s domain
+      * occur within the World's domain
       *
       * Private, since this method is automatically called when a World is created
       * as well as when the worldObj changes to reference a new area.
@@ -979,12 +871,12 @@
     _bindWorldEvents: (function() {
       var $world;
       if (($world = this.$()).length) {
-        return $world.off(&quot;click&quot;, &quot;.phasedButton&quot;).on(&quot;click&quot;, &quot;.phasedButton&quot;, _handlePhasedButtonClick);
+        return $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick);
       }
-    }).observes(&#x27;worldObj&#x27;).on(&#x27;init&#x27;),
+    }).observes('worldObj').on('init'),
 
     /**
-      * injectDefaultWorld clears out the Visualizer World&#x27;s contents, injects the basic
+      * injectDefaultWorld clears out the Visualizer World's contents, injects the basic
       * visualizer skeleton
       *
       * @deprecated @todo Deprecate this. ModuleViews should take care of this on a per-App basis...
@@ -993,9 +885,9 @@
       * @return {void}
      */
     injectDefaultWorld: function() {
-      if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-        if (typeof console.warn === &quot;function&quot;) {
-          console.warn(&quot;INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.&quot;);
+      if (typeof console !== "undefined" && console !== null) {
+        if (typeof console.warn === "function") {
+          console.warn("INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.");
         }
       }
       return this.$().empty().append($(defaultWorldTemplate));
@@ -1005,8 +897,8 @@
 
   /**
     * _handlePhasedButtonClick is called when an element with class phasedButton
-    * is clicked. Adds a class &#x27;disabledItem&#x27; to the element for 2 seconds;
-    * if the element is clicked again before the class &#x27;disabledItem&#x27; class expires,
+    * is clicked. Adds a class 'disabledItem' to the element for 2 seconds;
+    * if the element is clicked again before the class 'disabledItem' class expires,
     * the click will be ignored.
     *
     * @method _handlePhasedButtonClick
@@ -1015,16 +907,16 @@
    */
 
   _handlePhasedButtonClick = function(e) {
-    if ($(this).hasClass(&quot;disabledItem&quot;)) {
+    if ($(this).hasClass("disabledItem")) {
       e.stopImmediatePropagation();
       return false;
     }
     return Ember.run.next(this, function() {
-      return $(this).addExpiringClass(&quot;disabledItem&quot;, 2000);
+      return $(this).addExpiringClass("disabledItem", 2000);
     });
   };
 
-  defaultWorldTemplate = &quot;&lt;div id=&#x27;static-area&#x27; class=&#x27;static-area&#x27;&gt; &lt;div id=&#x27;visualizer-loading-indicator&#x27;&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=&#x27;shared-area&#x27; class=&#x27;shared-area&#x27;&gt; &lt;/div&gt;&quot;;
+  defaultWorldTemplate = "<div id='static-area' class='static-area'> <div id='visualizer-loading-indicator'> </div> </div> <div id='shared-area' class='shared-area'> </div>";
 
 }).call(this);
 
@@ -1066,7 +958,7 @@
 
   Array.prototype.shuffleVals = function() {
     var i, item, randLocation, temp, _i, _len;
-    for (i = _i = 0, _len = this.length; _i &lt; _len; i = ++_i) {
+    for (i = _i = 0, _len = this.length; _i < _len; i = ++_i) {
       item = this[i];
       randLocation = Math.floor(Math.random() * (i + 1));
       temp = item;
@@ -1085,7 +977,7 @@
 
     /**
       * values takes an Object and returns its values
-      * (similar to &#x60;.keys()&#x60;)
+      * (similar to `.keys()`)
       *
       * @method values
       * @return {Array} The values
@@ -1110,7 +1002,7 @@
   * The class has an expiry, after which it is removed.
   *
   * @method addExpiringClass
-  * @param {String} [className=&quot;disabled&quot;] Class name
+  * @param {String} [className="disabled"] Class name
   * @param {Integer} [timeout=1000] Number of milliseconds until class expires
   * @return {void}
   * @for fn
@@ -1121,7 +1013,7 @@
   jQuery.fn.extend({
     addExpiringClass: function(className, timeout) {
       if (className == null) {
-        className = &quot;disabled&quot;;
+        className = "disabled";
       }
       if (timeout == null) {
         timeout = 1000;
@@ -1144,7 +1036,7 @@
   *
   * @method truncateTo
   * @param {Integer} maxLength The maximum length of the String
-  * @param {String} [suffix=&quot;…&quot;] A String to use append in case of truncation
+  * @param {String} [suffix="…"] A String to use append in case of truncation
   * @return {String} The String cut to maxLength or fewer characters
   * @for String
   * @namespace NativeClass
@@ -1154,13 +1046,13 @@
   String.prototype.truncateTo = function(maxLength, suffix) {
     var suffixLength;
     if (suffix == null) {
-      suffix = &quot;…&quot;;
+      suffix = "…";
     }
     suffixLength = suffix.length;
-    if (isNaN(maxLength) || maxLength &lt;= suffixLength) {
+    if (isNaN(maxLength) || maxLength <= suffixLength) {
       maxLength = suffix.length + 1;
     }
-    if (this.length &gt; maxLength) {
+    if (this.length > maxLength) {
       return this.substr(0, maxLength - suffixLength) + suffix;
     }
     return this;
@@ -1210,7 +1102,7 @@
   String.prototype.includes = function(subString, isCaseInsensitive) {
     return this.advancedIndexOf(subString, {
       isCaseInsensitive: isCaseInsensitive
-    }) &gt;= 0;
+    }) >= 0;
   };
 
 
@@ -1251,7 +1143,7 @@
     if (n == null) {
       n = 0;
     }
-    start = n === 0 ? &quot;&quot; : this.slice(0, n);
+    start = n === 0 ? "" : this.slice(0, n);
     return start + this.charAt(n).toUpperCase() + this.slice(n + 1);
   };
 
@@ -1282,7 +1174,7 @@
    */
 
   String.prototype.removeInitialUnderscore = function() {
-    return this.replace(/^_/, &quot;&quot;);
+    return this.replace(/^_/, "");
   };
 
 }).call(this);
@@ -1302,14 +1194,14 @@
   this.Visualizer.Utils = {
 
     /**
-      * existsWithValue checks if a values isn&#x27;t null/undefined
+      * existsWithValue checks if a values isn't null/undefined
       *
       * @method existsWithValue
       * @param {Object} item An item to check existence of
       * @return {Boolean} false if param is null or undefined, otherwise true
      */
     existsWithValue: function(item) {
-      return typeof item !== &quot;undefined&quot; &amp;&amp; item !== null;
+      return typeof item !== "undefined" && item !== null;
     },
 
     /**
@@ -1323,7 +1215,7 @@
       * @method waitForRepeatingEvents
       * @param {Function} callback The function to be called at end of waiting time
       * @param {Integer} timeout Number of milliseconds to wait before exectuing function
-      * @param [String] timerName A namespace for the debounce @default &quot;default timer&quot;
+      * @param [String] timerName A namespace for the debounce @default "default timer"
       * @param [Object] timerSet A collection of timers to use in blocking functions @default {}
       * @return {Integer} The Timeout id assigned by the browser for the created timeout.
      */
@@ -1333,7 +1225,7 @@
       return func = function(callback, timeout, timerName, timerSet) {
         var storedTimer;
         if (timerName == null) {
-          timerName = &quot;default timer&quot;;
+          timerName = "default timer";
         }
         if (timerSet == null) {
           timerSet = _timers;
@@ -1355,7 +1247,7 @@
       * @return {Untyped} The smaller item
      */
     minVal: function(a, b) {
-      if (a &lt;= b) {
+      if (a <= b) {
         return a;
       } else {
         return b;
@@ -1371,7 +1263,7 @@
       * @return {Untyped} The larger item
      */
     maxVal: function(a, b) {
-      if (a &gt;= b) {
+      if (a >= b) {
         return a;
       } else {
         return b;
@@ -1387,12 +1279,12 @@
       * @param {Untyped} tried_value An item to compare
       * @param {Untyped} minimum_value The lower bound
       * @param {Untyped} maximum_value The upper bound
-      * @return {Untyped} An object that&#x27;s within the boundaries.
+      * @return {Untyped} An object that's within the boundaries.
      */
     boundedVal: function(tried_value, minimum_value, maximum_value) {
-      if (minimum_value &gt; tried_value) {
+      if (minimum_value > tried_value) {
         return minimum_value;
-      } else if (maximum_value &lt; tried_value) {
+      } else if (maximum_value < tried_value) {
         return maximum_value;
       } else {
         return tried_value;
@@ -1437,13 +1329,13 @@
       * @return {Boolean} Whether the input is an Array or not.
      */
     isArray: function(input) {
-      return Object.prototype.toString.call(input) === &quot;[object Array]&quot;;
+      return Object.prototype.toString.call(input) === "[object Array]";
     },
 
     /**
       * relativeSizeString parses an input size for either an explicit
       * value, or a value in relationship to some parent value.
-      * E.g. &quot;50%&quot; of 900 = 450, &quot;50&quot; = 50, &quot;50px&quot; = 50
+      * E.g. "50%" of 900 = 450, "50" = 50, "50px" = 50
       *
       * @method relativeSizeString
       * @param {String} val The input value to parse
@@ -1453,7 +1345,7 @@
     relativeSizeString: function(val, parentVal) {
       var parsedVal;
       parsedVal = parseInt(val);
-      if (typeof val === &quot;string&quot; &amp;&amp; val.indexOf(&quot;%&quot;) &gt;= 0) {
+      if (typeof val === "string" && val.indexOf("%") >= 0) {
         return (parsedVal / 100) * parentVal;
       } else if (isFinite(parsedVal)) {
         return parsedVal;
@@ -1479,10 +1371,10 @@
       a_index = 0;
       b_index = 0;
       results = [];
-      while ((a_index &lt; a.length) &amp;&amp; (b_index &lt; b.length)) {
-        if (a[a_index] &lt; b[b_index]) {
+      while ((a_index < a.length) && (b_index < b.length)) {
+        if (a[a_index] < b[b_index]) {
           a_index++;
-        } else if (a[a_index] &gt; b[b_index]) {
+        } else if (a[a_index] > b[b_index]) {
           b_index++;
         } else {
           results.push(a_index);
@@ -1510,10 +1402,10 @@
       a_index = 0;
       b_index = 0;
       count = 0;
-      while ((a_index &lt; a.length) &amp;&amp; (b_index &lt; b.length)) {
-        if (a[a_index] &lt; b[b_index]) {
+      while ((a_index < a.length) && (b_index < b.length)) {
+        if (a[a_index] < b[b_index]) {
           a_index++;
-        } else if (a[a_index] &gt; b[b_index]) {
+        } else if (a[a_index] > b[b_index]) {
           b_index++;
         } else {
           count++;
@@ -1534,9 +1426,9 @@
       * @return {Array} A copy of the input Array
      */
     cloneArray: function(inputArray) {
-      if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-        if (typeof console.log === &quot;function&quot;) {
-          console.log(&quot;cloneArray function is deprecated, please use Array.copy()&quot;);
+      if (typeof console !== "undefined" && console !== null) {
+        if (typeof console.log === "function") {
+          console.log("cloneArray function is deprecated, please use Array.copy()");
         }
       }
       return inputArray.slice(0);
@@ -1549,18 +1441,18 @@
    */
 
   window.waitForRepeatingEvents = function() {
-    if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-      if (typeof console.log === &quot;function&quot;) {
-        console.log(&quot;Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents&quot;);
+    if (typeof console !== "undefined" && console !== null) {
+      if (typeof console.log === "function") {
+        console.log("Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents");
       }
     }
     return Visualizer.Utils.waitForRepeatingEvents.apply(window, arguments);
   };
 
   window.existsWithValue = function() {
-    if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-      if (typeof console.log === &quot;function&quot;) {
-        console.log(&quot;Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue&quot;);
+    if (typeof console !== "undefined" && console !== null) {
+      if (typeof console.log === "function") {
+        console.log("Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue");
       }
     }
     return Visualizer.Utils.existsWithValue.apply(window, arguments);
@@ -1573,22 +1465,22 @@
 
   Visualizer.Utils.updateKCodePosition = function(key_pressed, position_tracker) {
     if (key_pressed === 38) {
-      if (position_tracker &lt; 2) {
-        if (position_tracker &lt; 2) {
+      if (position_tracker < 2) {
+        if (position_tracker < 2) {
           position_tracker += 1;
         }
-      } else if (position_tracker &gt; 2) {
+      } else if (position_tracker > 2) {
         position_tracker = 1;
       }
-    } else if (key_pressed === 40 &amp;&amp; (position_tracker === 2 || position_tracker === 3)) {
+    } else if (key_pressed === 40 && (position_tracker === 2 || position_tracker === 3)) {
       position_tracker += 1;
-    } else if (key_pressed === 37 &amp;&amp; (position_tracker === 4 || position_tracker === 6)) {
+    } else if (key_pressed === 37 && (position_tracker === 4 || position_tracker === 6)) {
       position_tracker += 1;
-    } else if (key_pressed === 39 &amp;&amp; (position_tracker === 5 || position_tracker === 7)) {
+    } else if (key_pressed === 39 && (position_tracker === 5 || position_tracker === 7)) {
       position_tracker += 1;
-    } else if (key_pressed === 66 &amp;&amp; position_tracker === 8) {
+    } else if (key_pressed === 66 && position_tracker === 8) {
       position_tracker += 1;
-    } else if (key_pressed === 65 &amp;&amp; position_tracker === 9) {
+    } else if (key_pressed === 65 && position_tracker === 9) {
       position_tracker = 10;
     } else {
       position_tracker = 0;
@@ -1597,13 +1489,13 @@
   };
 
   getRandomKitten = function(width, height) {
-    if (width &gt; 8) {
+    if (width > 8) {
       width = Math.floor((Math.random() * 10) + width - 5);
     }
-    if (height &gt; 8) {
+    if (height > 8) {
       height = Math.floor((Math.random() * 10) + height - 5);
     }
-    return &quot;http://placekitten.com/&quot; + width + &quot;/&quot; + height;
+    return "http://placekitten.com/" + width + "/" + height;
   };
 
 }).call(this);
@@ -1616,7 +1508,7 @@
   * simplify data management.
   *
   * Each Module also has a collection of relevant ModuleViews - Objects that
-  * define and take care of how a given Module&#x27;s data can be displayed.
+  * define and take care of how a given Module's data can be displayed.
   *
   * @class Module
   * @namespace Visualizer
@@ -1652,8 +1544,8 @@
       * available to this Module.
       *
       * Note: this attribute should only be accessed from the
-      * data-management side of your app; it&#x27;s where you dump data, and it&#x27;s
-      * what you generally access for front-end filtering. This Module&#x27;s
+      * data-management side of your app; it's where you dump data, and it's
+      * what you generally access for front-end filtering. This Module's
       * ModuleViews should not access the content, however - they should access
       * the dataset (which is a subset of content).
       *
@@ -1678,11 +1570,11 @@
       * @type Ember.Array
       * @required
      */
-    dataset: Ember.computed.alias(&#x27;arrangedContent&#x27;),
+    dataset: Ember.computed.alias('arrangedContent'),
 
     /**
       * moduleViews an object dictionary/map of Visualizer ModuleView objects,
-      * each of which must be relevant to this particular Module&#x27;s data structuring.
+      * each of which must be relevant to this particular Module's data structuring.
       *
       * For example, if this Module is a set of words with frequencies, a WordCloud
       * may be an applicable ModuleView.
@@ -1708,7 +1600,7 @@
       * @constructor
      */
     init: function() {
-      return typeof this.setDefaultViews === &quot;function&quot; ? this.setDefaultViews() : void 0;
+      return typeof this.setDefaultViews === "function" ? this.setDefaultViews() : void 0;
     },
 
     /**
@@ -1720,39 +1612,39 @@
      */
     requestRedraw: function() {
       var key, scene, _ref;
-      scene = this.get(&#x27;visualizer.currentScene&#x27;);
-      key = this.get(&#x27;key&#x27;);
-      if ((scene != null) &amp;&amp; (key != null)) {
-        return scene.runWidgets((_ref = scene.get(&#x27;widgets&#x27;)) != null ? _ref.filterBy(&#x27;module&#x27;, key) : void 0);
+      scene = this.get('visualizer.currentScene');
+      key = this.get('key');
+      if ((scene != null) && (key != null)) {
+        return scene.runWidgets((_ref = scene.get('widgets')) != null ? _ref.filterBy('module', key) : void 0);
       }
     },
 
     /**
       * forceLimit sorts the current data by a provided key, and selects only the
-      * first maxLength (property) items for this Module&#x27;s dataset, ensuring that
-      * the limit to the viewed-data&#x27;s size is enforced.
+      * first maxLength (property) items for this Module's dataset, ensuring that
+      * the limit to the viewed-data's size is enforced.
       *
       * @TODO consider implementing a n-item max-heap data structure instead of sorting
       *
       * @method forceLimit
-      * @param {String} [key=&#x27;timestamp&#x27;] Property to use for sorting the data.
+      * @param {String} [key='timestamp'] Property to use for sorting the data.
       * @return {void}
      */
     forceLimit: function(key) {
       var items;
       if (key == null) {
-        key = &#x27;timestamp&#x27;;
+        key = 'timestamp';
       }
-      items = this.get(&#x27;dataset&#x27;).sort(function(_a, _b) {
+      items = this.get('dataset').sort(function(_a, _b) {
         return _b[key] - _a[key];
       });
-      return this.set(&#x27;dataset&#x27;, items.slice(0, this.get(&#x27;maxLength&#x27;)));
+      return this.set('dataset', items.slice(0, this.get('maxLength')));
     },
 
     /**
       * groupedBy creates a cached property on the Module to retrieve its data
       * in the form of a two-dimensional Array, where the sub arrays contain
-      * this Module&#x27;s dataset split into sets that share a common (passed) property.
+      * this Module's dataset split into sets that share a common (passed) property.
       *
       * The outside Array is sorted by length, so the largest groups are at the start.
       *
@@ -1763,41 +1655,41 @@
       *
       * @method groupedBy
       * @param {String} property Property to use for grouping the data.
-      * @return {Array} The Module&#x27;s dataset grouped by the property
+      * @return {Array} The Module's dataset grouped by the property
      */
     groupedBy: function(property) {
       var cachableProperty, cache, newProp, val;
-      cachableProperty = property.replace(&#x27;.&#x27;, &#x27;__&#x27;);
-      cache = &quot;__groupedBy_&quot; + cachableProperty;
+      cachableProperty = property.replace('.', '__');
+      cache = "__groupedBy_" + cachableProperty;
       if ((val = this.get(cache)) == null) {
         newProp = {};
         newProp[cache] = (function() {
           return this._groupedBy(property).sort(function(_a, _b) {
             return _b.length - _a.length;
           });
-        }).property(&quot;dataset.@each.&quot; + property);
+        }).property("dataset.@each." + property);
         this.reopen(newProp);
       }
       return val || this.get(cache);
     },
 
     /**
-      * _groupedBy groups the Module&#x27;s dataset by a given property, returning
+      * _groupedBy groups the Module's dataset by a given property, returning
       * an unsorted, two-dimensional array.
       *
       * This method should not be called explicitly, instead developers should
-      * go through the &#x60;groupedBy&#x60; method (no leading underscore), which
+      * go through the `groupedBy` method (no leading underscore), which
       * caches the groups (making redraws far more efficient)
       *
       * @method _groupedBy
       * @param {String} property Property to use for grouping the data.
-      * @return {Array} The Module&#x27;s dataset grouped by the property
+      * @return {Array} The Module's dataset grouped by the property
      */
     _groupedBy: function(property) {
       var grouped, item, key, _i, _len, _ref;
       grouped = Ember.Object.create();
-      _ref = this.get(&#x27;dataset&#x27;);
-      for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
+      _ref = this.get('dataset');
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         item = _ref[_i];
         key = Ember.get(item, property);
         (grouped[key] != null ? grouped[key] : grouped[key] = []).push(item);
@@ -1813,7 +1705,7 @@
   * Visualizer ModuleView
   * Module Views encapsulate the functionality for drawing,
   * coloring, and handling events on visualizations of the data
-  * provided by a Module. These are the &quot;visual&quot; side of
+  * provided by a Module. These are the "visual" side of
   * data visualizations.
   *
   * @class ModuleView
@@ -1835,14 +1727,14 @@
 
     /**
       * containerSelector is a string CSS selector used for finding
-      * this ModuleView&#x27;s window in a Visualization.
+      * this ModuleView's window in a Visualization.
       *
       * Often unique, but occasionally multiple ModuleViews will be
       * written to share a container.
       *
-      * Often this property will be specified in a widget&#x27;s parameters,
+      * Often this property will be specified in a widget's parameters,
       * otherwise child classes to ModuleView should specify defaults.
-      * If a widget does specify a &#x60;container&#x60; param, it will be set and used
+      * If a widget does specify a `container` param, it will be set and used
       * running any operation.
       *
       * @property containerSelector
@@ -1853,7 +1745,7 @@
 
     /**
       * previousSelectors is a list history of selectors that were
-      * previously set as this instance of a ModuleView&#x27;s containerSelector.
+      * previously set as this instance of a ModuleView's containerSelector.
       *
       * This may be useful for navigation, or for cleaning up after a visualization.
       *
@@ -1871,7 +1763,7 @@
       * @type Visualizer
       * @required
      */
-    visualizer: Ember.computed.alias(&#x27;module.visualizer&#x27;),
+    visualizer: Ember.computed.alias('module.visualizer'),
 
     /**
       * data is a reference to the visible data for visualization.
@@ -1880,7 +1772,7 @@
       * @type Ember.Array
       * @required
      */
-    data: Ember.computed.alias(&#x27;module.dataset&#x27;),
+    data: Ember.computed.alias('module.dataset'),
 
     /**
       * arrangedContent is a reference to all Module data (sorted/arranged).
@@ -1894,7 +1786,7 @@
       * @type Ember.Array
       * @optional
      */
-    arrangedContent: Ember.computed.alias(&#x27;module.arrangedContent&#x27;),
+    arrangedContent: Ember.computed.alias('module.arrangedContent'),
 
     /**
       * dimensionsDidChange is a flag used by ModuleViews to decide how much
@@ -1920,7 +1812,7 @@
       * @constructor
      */
     init: function(module) {
-      return this.set(&#x27;module&#x27;, module);
+      return this.set('module', module);
     },
 
     /**
@@ -1959,13 +1851,13 @@
     },
 
     /**
-      * run is used used to execute a widget&#x27;s operation on a ModuleView.
+      * run is used used to execute a widget's operation on a ModuleView.
       * Many times additional parameters are passed, these assist in updating a
-      * ModuleView by providing the widget&#x27;s specifications (container, width,
+      * ModuleView by providing the widget's specifications (container, width,
       * any data limitations, etc.)
       *
-      * If params includes a &#x60;container&#x60; key, its value will be used to define
-      * this particular ModuleView&#x27;s container viewport.
+      * If params includes a `container` key, its value will be used to define
+      * this particular ModuleView's container viewport.
       *
       * @method run
       * @param {String} operation The method on this ModuleView to run.
@@ -1980,12 +1872,12 @@
         this.updateSelector(params.container);
       }
       this._presetContainerAttrs(params);
-      return typeof this[operation] === &quot;function&quot; ? this[operation](params) : void 0;
+      return typeof this[operation] === "function" ? this[operation](params) : void 0;
     },
 
     /**
       * updateSelector takes a new containerSelector parameter, and uses it to
-      * change this ModuleView&#x27;s viewport. It also updates the &#x60;previousSelectors&#x60;
+      * change this ModuleView's viewport. It also updates the `previousSelectors`
       * history to contain the selector that was used before this method was called.
       *
       * @method updateSelector
@@ -1994,15 +1886,15 @@
      */
     updateSelector: function(containerSelector) {
       var _oldSel;
-      if (containerSelector !== (_oldSel = this.get(&#x27;containerSelector&#x27;))) {
+      if (containerSelector !== (_oldSel = this.get('containerSelector'))) {
         this.clear();
-        this.get(&#x27;previousSelectors&#x27;).push(_oldSel);
-        return this.set(&#x27;containerSelector&#x27;, containerSelector);
+        this.get('previousSelectors').push(_oldSel);
+        return this.set('containerSelector', containerSelector);
       }
     },
 
     /**
-      * $container is a method which returns the ModuleView&#x27;s container/viewport
+      * $container is a method which returns the ModuleView's container/viewport
       * JQuery Object.
       *
       * If a parameter is passed, $container will attempt to find that parameter
@@ -2014,23 +1906,23 @@
      */
     $container: function(selector) {
       var spacedSelector;
-      spacedSelector = selector ? &quot; &quot; + selector : &quot;&quot;;
-      return this.get(&#x27;visualizer.world&#x27;).$(&quot;&quot; + (this.get(&#x27;containerSelector&#x27;)) + spacedSelector);
+      spacedSelector = selector ? " " + selector : "";
+      return this.get('visualizer.world').$("" + (this.get('containerSelector')) + spacedSelector);
     },
 
     /**
       * hardReset clears out the ModuleView and tells it that dimensionsDidChange,
       * so the next redraw/execution is a fresh one (fully recalculated).
       *
-      * This is automatically called when the ModuleView&#x27;s data changes.
+      * This is automatically called when the ModuleView's data changes.
       *
       * @method hardReset
       * @return {void}
      */
     hardReset: (function() {
-      this.set(&#x27;dimensionsDidChange&#x27;, true);
-      return this.run(&#x27;clear&#x27;);
-    }).observes(&#x27;data&#x27;),
+      this.set('dimensionsDidChange', true);
+      return this.run('clear');
+    }).observes('data'),
 
     /**
       * widgetParamedOutlineCSS provides an Object where keys/values map to CSS attributes
@@ -2039,7 +1931,7 @@
       * The point of this method is to provide access to data that can be used to set the
       * style of the DOM element containing this ModuleView to the manually-set specifications.
       *
-      * If a developer opts to simply use a container&#x27;s size/position, this will return an
+      * If a developer opts to simply use a container's size/position, this will return an
       * empty object.
       *
       * @method widgetParamedOutlineCSS
@@ -2052,11 +1944,11 @@
         params = {};
       }
       cssRules = {};
-      _ref = [&#x27;width&#x27;, &#x27;height&#x27;, &#x27;left&#x27;, &#x27;top&#x27;];
-      for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
+      _ref = ['width', 'height', 'left', 'top'];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         styleType = _ref[_i];
         if (params[styleType] != null) {
-          cssRules[styleType] = &quot;&quot; + (this.get(styleType)) + &quot;px&quot;;
+          cssRules[styleType] = "" + (this.get(styleType)) + "px";
         }
       }
       return cssRules;
@@ -2067,10 +1959,10 @@
       * to an expected format (as well as to determine whether a dimension changed).
       *
       * @method width
-      * @param {String} key ALWAYS set to &quot;width&quot;
+      * @param {String} key ALWAYS set to "width"
       * @param [value] A value for setting (undefined for getting)
       * @return {Integer} A collection of manually-specified size/position values
-      * @private ( ONLY access via &#x60;.get(&#x27;width&#x27;)&#x60; or &#x60;.set(&#x27;width&#x27;, value)&#x60; !!!)
+      * @private ( ONLY access via `.get('width')` or `.set('width', value)` !!!)
      */
     width: (function(key, value) {
       return this._updateDimension(key, value);
@@ -2081,10 +1973,10 @@
       * to an expected format (as well as to determine whether a dimension changed).
       *
       * @method height
-      * @param {String} key ALWAYS set to &quot;height&quot;
+      * @param {String} key ALWAYS set to "height"
       * @param [value] A value for setting (undefined for getting)
       * @return {Integer} The updated value
-      * @private ( ONLY access via &#x60;.get(&#x27;height&#x27;)&#x60; or &#x60;.set(&#x27;height&#x27;, value)&#x60; !!!)
+      * @private ( ONLY access via `.get('height')` or `.set('height', value)` !!!)
      */
     height: (function(key, value) {
       return this._updateDimension(key, value);
@@ -2092,18 +1984,18 @@
 
     /**
       * _updateDimension is used when setting width or height.
-      * It accepts a key (which should be set to &quot;width&quot; or &quot;height&quot;),
+      * It accepts a key (which should be set to "width" or "height"),
       * and a value.
       *
       * The value is rounded down to the nearest integer to keep the DOM clean,
       * and to keep determining changes simple.
       *
-      * If the value isn&#x27;t the same as this ModuleView&#x27;s previous value for the
+      * If the value isn't the same as this ModuleView's previous value for the
       * same key property, dimensionsDidChange flag will be set true so that the
       * ModuleView knows to perform its next operation with full calculations.
       *
       * @method _updateDimension
-      * @param {String} key Either &quot;width&quot; or &quot;height&quot;
+      * @param {String} key Either "width" or "height"
       * @param [value] A value for setting (undefined if just getting)
       * @return {Integer} The updated value
       * @private ( used by width/height setters )
@@ -2113,7 +2005,7 @@
       if ((value != null)) {
         value = Math.floor(value);
         if (value !== (previousValue = this.get(key))) {
-          this.set(&#x27;dimensionsDidChange&#x27;, true);
+          this.set('dimensionsDidChange', true);
         }
       }
       return value;
@@ -2126,7 +2018,7 @@
       *
       * If width or height are manually specified, this will not update that attribute -
       * in these cases, the ModuleView should know how to handle explicit dimensions.
-      * The &quot;resizable mixin&quot; can help with this (more details in _resizable_mixin file)
+      * The "resizable mixin" can help with this (more details in _resizable_mixin file)
       *
       * @method _presetContainerAttrs
       * @param {Object} [params] Any additional specifications for the operation.
@@ -2137,13 +2029,13 @@
       if (params == null) {
         params = {};
       }
-      if (!((params.width != null) &amp;&amp; (params.height != null))) {
+      if (!((params.width != null) && (params.height != null))) {
         container = this.$container();
         if (params.width == null) {
-          this.set(&#x27;width&#x27;, container.width());
+          this.set('width', container.width());
         }
         if (params.height == null) {
-          return this.set(&#x27;height&#x27;, container.height());
+          return this.set('height', container.height());
         }
       }
     }
@@ -2157,7 +2049,7 @@
   * A helper mixin for ModuleViews which can have their size set manually.
   * This simplifies specifying size, padding, and position of a ModuleView
   * viewport container, and allows values to be set either relatively
-  * (as a percentage of the Visualizer&#x27;s World), or explicitly (e.g. &quot;50px&quot; or 50)
+  * (as a percentage of the Visualizer's World), or explicitly (e.g. "50px" or 50)
   *
   * @class ResizableMixin
   * @extends Ember.Mixin
@@ -2169,10 +2061,10 @@
   Visualizer.ModuleView.ResizableMixin = Ember.Mixin.create({
 
     /**
-      * run hijacks the ModuleView&#x27;s run method to first attempt to update
-      * the viewport&#x27;s size based on the parameter specifications.
+      * run hijacks the ModuleView's run method to first attempt to update
+      * the viewport's size based on the parameter specifications.
       * After attempting to update the size/position of the viewport,
-      * the ModuleView&#x27;s run function is allowed to proceed.
+      * the ModuleView's run function is allowed to proceed.
       *
       * @method run
       * @param {String} operation The method on this ModuleView to run.
@@ -2189,35 +2081,35 @@
 
     /**
       * _updateSize scans the widget-sent params for manually-set
-      * size/position values, uses these to set up the ModuleView&#x27;s
+      * size/position values, uses these to set up the ModuleView's
       * relevant attributes.
       *
       * @method _updateSize
       * @param {Object} [params] Any additional specifications for the operation.
       * @return {void}
-      * @private (called when &#x60;run&#x60; attempts to execute an operation)
+      * @private (called when `run` attempts to execute an operation)
      */
     _updateSize: function(params) {
       var dimension, _i, _len, _ref, _results;
       if (params == null) {
         params = {};
       }
-      this.get(&quot;visualizer.world&quot;).resize();
+      this.get("visualizer.world").resize();
       _ref = [
         {
-          key: &#x27;width&#x27;
+          key: 'width'
         }, {
-          key: &#x27;height&#x27;
+          key: 'height'
         }, {
-          key: &quot;left&quot;,
-          req: &quot;width&quot;
+          key: "left",
+          req: "width"
         }, {
-          key: &quot;top&quot;,
-          req: &quot;height&quot;
+          key: "top",
+          req: "height"
         }
       ];
       _results = [];
-      for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         dimension = _ref[_i];
         _results.push(this._tryUpdateValue(dimension.key, params[dimension.key], params, dimension.req));
       }
@@ -2226,13 +2118,13 @@
 
     /**
       * _tryUpdateValue given a sizing/position-defining key and value,
-      * this method attempts to parse the value and, if it&#x27;s a relative
+      * this method attempts to parse the value and, if it's a relative
       * percentage or String, coerce it to an integer.
       *
-      * Allows values to be explicit (e.g. 50, or &quot;50px&quot;), or relative
-      * to the Visualizer&#x27;s World (e.g. &quot;50%&quot;). Parameter relativeReq is
-      * used to specify which of the World&#x27;s parameters should be used to
-      * determine a relative size (e.g. &quot;left&quot; uses the World&#x27;s &quot;width&quot;).
+      * Allows values to be explicit (e.g. 50, or "50px"), or relative
+      * to the Visualizer's World (e.g. "50%"). Parameter relativeReq is
+      * used to specify which of the World's parameters should be used to
+      * determine a relative size (e.g. "left" uses the World's "width").
       *
       * params may also specify an amount of padding.
       *
@@ -2242,7 +2134,7 @@
       * @param {Object} [params] Any additional specifications for the operation.
       * @param {String} [relativeReq=key] The relevant property (to the key) on the World
       * @return {Boolean} True if the dimension changed, false otherwise.
-      * @private (called when &#x60;_updateSize&#x60; attempts to execute)
+      * @private (called when `_updateSize` attempts to execute)
      */
     _tryUpdateValue: function(key, val, params, relativeReq) {
       var newSize, padding;
@@ -2254,11 +2146,11 @@
       }
       if (val != null) {
         if (params.padding != null) {
-          padding = Visualizer.Utils.relativeSizeString(params.padding, this.get(&quot;visualizer.world.&quot; + relativeReq));
+          padding = Visualizer.Utils.relativeSizeString(params.padding, this.get("visualizer.world." + relativeReq));
         }
         padding = padding != null ? padding : 15;
-        newSize = Math.floor(Visualizer.Utils.relativeSizeString(val, this.get(&quot;visualizer.world.&quot; + relativeReq)) - padding);
-        if (isFinite(newSize) &amp;&amp; (this.get(key) !== newSize)) {
+        newSize = Math.floor(Visualizer.Utils.relativeSizeString(val, this.get("visualizer.world." + relativeReq)) - padding);
+        if (isFinite(newSize) && (this.get(key) !== newSize)) {
           this.set(key, newSize);
           return true;
         }
@@ -2268,23 +2160,3 @@
   });
 
 }).call(this);
-
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>

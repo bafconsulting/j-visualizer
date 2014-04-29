@@ -34,7 +34,8 @@
   waitForRepeatingEvents: (()-> #Tested
     _timers = {}
     return func = (callback, timeout, timerName = "default timer", timerSet = _timers) ->
-      clearTimeout(timerSet[timerName])  if timerSet[timerName]
+      storedTimer = timerSet[timerName]
+      clearTimeout(storedTimer) if storedTimer
       timerSet[timerName] = setTimeout(callback, timeout)
   )()
 

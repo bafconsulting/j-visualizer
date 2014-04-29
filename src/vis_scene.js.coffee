@@ -141,8 +141,7 @@
   _runWidget: (widget={})->
     viewIdentifier = "visualizer.modules.#{widget.module}.moduleViews.#{widget.view}"
     Visualizer.Utils.waitForRepeatingEvents (=>
-      moduleView = @get(viewIdentifier)
-      moduleView?.run(widget.operation, widget.params)
+      @get(viewIdentifier)?.run(widget.operation, widget.params)
     ), @get("drawWait"), "Scene Redraw for #{viewIdentifier}", @get('visualizer.timers')
 
   ###*

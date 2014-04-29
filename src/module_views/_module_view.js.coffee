@@ -292,6 +292,7 @@
    # @return {void}
   ###
   _presetContainerAttrs: (params={}) ->
-    container = @$container()
-    (@set 'width', container.width()) unless params.width?
-    (@set 'height', container.height()) unless params.height?
+    unless params.width? and params.height?
+      container = @$container()
+      (@set 'width', container.width()) unless params.width?
+      (@set 'height', container.height()) unless params.height?

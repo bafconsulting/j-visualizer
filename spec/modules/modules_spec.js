@@ -103,7 +103,7 @@ test('groupedBy', function() {
 
 // requestRedraw
 asyncTest('requestRedraw', 2, function() {
-  var _specWait = (_vis.get('currentScene.drawWait') + _vis.get('currentScene.fullRefreshWait')) * 1.1;
+  var _specWait = (_vis.get('currentScene.drawWait') + _vis.get('currentScene.fullRefreshWait')) + 50;
   var redrawModule = _vis.get('modules.0');
   var ignoredModule = _vis.get('modules.2');
   var _viewVal = 'moduleViews.specView.val';
