@@ -92,12 +92,6 @@
       visualizer: this
 
   ###*
-   # Alias for Visualizer.World method: injectDefaultWorld
-   # @deprecated Use (visualizer).get('world').injectDefaultWorld()
-  ###
-  injectWorld: () -> @get('world').injectDefaultWorld()
-
-  ###*
    # addModule creates a Visualizer.Module object specified by the moduleClass parameter,
    # using a provided key (to allow differentiation and access). If (optional) content
    # parameter is provided, it will be set as the module's content.

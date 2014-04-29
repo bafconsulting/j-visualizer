@@ -219,14 +219,6 @@
     },
 
     /**
-      * Alias for Visualizer.World method: injectDefaultWorld
-      * @deprecated Use (visualizer).get(&#x27;world&#x27;).injectDefaultWorld()
-     */
-    injectWorld: function() {
-      return this.get(&#x27;world&#x27;).injectDefaultWorld();
-    },
-
-    /**
       * addModule creates a Visualizer.Module object specified by the moduleClass parameter,
       * using a provided key (to allow differentiation and access). If (optional) content
       * parameter is provided, it will be set as the module&#x27;s content.
@@ -891,7 +883,7 @@
  */
 
 (function() {
-  var defaultWorldTemplate, _handlePhasedButtonClick;
+  var _handlePhasedButtonClick;
 
   this.Visualizer.World = Ember.Object.extend({
 
@@ -981,25 +973,7 @@
       if (($world = this.$()).length) {
         return $world.off(&quot;click&quot;, &quot;.phasedButton&quot;).on(&quot;click&quot;, &quot;.phasedButton&quot;, _handlePhasedButtonClick);
       }
-    }).observes(&#x27;worldObj&#x27;).on(&#x27;init&#x27;),
-
-    /**
-      * injectDefaultWorld clears out the Visualizer World&#x27;s contents, injects the basic
-      * visualizer skeleton
-      *
-      * @deprecated @todo Deprecate this. ModuleViews should take care of this on a per-App basis...
-      *
-      * @method injectDefaultWorld
-      * @return {void}
-     */
-    injectDefaultWorld: function() {
-      if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-        if (typeof console.warn === &quot;function&quot;) {
-          console.warn(&quot;INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.&quot;);
-        }
-      }
-      return this.$().empty().append($(defaultWorldTemplate));
-    }
+    }).observes(&#x27;worldObj&#x27;).on(&#x27;init&#x27;)
   });
 
 
@@ -1023,8 +997,6 @@
       return $(this).addExpiringClass(&quot;disabledItem&quot;, 2000);
     });
   };
-
-  defaultWorldTemplate = &quot;&lt;div id=&#x27;static-area&#x27; class=&#x27;static-area&#x27;&gt; &lt;div id=&#x27;visualizer-loading-indicator&#x27;&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=&#x27;shared-area&#x27; class=&#x27;shared-area&#x27;&gt; &lt;/div&gt;&quot;;
 
 }).call(this);
 
@@ -1541,29 +1513,6 @@
       }
       return inputArray.slice(0);
     }
-  };
-
-
-  /*
-   * Previously Globally defined functions...
-   */
-
-  window.waitForRepeatingEvents = function() {
-    if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-      if (typeof console.log === &quot;function&quot;) {
-        console.log(&quot;Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents&quot;);
-      }
-    }
-    return Visualizer.Utils.waitForRepeatingEvents.apply(window, arguments);
-  };
-
-  window.existsWithValue = function() {
-    if (typeof console !== &quot;undefined&quot; &amp;&amp; console !== null) {
-      if (typeof console.log === &quot;function&quot;) {
-        console.log(&quot;Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue&quot;);
-      }
-    }
-    return Visualizer.Utils.existsWithValue.apply(window, arguments);
   };
 
 

@@ -111,14 +111,6 @@
     },
 
     /**
-      * Alias for Visualizer.World method: injectDefaultWorld
-      * @deprecated Use (visualizer).get('world').injectDefaultWorld()
-     */
-    injectWorld: function() {
-      return this.get('world').injectDefaultWorld();
-    },
-
-    /**
       * addModule creates a Visualizer.Module object specified by the moduleClass parameter,
       * using a provided key (to allow differentiation and access). If (optional) content
       * parameter is provided, it will be set as the module's content.
@@ -783,7 +775,7 @@
  */
 
 (function() {
-  var defaultWorldTemplate, _handlePhasedButtonClick;
+  var _handlePhasedButtonClick;
 
   this.Visualizer.World = Ember.Object.extend({
 
@@ -873,25 +865,7 @@
       if (($world = this.$()).length) {
         return $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick);
       }
-    }).observes('worldObj').on('init'),
-
-    /**
-      * injectDefaultWorld clears out the Visualizer World's contents, injects the basic
-      * visualizer skeleton
-      *
-      * @deprecated @todo Deprecate this. ModuleViews should take care of this on a per-App basis...
-      *
-      * @method injectDefaultWorld
-      * @return {void}
-     */
-    injectDefaultWorld: function() {
-      if (typeof console !== "undefined" && console !== null) {
-        if (typeof console.warn === "function") {
-          console.warn("INJECT WORLD IS TOTALLY, ENTIRELY DEPRECATED! Please fix your app now - it will be removed in the next version.");
-        }
-      }
-      return this.$().empty().append($(defaultWorldTemplate));
-    }
+    }).observes('worldObj').on('init')
   });
 
 
@@ -915,8 +889,6 @@
       return $(this).addExpiringClass("disabledItem", 2000);
     });
   };
-
-  defaultWorldTemplate = "<div id='static-area' class='static-area'> <div id='visualizer-loading-indicator'> </div> </div> <div id='shared-area' class='shared-area'> </div>";
 
 }).call(this);
 
@@ -1433,29 +1405,6 @@
       }
       return inputArray.slice(0);
     }
-  };
-
-
-  /*
-   * Previously Globally defined functions...
-   */
-
-  window.waitForRepeatingEvents = function() {
-    if (typeof console !== "undefined" && console !== null) {
-      if (typeof console.log === "function") {
-        console.log("Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents");
-      }
-    }
-    return Visualizer.Utils.waitForRepeatingEvents.apply(window, arguments);
-  };
-
-  window.existsWithValue = function() {
-    if (typeof console !== "undefined" && console !== null) {
-      if (typeof console.log === "function") {
-        console.log("Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue");
-      }
-    }
-    return Visualizer.Utils.existsWithValue.apply(window, arguments);
   };
 
 

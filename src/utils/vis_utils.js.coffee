@@ -198,24 +198,6 @@
     inputArray.slice 0
 
 ###
-# Previously Globally defined functions...
-###
-
-# This seems to be failing for the window[func] approach :(
-# for func in ['existsWithValue']
-#   window[func] = ->
-#     console?.log? "Global Namespace for #{func} function is deprecated, please use Visualizer.Utils.#{func}"
-#     Visualizer.Utils[func].apply window, arguments
-
-window.waitForRepeatingEvents = () ->
-  console?.log? "Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents"
-  Visualizer.Utils.waitForRepeatingEvents.apply window, arguments
-
-window.existsWithValue = () ->
-  console?.log? "Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue"
-  Visualizer.Utils.existsWithValue.apply window, arguments
-
-###
 # FUN!
 ###
 Visualizer.Utils.updateKCodePosition = (key_pressed, position_tracker) ->
