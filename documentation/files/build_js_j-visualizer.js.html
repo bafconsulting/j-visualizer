@@ -1978,7 +1978,7 @@
      */
     hardReset: (function() {
       this.set(&#x27;dimensionsDidChange&#x27;, true);
-      return this.run(&#x27;clear&#x27;);
+      return this.get(&#x27;module&#x27;).requestRedraw();
     }).observes(&#x27;data&#x27;),
 
     /**

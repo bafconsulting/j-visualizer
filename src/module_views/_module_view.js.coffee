@@ -202,7 +202,7 @@
   ###
   hardReset: (()->
     @set('dimensionsDidChange', true) # Because the data itself is sort of a dimension, too...
-    @run('clear')
+    @get('module').requestRedraw()
   ).observes('data')
 
   ###*

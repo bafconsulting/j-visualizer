@@ -1870,7 +1870,7 @@
      */
     hardReset: (function() {
       this.set('dimensionsDidChange', true);
-      return this.run('clear');
+      return this.get('module').requestRedraw();
     }).observes('data'),
 
     /**
