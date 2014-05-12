@@ -49,8 +49,8 @@
   description: null
 
   ###*
-   # drawWait is the debounce time waited before updating the scene.
-   # If a scene's reload is requested many times in rapid succession it will wait
+   # drawWait is the debounce time waited before running a single widget's update.
+   # If a widget's reload is requested many times in rapid succession it will wait
    # until drawWait milliseconds after the last call before executing the reload.
    #
    # @property drawWait
@@ -59,6 +59,17 @@
    # @required
   ###
   drawWait: 100
+
+  ###*
+   # fullRefreshWait is an additional debounce time waited before
+   # totally updating the scene. This adds some
+   #
+   # @property fullRefreshWait
+   # @type Integer (milliseconds)
+   # @default 20
+   # @required
+  ###
+  fullRefreshWait: 20
 
   ###*
    # widgets references a collection of "widget" Objects, each of which
@@ -96,12 +107,13 @@
    # In essence it ensures that any Views that are not currently in use are cleansed.
    #
    # @method clearUnusedViews
-   # @return {void}
+   # @chainable
   ###
   clearUnusedViews: ->
     for own moduleName, module of @get("visualizer.modules")
       for own viewName, view of module.get('moduleViews')
         view.clear?() unless @get("requestedModuleViews.#{moduleName}.#{viewName}")
+    @
 
   ###*
    # runWidgets iterated this scene's widgets, and requests that the ModuleView specified
@@ -111,12 +123,26 @@
    # another ModuleView, a set of icons, to group themselves by common-words.
    #
    # @method runWidgets
-   # @return {void}
+   # @chainable
   ###
   runWidgets: (widgets = @get('widgets')) ->
-    for widget in widgets
-      moduleView = @get("visualizer.modules.#{widget.module}.moduleViews.#{widget.view}")
-      moduleView?.run(widget.operation, widget.params)
+    @_runWidget(widget) for widget in widgets
+    @
+
+  ###*
+   # _runWidget runs the current scene's operation for a single widget.
+   # Waits for repeating events to prevent multiple refreshes on the
+   # same dimensions/parameters.
+   #
+   # @method _runWidget
+   # @return {void}
+   # @private
+  ###
+  _runWidget: (widget={})->
+    viewIdentifier = "visualizer.modules.#{widget.module}.moduleViews.#{widget.view}"
+    Visualizer.Utils.waitForRepeatingEvents (=>
+      @get(viewIdentifier)?.run(widget.operation, widget.params)
+    ), @get("drawWait"), "Scene Redraw for #{viewIdentifier}", @get('visualizer.timers')
 
   ###*
    # reload initiates the process of updating the visualization by cleaning out old Views
@@ -132,4 +158,4 @@
     Visualizer.Utils.waitForRepeatingEvents (=>
       @clearUnusedViews()
       @runWidgets()
-    ), @get("drawWait"), "Scene Reload", @get('visualizer.timers')
+    ), @get('fullRefreshWait'), "Full Scene Reload", @get('visualizer.timers')

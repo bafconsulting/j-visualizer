@@ -1,5 +1,5 @@
 {
-  "name": "j-visualizer",
+  "name": "j-visualizer-spec",
   "dependencies": {
     "ember-runtime": "http://builds.emberjs.com.s3.amazonaws.com/beta/daily/20130909/ember-runtime.js",
     "jquery": "> 2.0",

@@ -111,14 +111,6 @@
     },
 
     /**
-      * Alias for Visualizer.World method: injectDefaultWorld
-      * @deprecated Use (visualizer).get('world').injectDefaultWorld()
-     */
-    injectWorld: function() {
-      return this.get('world').injectDefaultWorld();
-    },
-
-    /**
       * addModule creates a Visualizer.Module object specified by the moduleClass parameter,
       * using a provided key (to allow differentiation and access). If (optional) content
       * parameter is provided, it will be set as the module's content.
@@ -132,14 +124,16 @@
       * @return {void}
      */
     addModule: function(moduleClass, moduleKey, content) {
-      this.set("modules." + moduleKey, moduleClass.create({
+      var module;
+      module = moduleClass.create({
         visualizer: this,
         key: moduleKey
-      }));
+      });
+      this.set("modules." + moduleKey, module);
       if (content != null) {
         this.set("modules." + moduleKey + ".content", content);
       }
-      return this.refresh();
+      return module.requestRedraw();
     },
 
     /**
@@ -617,8 +611,8 @@
     description: null,
 
     /**
-      * drawWait is the debounce time waited before updating the scene.
-      * If a scene's reload is requested many times in rapid succession it will wait
+      * drawWait is the debounce time waited before running a single widget's update.
+      * If a widget's reload is requested many times in rapid succession it will wait
       * until drawWait milliseconds after the last call before executing the reload.
       *
       * @property drawWait
@@ -627,6 +621,17 @@
       * @required
      */
     drawWait: 100,
+
+    /**
+      * fullRefreshWait is an additional debounce time waited before
+      * totally updating the scene. This adds some
+      *
+      * @property fullRefreshWait
+      * @type Integer (milliseconds)
+      * @default 20
+      * @required
+     */
+    fullRefreshWait: 20,
 
     /**
       * widgets references a collection of "widget" Objects, each of which
@@ -670,32 +675,26 @@
       * In essence it ensures that any Views that are not currently in use are cleansed.
       *
       * @method clearUnusedViews
-      * @return {void}
+      * @chainable
      */
     clearUnusedViews: function() {
-      var module, moduleName, view, viewName, _ref, _results;
+      var module, moduleName, view, viewName, _ref, _ref1;
       _ref = this.get("visualizer.modules");
-      _results = [];
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _results.push((function() {
-          var _ref1, _results1;
-          _ref1 = module.get('moduleViews');
-          _results1 = [];
-          for (viewName in _ref1) {
-            if (!__hasProp.call(_ref1, viewName)) continue;
-            view = _ref1[viewName];
-            if (!this.get("requestedModuleViews." + moduleName + "." + viewName)) {
-              _results1.push(typeof view.clear === "function" ? view.clear() : void 0);
-            } else {
-              _results1.push(void 0);
+        _ref1 = module.get('moduleViews');
+        for (viewName in _ref1) {
+          if (!__hasProp.call(_ref1, viewName)) continue;
+          view = _ref1[viewName];
+          if (!this.get("requestedModuleViews." + moduleName + "." + viewName)) {
+            if (typeof view.clear === "function") {
+              view.clear();
             }
           }
-          return _results1;
-        }).call(this));
+        }
       }
-      return _results;
+      return this;
     },
 
     /**
@@ -706,20 +705,41 @@
       * another ModuleView, a set of icons, to group themselves by common-words.
       *
       * @method runWidgets
-      * @return {void}
+      * @chainable
      */
     runWidgets: function(widgets) {
-      var moduleView, widget, _i, _len, _results;
+      var widget, _i, _len;
       if (widgets == null) {
         widgets = this.get('widgets');
       }
-      _results = [];
       for (_i = 0, _len = widgets.length; _i < _len; _i++) {
         widget = widgets[_i];
-        moduleView = this.get("visualizer.modules." + widget.module + ".moduleViews." + widget.view);
-        _results.push(moduleView != null ? moduleView.run(widget.operation, widget.params) : void 0);
+        this._runWidget(widget);
       }
-      return _results;
+      return this;
+    },
+
+    /**
+      * _runWidget runs the current scene's operation for a single widget.
+      * Waits for repeating events to prevent multiple refreshes on the
+      * same dimensions/parameters.
+      *
+      * @method _runWidget
+      * @return {void}
+      * @private
+     */
+    _runWidget: function(widget) {
+      var viewIdentifier;
+      if (widget == null) {
+        widget = {};
+      }
+      viewIdentifier = "visualizer.modules." + widget.module + ".moduleViews." + widget.view;
+      return Visualizer.Utils.waitForRepeatingEvents(((function(_this) {
+        return function() {
+          var _ref;
+          return (_ref = _this.get(viewIdentifier)) != null ? _ref.run(widget.operation, widget.params) : void 0;
+        };
+      })(this)), this.get("drawWait"), "Scene Redraw for " + viewIdentifier, this.get('visualizer.timers'));
     },
 
     /**
@@ -738,7 +758,7 @@
           _this.clearUnusedViews();
           return _this.runWidgets();
         };
-      })(this)), this.get("drawWait"), "Scene Reload", this.get('visualizer.timers'));
+      })(this)), this.get('fullRefreshWait'), "Full Scene Reload", this.get('visualizer.timers'));
     }
   });
 
@@ -755,7 +775,7 @@
  */
 
 (function() {
-  var defaultWorldTemplate, _handlePhasedButtonClick;
+  var _handlePhasedButtonClick;
 
   this.Visualizer.World = Ember.Object.extend({
 
@@ -845,33 +865,7 @@
       if (($world = this.$()).length) {
         return $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick);
       }
-    }).observes('worldObj').on('init'),
-
-    /**
-      * injectDefaultWorld clears out the Visualizer World's contents, injects the basic
-      * visualizer skeleton
-      *
-      * @deprecated @todo Deprecate this. ModuleViews should take care of this on a per-App basis...
-      *
-      * @method injectDefaultWorld
-      * @return {void}
-     */
-    injectDefaultWorld: function() {
-      return this.$().empty().append($(defaultWorldTemplate));
-    },
-
-    /**
-      * resizeSharedArea updates the height of the "shared area" DOM element
-      * within the Visualizer World.
-      *
-      * @deprecated @todo: remove this - this should be the work of ModuleViews...
-      *
-      * @method resizeSharedArea
-      * @return {void}
-     */
-    resizeSharedArea: (function() {
-      return this.$("#shared-area").css('height', "" + (this.get('height')) + "px");
-    }).observes('height')
+    }).observes('worldObj').on('init')
   });
 
 
@@ -895,8 +889,6 @@
       return $(this).addExpiringClass("disabledItem", 2000);
     });
   };
-
-  defaultWorldTemplate = "<div id='static-area' class='static-area'> <div id='visualizer-loading-indicator'> </div> </div> <div id='shared-area'> </div>";
 
 }).call(this);
 
@@ -1203,14 +1195,16 @@
       var func, _timers;
       _timers = {};
       return func = function(callback, timeout, timerName, timerSet) {
+        var storedTimer;
         if (timerName == null) {
           timerName = "default timer";
         }
         if (timerSet == null) {
           timerSet = _timers;
         }
-        if (timerSet[timerName]) {
-          clearTimeout(timerSet[timerName]);
+        storedTimer = timerSet[timerName];
+        if (storedTimer) {
+          clearTimeout(storedTimer);
         }
         return timerSet[timerName] = setTimeout(callback, timeout);
       };
@@ -1415,29 +1409,6 @@
 
 
   /*
-   * Previously Globally defined functions...
-   */
-
-  window.waitForRepeatingEvents = function() {
-    if (typeof console !== "undefined" && console !== null) {
-      if (typeof console.log === "function") {
-        console.log("Global Namespace for waitForRepeatingEvents function is deprecated, please use Visualizer.Utils.waitForRepeatingEvents");
-      }
-    }
-    return Visualizer.Utils.waitForRepeatingEvents.apply(window, arguments);
-  };
-
-  window.existsWithValue = function() {
-    if (typeof console !== "undefined" && console !== null) {
-      if (typeof console.log === "function") {
-        console.log("Global Namespace for existsWithValue function is deprecated, please use Visualizer.Utils.existsWithValue");
-      }
-    }
-    return Visualizer.Utils.existsWithValue.apply(window, arguments);
-  };
-
-
-  /*
    * FUN!
    */
 
@@ -1579,6 +1550,22 @@
      */
     init: function() {
       return typeof this.setDefaultViews === "function" ? this.setDefaultViews() : void 0;
+    },
+
+    /**
+      * requestRedraw sends a request to the current scene
+      * to redraw the widgets relevant to this module (and no others).
+      *
+      * @method requestRedraw
+      * @return {void}
+     */
+    requestRedraw: function() {
+      var key, scene, _ref;
+      scene = this.get('visualizer.currentScene');
+      key = this.get('key');
+      if ((scene != null) && (key != null)) {
+        return scene.runWidgets((_ref = scene.get('widgets')) != null ? _ref.filterBy('module', key) : void 0);
+      }
     },
 
     /**
@@ -1883,7 +1870,7 @@
      */
     hardReset: (function() {
       this.set('dimensionsDidChange', true);
-      return this.run('clear');
+      return this.get('module').requestRedraw();
     }).observes('data'),
 
     /**
@@ -1991,12 +1978,14 @@
       if (params == null) {
         params = {};
       }
-      container = this.$container();
-      if (params.width == null) {
-        this.set('width', container.width());
-      }
-      if (params.height == null) {
-        return this.set('height', container.height());
+      if (!((params.width != null) && (params.height != null))) {
+        container = this.$container();
+        if (params.width == null) {
+          this.set('width', container.width());
+        }
+        if (params.height == null) {
+          return this.set('height', container.height());
+        }
       }
     }
   });

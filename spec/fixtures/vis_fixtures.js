@@ -28,6 +28,7 @@ visSpecFixtures.specModule = Visualizer.Module.extend({
 visSpecFixtures.specScenes = [
   {
     identifier: "1",
+    fullRefreshWait: 10,
     widgets: [{
       module: "0",
       view: "specView",
@@ -43,6 +44,7 @@ visSpecFixtures.specScenes = [
   {
     identifier: "2",
     drawWait: 10,
+    fullRefreshWait: 10,
     widgets: [{
       module: "1",
       view: "specView",

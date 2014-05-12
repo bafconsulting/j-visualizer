@@ -81,32 +81,6 @@
       $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick)
   ).observes('worldObj').on('init')
 
-  ###*
-   # injectDefaultWorld clears out the Visualizer World's contents, injects the basic
-   # visualizer skeleton
-   #
-   # @deprecated @todo Deprecate this. ModuleViews should take care of this on a per-App basis...
-   #
-   # @method injectDefaultWorld
-   # @return {void}
-  ###
-  injectDefaultWorld: ()->
-    @$().empty().append $(defaultWorldTemplate)
-
-  ###*
-   # resizeSharedArea updates the height of the "shared area" DOM element
-   # within the Visualizer World.
-   #
-   # @deprecated @todo: remove this - this should be the work of ModuleViews...
-   #
-   # @method resizeSharedArea
-   # @return {void}
-  ###
-  resizeSharedArea: ( ()->
-    @$("#shared-area").css('height', "#{@get('height')}px")
-  ).observes('height')
-
-
 ###*
  # _handlePhasedButtonClick is called when an element with class phasedButton
  # is clicked. Adds a class 'disabledItem' to the element for 2 seconds;
@@ -123,13 +97,3 @@ _handlePhasedButtonClick = (e) ->
     return false
   Ember.run.next @, ->
     $(this).addExpiringClass "disabledItem", 2000
-
-# Private:
-# TODO: Emberize, make this a real template/view.
-#       Alternatively: REMOVE, allow each moduleView to ensure it's own parts exist
-defaultWorldTemplate = "
-  <div id='static-area' class='static-area'>
-    <div id='visualizer-loading-indicator'> </div>
-  </div>
-  <div id='shared-area'> </div>
-"

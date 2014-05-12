@@ -93,6 +93,19 @@
     @setDefaultViews?()
 
   ###*
+   # requestRedraw sends a request to the current scene
+   # to redraw the widgets relevant to this module (and no others).
+   #
+   # @method requestRedraw
+   # @return {void}
+  ###
+  requestRedraw: ()->
+    scene = @get('visualizer.currentScene')
+    key = @get('key')
+    if scene? and key?
+      scene.runWidgets scene.get('widgets')?.filterBy('module', key)
+
+  ###*
    # forceLimit sorts the current data by a provided key, and selects only the
    # first maxLength (property) items for this Module's dataset, ensuring that
    # the limit to the viewed-data's size is enforced.

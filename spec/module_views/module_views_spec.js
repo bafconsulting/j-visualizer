@@ -99,7 +99,6 @@ test('dimensionsDidChange , hardReset', function() {
   ok(!_testModuleView.get('testCleared'), "Clear function not yet triggered.");
   _testModuleView.hardReset();
   equal(_testModuleView.get('dimensionsDidChange'), true, "hardReset caused dimensionsDidChange to flip to true");
-  ok(_testModuleView.get('testCleared'), "hardReset triggered clear function.");
 });
 
 
