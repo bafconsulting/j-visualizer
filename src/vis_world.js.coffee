@@ -78,7 +78,8 @@
   ###
   _bindWorldEvents: (() ->
     if($world = @$()).length
-      $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick)
+      $world.off("click", ".phasedButton", _handlePhasedButtonClick)
+            .on("click", ".phasedButton", _handlePhasedButtonClick)
   ).observes('worldObj').on('init')
 
 ###*

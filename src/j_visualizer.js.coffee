@@ -96,19 +96,21 @@
    # using a provided key (to allow differentiation and access). If (optional) content
    # parameter is provided, it will be set as the module's content.
    #
-   # After the module's creation, the Visualizer object is refreshed.
-   #
    # @method addModule
    # @param {Module} moduleClass Class of a Visualizer.Module Object to be created
    # @param {String} moduleKey Key used by the Visualizer and module for access and differentiation
    # @param {Array} [content] (Optional) Collection of data to use immediately with the module
-   # @return {void}
+   # @chainable
   ###
   addModule: (moduleClass, moduleKey, content) ->
-    module = moduleClass.create({visualizer: this, key: moduleKey})
-    @set("modules.#{moduleKey}", module)
-    @set("modules.#{moduleKey}.content", content) if content?
-    module.requestRedraw()
+    if Em.isArray(content)
+      console?.log? "Content Array parameter for addModule is deprecated - 
+                     please pass an Object of default properties instead. 
+                     (Use `{content: content}` for old behaviour)"
+      content = {content: content}
+    params = $.extend {visualizer: this, key: moduleKey}, content
+    @set "modules.#{moduleKey}", moduleClass.create(params)
+    @
 
   ###*
    # refresh sends a request to the current scene to update the visualization
@@ -119,15 +121,12 @@
    # refresh observes the world's state, and the current scene - it should automatically
    # be triggered when any of these things change to ensure an up-to-date Visualization.
    #
-   # Note: because Ember Observers currently only watch Array collections (@each), not Object-maps,
-   # This will (sadly) not currently watch 'modules.@each.dataset'...
-   #
    # @method refresh
    # @return {void}
   ###
   refresh: (() ->
     @get('currentScene')?.reload() if @get('world.loaded')
-  ).observes('currentScene', 'world.worldObj', 'world.loaded', 'world.width', 'world.height')
+  ).observes('currentScene', 'world.loaded', 'world.width', 'world.height')
 
   ###*
    # useScenes updates the Visualizer's scenes collection with the inputScenes parameter.
@@ -136,15 +135,18 @@
    #
    # @method useScenes
    # @param {Array} inputScenes A set of scenes to create and use for Visualization.
-   # @return {void}
+   # @chainable
   ###
   useScenes: (inputScenes=[]) ->
     unless Visualizer.Utils.isArray(inputScenes)
-      console?.log? "Object({})-type input for useScenes is deprecated - please pass an Array instead..."
+      console?.log? "Object({})-type input for useScenes is deprecated - 
+                     please pass an Array instead."
       inputScenes = inputScenes.visualizer_scenes
     for scene in (inputScenes)
       scene.visualizer = this
       @set "scenes.#{scene.identifier}", Visualizer.Scene.create(scene)
+    @setScene(inputScenes[0]?.identifier) unless @get('currentScene')
+    @
 
   ###*
    # setScene updates the Visualizer's currentScene property to reference the

@@ -115,25 +115,30 @@
       * using a provided key (to allow differentiation and access). If (optional) content
       * parameter is provided, it will be set as the module's content.
       *
-      * After the module's creation, the Visualizer object is refreshed.
-      *
       * @method addModule
       * @param {Module} moduleClass Class of a Visualizer.Module Object to be created
       * @param {String} moduleKey Key used by the Visualizer and module for access and differentiation
       * @param {Array} [content] (Optional) Collection of data to use immediately with the module
-      * @return {void}
+      * @chainable
      */
     addModule: function(moduleClass, moduleKey, content) {
-      var module;
-      module = moduleClass.create({
+      var params;
+      if (Em.isArray(content)) {
+        if (typeof console !== "undefined" && console !== null) {
+          if (typeof console.log === "function") {
+            console.log("Content Array parameter for addModule is deprecated - please pass an Object of default properties instead. (Use `{content: content}` for old behaviour)");
+          }
+        }
+        content = {
+          content: content
+        };
+      }
+      params = $.extend({
         visualizer: this,
         key: moduleKey
-      });
-      this.set("modules." + moduleKey, module);
-      if (content != null) {
-        this.set("modules." + moduleKey + ".content", content);
-      }
-      return module.requestRedraw();
+      }, content);
+      this.set("modules." + moduleKey, moduleClass.create(params));
+      return this;
     },
 
     /**
@@ -145,9 +150,6 @@
       * refresh observes the world's state, and the current scene - it should automatically
       * be triggered when any of these things change to ensure an up-to-date Visualization.
       *
-      * Note: because Ember Observers currently only watch Array collections (@each), not Object-maps,
-      * This will (sadly) not currently watch 'modules.@each.dataset'...
-      *
       * @method refresh
       * @return {void}
      */
@@ -156,7 +158,7 @@
       if (this.get('world.loaded')) {
         return (_ref = this.get('currentScene')) != null ? _ref.reload() : void 0;
       }
-    }).observes('currentScene', 'world.worldObj', 'world.loaded', 'world.width', 'world.height'),
+    }).observes('currentScene', 'world.loaded', 'world.width', 'world.height'),
 
     /**
       * useScenes updates the Visualizer's scenes collection with the inputScenes parameter.
@@ -165,28 +167,30 @@
       *
       * @method useScenes
       * @param {Array} inputScenes A set of scenes to create and use for Visualization.
-      * @return {void}
+      * @chainable
      */
     useScenes: function(inputScenes) {
-      var scene, _i, _len, _results;
+      var scene, _i, _len, _ref;
       if (inputScenes == null) {
         inputScenes = [];
       }
       if (!Visualizer.Utils.isArray(inputScenes)) {
         if (typeof console !== "undefined" && console !== null) {
           if (typeof console.log === "function") {
-            console.log("Object({})-type input for useScenes is deprecated - please pass an Array instead...");
+            console.log("Object({})-type input for useScenes is deprecated - please pass an Array instead.");
           }
         }
         inputScenes = inputScenes.visualizer_scenes;
       }
-      _results = [];
       for (_i = 0, _len = inputScenes.length; _i < _len; _i++) {
         scene = inputScenes[_i];
         scene.visualizer = this;
-        _results.push(this.set("scenes." + scene.identifier, Visualizer.Scene.create(scene)));
+        this.set("scenes." + scene.identifier, Visualizer.Scene.create(scene));
       }
-      return _results;
+      if (!this.get('currentScene')) {
+        this.setScene((_ref = inputScenes[0]) != null ? _ref.identifier : void 0);
+      }
+      return this;
     },
 
     /**
@@ -863,7 +867,7 @@
     _bindWorldEvents: (function() {
       var $world;
       if (($world = this.$()).length) {
-        return $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick);
+        return $world.off("click", ".phasedButton", _handlePhasedButtonClick).on("click", ".phasedButton", _handlePhasedButtonClick);
       }
     }).observes('worldObj').on('init')
   });
