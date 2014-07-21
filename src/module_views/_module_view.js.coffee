@@ -203,7 +203,7 @@
   hardReset: (()->
     @set('dimensionsDidChange', true) # Because the data itself is sort of a dimension, too...
     @get('module').requestRedraw()
-  ).observes('data')
+  ).observes('data.[]')
 
   ###*
    # widgetParamedOutlineCSS provides an Object where keys/values map to CSS attributes

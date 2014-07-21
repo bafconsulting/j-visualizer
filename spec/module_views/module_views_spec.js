@@ -12,6 +12,7 @@ module("Visualizer.ModuleViews Unit Test", {
   setup: function() {
     _vis = getSpecVisualizer();
     _testModule = _vis.get('modules.1');
+    _testModule.addView('specView');
     _testModuleView = _vis.get('modules.1.moduleViews.specView');
 
     _testModuleView.clear = function(){

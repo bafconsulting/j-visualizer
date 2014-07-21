@@ -1,5 +1,7 @@
 var _vis,
     _testModule,
+    _specWait,
+    _specDrawWait = 10,
     reduceFunc = function(prev, cur){return prev+cur.val;},
     testContent = [{val: 1, type: 'A'}, {val: 3, type: 'A'}, {val: 2, type: 'B'}];
 module("Visualizer.Modules Unit Test", {
@@ -10,12 +12,20 @@ module("Visualizer.Modules Unit Test", {
   setup: function() {
     _vis = getSpecVisualizer();
     _testModule = _vis.get('modules.1');
+
+    // Let's tone down the drawWait value to make the tests run more quickly...
+    _vis.set('currentScene.drawWait', _specDrawWait);
+    _vis.set('currentScene.fullRefreshWait', _specDrawWait);
+    _specWait = (_vis.get('currentScene.drawWait') + _vis.get('currentScene.fullRefreshWait')) + 10;
   },
 
   /**
    * Teardown is run after every test.
    */
-  teardown: function() {}
+  teardown: function() {
+    _vis.get('currentScene.widgets').clear();
+    _vis = null;
+  }
 });
 
 test('Module spec setup', function() {
@@ -101,9 +111,100 @@ test('groupedBy', function() {
                                                       really changed, the groups are the same.");
 });
 
+
+// requestedViews:
+test('requestedViews', function() {
+  var requestedViews = _testModule.get('requestedViews');
+  equal(requestedViews.length, 0, "There are no requestedViews for the test module");
+
+  // Okay, try with a module that's actually requested (Module "0" will do):
+  var requestedViewsFor0 = _vis.get('modules.0.requestedViews');
+  equal(requestedViewsFor0.length, 1, "There is one requested view for the test module");
+  equal(requestedViewsFor0[0], 'specView', "The contents of the requestedView element is the view's key");
+});
+
+// addView
+asyncTest('addView', 9, function() {
+  var _viewVal = 'moduleViews.specView.val';
+
+  Ember.run.later(this, function () {
+    var module0 = _vis.get('modules.0');
+    module0.set('redrawWasRequested', false);
+    _testModule.set('redrawWasRequested', false);
+
+    equal(Object.keys(_testModule.get('moduleViews')).length, 0, 'Test module has no ModuleViews');
+    equal(Object.keys(module0.get('moduleViews')).length, 1, 'requestedModule has the requested view');
+    var prevViewForModule0 = module0.get('moduleViews.specView');
+
+    var testModuleView = _testModule.addView('specView');
+    ok(testModuleView, 'A ModuleView was returned for testModuleView');
+    equal(Object.keys(_testModule.get('moduleViews')).length, 1, '_testModule has stored the new view');
+    equal(_testModule.get('moduleViews.specView'), testModuleView, 'The view returned is the \
+                                                                    view stored (_testModule');
+
+    var newViewFor0 = module0.addView('specView');
+    equal(newViewFor0, prevViewForModule0, 'The previously existing view is returned for Module 0');
+    equal(Object.keys(module0.get('moduleViews')).length, 1, 'There is still only one view');
+
+    // Test that test module requested a redraw to celebrate the new ModuleView
+    Ember.run.later(this, function () {
+      equal(module0.get('redrawWasRequested'), false, 'Module 0 did not redraw (no new view, no need)');
+      equal(_testModule.get('redrawWasRequested'), true, '_testModule is redrawn to reflect new views');
+      start();
+    }, _specWait);
+  }, _specWait);
+});
+
+// setDefaultViews
+asyncTest('setDefaultViews', 11, function() {
+  var module0 = _vis.get('modules.0');
+  module0.reopen({
+    addViewCalled: 0,
+    addView: function(){
+      this.incrementProperty('addViewCalled')
+      this._super.apply(this, arguments);
+    }
+  });
+  Ember.run.later(this, function () {
+    ok(module0.get('moduleViews.specView'), 'On initialization, specView exists.');
+    ok(!module0.get('moduleViews.hiddenSpecView'), 'On initialization, hiddenSpecView does NOT exist.');
+    equal(module0.get('addViewCalled'), 1, 'setDefaultViews called addView once on initialization.')
+
+    module0.setDefaultViews();
+    module0.setDefaultViews();
+    module0.setDefaultViews();
+    module0.setDefaultViews();
+    module0.setDefaultViews();
+    Ember.run.later(this, function () {
+      equal(module0.get('addViewCalled'), 2, 'Though setDefaultViews was spammed, \
+                                              addView was only called one more time.')
+      ok(module0.get('moduleViews.specView'), 'On initialization, specView exists.');
+      ok(!module0.get('moduleViews.hiddenSpecView'), 'On initialization, hiddenSpecView does NOT exist.');
+
+      // Redraw tests:
+      ok(module0.get('redrawWasRequested'), 'Module requested a redraw with new View');
+      module0.set('redrawWasRequested', false);
+
+      // Request a new view, see that it gets added!
+      _vis.get('currentScene.widgets').addObject({
+        module: '0',
+        view: 'hiddenSpecView',
+        operation: 'who cares'
+      });
+      Ember.run.later(this, function () {
+        equal(module0.get('addViewCalled'), 4, 'addView was called twice more (two requested views).')
+        ok(module0.get('moduleViews.specView'), 'specView still exists.');
+        ok(module0.get('moduleViews.hiddenSpecView'), 'hiddenSpecView now exists!');
+
+        ok(module0.get('redrawWasRequested'), 'Module requested a redraw with new View');
+        start();
+      }, _specWait);
+    }, _specWait);
+  }, _specWait);
+});
+
 // requestRedraw
 asyncTest('requestRedraw', 2, function() {
-  var _specWait = (_vis.get('currentScene.drawWait') + _vis.get('currentScene.fullRefreshWait')) + 50;
   var redrawModule = _vis.get('modules.0');
   var ignoredModule = _vis.get('modules.2');
   var _viewVal = 'moduleViews.specView.val';

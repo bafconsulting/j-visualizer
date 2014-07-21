@@ -99,7 +99,7 @@
       moduleKey = (moduleList[widget.module] ?= {})
       moduleKey[widget.view] = true
     moduleList
-  ).property('widgets.@each')
+  ).property('widgets.[]')
 
   ###*
    # clearUnusedViews sends a "clear" request to each ModuleView used by the current

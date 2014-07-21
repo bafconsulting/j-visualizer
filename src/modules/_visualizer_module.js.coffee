@@ -94,6 +94,76 @@
   moduleViews: (Ember.computed ()-> Ember.Object.create()).property()
 
   ###*
+   # defaultViews is an Object containing of key-value pairs, where the key
+   # represents the common name for the view (as specified in the Scene JSON,
+   # for example, one might be 'wordcloud'), and the value represents the class of
+   # the view, for instantiation purposes.
+   #
+   # Style:
+   # {
+   #   'viewKey': ViewClass,
+   #   'pieChart': VisualizerCharts.PieChart
+   # }
+   #
+   # @property defaultViews
+   # @type Object
+   # @required
+  ###
+  defaultViews: Ember.computed -> {}
+
+  ###*
+   # setDefaultViews iterates over the requestedViews
+   # (specified in the current scene's JSON), and attempts to instantiate
+   # all relevant ModuleViews.
+   #
+   # This method is called by default when the current scene or it's
+   # widgets/requirements change. Is run in a debounce to keep it fast.
+   #
+   # @todo Requires test specs!!!
+   #
+   # @method setDefaultViews
+   # @return {void}
+  ###
+  setDefaultViews: (()->
+    Visualizer.Utils.waitForRepeatingEvents (=>
+      @addView(viewKey) for viewKey in @get('requestedViews').uniq()
+    ), 10, "Set Default Views for Module #{@get('key')}", @get('visualizer.timers')
+  ).observes('requestedViews.[]').on('init')
+
+  ###*
+   # addView takes a (key) name and ModuleView Class as parameters, and uses these to create
+   # a ModuleView for this module, and store it under the key's name. If no class is passed,
+   # this will look to the defaultViews index to attempt to find the relevant ModuleView.
+   #
+   # If the ModuleView already exists, it will simply return that, if it successfully creates
+   # a ModuleView, the resulting view will be returns. Otherwise the result will be undefined.
+   #
+   # @method addView
+   # @param {String} viewKey Name (key) for the view to be stored under.
+   # @param {ModuleView Class} [viewClass=defaultViews.viewKey] The class to View
+   # @return {ModuleView} (or null if doesn't exist and there is no class to instantiate...)
+  ###
+  addView: (viewKey, viewClass = @get("defaultViews.#{viewKey}"))->
+    _view = @get("moduleViews.#{viewKey}")
+    if (not _view) and viewClass?
+      _view = new viewClass(this)
+      @set("moduleViews.#{viewKey}", _view)
+      @requestRedraw()
+    _view or null
+
+  ###*
+   # requestedViews is an Array of keys (Strings) that represent Views that the
+   # currentScene will be attempting to draw for this particular module.
+   #
+   # @property requestedViews
+   # @type Array
+   # @required
+  ###
+  requestedViews: (()->
+    Object.keys(@get("visualizer.currentScene.requestedModuleViews.#{@get('key')}") || {})
+  ).property('visualizer.currentScene.requestedModuleViews')
+
+  ###*
    # init is called upon creation of a Visualizer Module Object.
    # It is responsible for the initial processing and setup of the Object.
    #
