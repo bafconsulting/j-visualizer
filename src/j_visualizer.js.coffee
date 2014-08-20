@@ -104,10 +104,10 @@
   ###
   addModule: (moduleClass, moduleKey, content) ->
     if Em.isArray(content)
-      console?.log? "Content Array parameter for addModule is deprecated - 
-                     please pass an Object of default properties instead. 
+      console?.log? "Content Array parameter for addModule is deprecated -
+                     please pass an Object of default properties instead.
                      (Use `{content: content}` for old behaviour)"
-      content = {content: content}
+      content = {model: content}
     params = $.extend {visualizer: this, key: moduleKey}, content
     @set "modules.#{moduleKey}", moduleClass.create(params)
     @
@@ -139,7 +139,7 @@
   ###
   useScenes: (inputScenes=[]) ->
     unless Visualizer.Utils.isArray(inputScenes)
-      console?.log? "Object({})-type input for useScenes is deprecated - 
+      console?.log? "Object({})-type input for useScenes is deprecated -
                      please pass an Array instead."
       inputScenes = inputScenes.visualizer_scenes
     for scene in (inputScenes)

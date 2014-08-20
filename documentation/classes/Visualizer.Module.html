@@ -221,6 +221,13 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_model">model</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_moduleViews">moduleViews</a>
 
                                 
@@ -294,7 +301,7 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1629"><code>build&#x2F;js&#x2F;j-visualizer.js:1629</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1640"><code>build&#x2F;js&#x2F;j-visualizer.js:1640</code></a>
         
         </p>
 
@@ -405,7 +412,7 @@ caches the groups (making redraws far more efficient)</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1575"><code>build&#x2F;js&#x2F;j-visualizer.js:1575</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1586"><code>build&#x2F;js&#x2F;j-visualizer.js:1586</code></a>
         
         </p>
 
@@ -513,7 +520,7 @@ the limit to the viewed-data&#39;s size is enforced.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1597"><code>build&#x2F;js&#x2F;j-visualizer.js:1597</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1608"><code>build&#x2F;js&#x2F;j-visualizer.js:1608</code></a>
         
         </p>
 
@@ -617,7 +624,7 @@ is simply O(1) as it simply grabs the previous data. Say what??? :P</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1559"><code>build&#x2F;js&#x2F;j-visualizer.js:1559</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1570"><code>build&#x2F;js&#x2F;j-visualizer.js:1570</code></a>
         
         </p>
 
@@ -695,9 +702,10 @@ to redraw the widgets relevant to this module (and no others).</p>
 
     <div class="description">
         <p>content is the full set of data (in Array , Ember.Array) form that is
-available to this Module.</p>
+available to this Module. It is computed based on <code>model</code> and should
+not be set directly.</p>
 <p>Note: this attribute should only be accessed from the
-data-management side of your app; it&#39;s where you dump data, and it&#39;s
+data-management side of your app; it&#39;s
 what you generally access for front-end filtering. This Module&#39;s
 ModuleViews should not access the content, however - they should access
 the dataset (which is a subset of content).</p>
@@ -735,7 +743,7 @@ the dataset (which is a subset of content).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1513"><code>build&#x2F;js&#x2F;j-visualizer.js:1513</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1524"><code>build&#x2F;js&#x2F;j-visualizer.js:1524</code></a>
         
         </p>
 
@@ -809,6 +817,53 @@ this property represents that limit.</p>
 </div>
 
                 
+                    <div id="property_model" class="property item">
+    <h3 class="name"><code>model</code></h3>
+    <span class="type">Ember.Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1512"><code>build&#x2F;js&#x2F;j-visualizer.js:1512</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p><code>model</code> is the array which you should set or append when dumping
+data. To access data, you should use <code>content</code> or, when applicable,
+<code>dataset</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_moduleViews" class="property item">
     <h3 class="name"><code>moduleViews</code></h3>
     <span class="type">Ember.Object</span>
@@ -832,7 +887,7 @@ this property represents that limit.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1528"><code>build&#x2F;js&#x2F;j-visualizer.js:1528</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1539"><code>build&#x2F;js&#x2F;j-visualizer.js:1539</code></a>
         
         </p>
 

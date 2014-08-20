@@ -7,4 +7,5 @@ Ember.Object.reopen
    # @return {Array} The values
   ###
   values: ->
-    value for own key, value of @
+    for key in Object.keys(@)
+      @[key]

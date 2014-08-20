@@ -20,7 +20,7 @@ JVisualizer also provides several generic utilities often used in data modeling/
 Coming soon!
 
 ### Prerequisites
- * Ember-runtime
+ * Ember-runtime (Please update spec/bower.json to specify newer versions as needed)
  * JQuery
 
 For Testing:

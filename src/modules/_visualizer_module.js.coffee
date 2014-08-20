@@ -35,19 +35,35 @@
 
   ###*
    # content is the full set of data (in Array , Ember.Array) form that is
-   # available to this Module.
+   # available to this Module. It is computed based on `model` and should
+   # not be set directly.
    #
    # Note: this attribute should only be accessed from the
-   # data-management side of your app; it's where you dump data, and it's
+   # data-management side of your app; it's
    # what you generally access for front-end filtering. This Module's
    # ModuleViews should not access the content, however - they should access
    # the dataset (which is a subset of content).
    #
+   # FIXME (deprecation): Setting `content` directly is deprecated as of Ember 1.7 and will likely
+   #                      be removed at a later date.
+   #                      Some module subclasses may still set content directly and as a result
+   #                      we will temporarily continue to alias `content` to `model`.
+   #
    # @property content
    # @type Ember.Array
-   # @required
+   # @readOnly
   ###
-  content: (Ember.computed ()-> Ember.A() ).property()
+  content: Em.computed.alias('model')
+
+  ###*
+   # `model` is the array which you should set or append when dumping
+   # data. To access data, you should use `content` or, when applicable,
+   # `dataset`.
+   #
+   # @property model
+   # @type Ember.Array
+  ###
+  model: (Ember.computed ()-> Ember.A() ).property()
 
   ###*
    # dataset is the subset of content used for current visualization.
@@ -62,7 +78,7 @@
    # @type Ember.Array
    # @required
   ###
-  dataset: Ember.computed.alias('arrangedContent')
+  dataset: Ember.computed.defaultTo('arrangedContent')
 
   ###*
    # moduleViews an object dictionary/map of Visualizer ModuleView objects,
@@ -89,8 +105,9 @@
    #
    # @constructor
   ###
-  init: ->
+  trySetDefaultViews: (->
     @setDefaultViews?()
+  ).on('init')
 
   ###*
    # requestRedraw sends a request to the current scene

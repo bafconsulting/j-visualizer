@@ -111,8 +111,8 @@
   ###
   clearUnusedViews: ->
     for own moduleName, module of @get("visualizer.modules")
-      for own viewName, view of module.get('moduleViews')
-        view.clear?() unless @get("requestedModuleViews.#{moduleName}.#{viewName}")
+      for own viewName, view of module?.get('moduleViews')
+        view?.clear?() unless @get("requestedModuleViews.#{moduleName}.#{viewName}")
     @
 
   ###*

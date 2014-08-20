@@ -130,7 +130,7 @@
           }
         }
         content = {
-          content: content
+          model: content
         };
       }
       params = $.extend({
@@ -687,13 +687,15 @@
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _ref1 = module.get('moduleViews');
+        _ref1 = module != null ? module.get('moduleViews') : void 0;
         for (viewName in _ref1) {
           if (!__hasProp.call(_ref1, viewName)) continue;
           view = _ref1[viewName];
           if (!this.get("requestedModuleViews." + moduleName + "." + viewName)) {
-            if (typeof view.clear === "function") {
-              view.clear();
+            if (view != null) {
+              if (typeof view.clear === "function") {
+                view.clear();
+              }
             }
           }
         }
@@ -947,8 +949,6 @@
 }).call(this);
 
 (function() {
-  var __hasProp = {}.hasOwnProperty;
-
   Ember.Object.reopen({
 
     /**
@@ -959,12 +959,12 @@
       * @return {Array} The values
      */
     values: function() {
-      var key, value, _results;
+      var key, _i, _len, _ref, _results;
+      _ref = Object.keys(this);
       _results = [];
-      for (key in this) {
-        if (!__hasProp.call(this, key)) continue;
-        value = this[key];
-        _results.push(value);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        _results.push(this[key]);
       }
       return _results;
     }
@@ -1494,19 +1494,30 @@
 
     /**
       * content is the full set of data (in Array , Ember.Array) form that is
-      * available to this Module.
+      * available to this Module. It is computed based on `model` and should
+      * not be set directly.
       *
       * Note: this attribute should only be accessed from the
-      * data-management side of your app; it's where you dump data, and it's
+      * data-management side of your app; it's
       * what you generally access for front-end filtering. This Module's
       * ModuleViews should not access the content, however - they should access
       * the dataset (which is a subset of content).
       *
       * @property content
       * @type Ember.Array
-      * @required
+      * @readOnly
      */
-    content: (Ember.computed(function() {
+    content: Em.computed.alias('model'),
+
+    /**
+      * `model` is the array which you should set or append when dumping
+      * data. To access data, you should use `content` or, when applicable,
+      * `dataset`.
+      *
+      * @property model
+      * @type Ember.Array
+     */
+    model: (Ember.computed(function() {
       return Ember.A();
     })).property(),
 
@@ -1523,7 +1534,7 @@
       * @type Ember.Array
       * @required
      */
-    dataset: Ember.computed.alias('arrangedContent'),
+    dataset: Ember.computed.defaultTo('arrangedContent'),
 
     /**
       * moduleViews an object dictionary/map of Visualizer ModuleView objects,
@@ -1552,9 +1563,9 @@
       *
       * @constructor
      */
-    init: function() {
+    trySetDefaultViews: (function() {
       return typeof this.setDefaultViews === "function" ? this.setDefaultViews() : void 0;
-    },
+    }).on('init'),
 
     /**
       * requestRedraw sends a request to the current scene
