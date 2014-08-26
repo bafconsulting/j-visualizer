@@ -115,25 +115,30 @@
       * using a provided key (to allow differentiation and access). If (optional) content
       * parameter is provided, it will be set as the module's content.
       *
-      * After the module's creation, the Visualizer object is refreshed.
-      *
       * @method addModule
       * @param {Module} moduleClass Class of a Visualizer.Module Object to be created
       * @param {String} moduleKey Key used by the Visualizer and module for access and differentiation
       * @param {Array} [content] (Optional) Collection of data to use immediately with the module
-      * @return {void}
+      * @chainable
      */
     addModule: function(moduleClass, moduleKey, content) {
-      var module;
-      module = moduleClass.create({
+      var params;
+      if (Em.isArray(content)) {
+        if (typeof console !== "undefined" && console !== null) {
+          if (typeof console.log === "function") {
+            console.log("Content Array parameter for addModule is deprecated - please pass an Object of default properties instead. (Use `{content: content}` for old behaviour)");
+          }
+        }
+        content = {
+          model: content
+        };
+      }
+      params = $.extend({
         visualizer: this,
         key: moduleKey
-      });
-      this.set("modules." + moduleKey, module);
-      if (content != null) {
-        this.set("modules." + moduleKey + ".content", content);
-      }
-      return module.requestRedraw();
+      }, content);
+      this.set("modules." + moduleKey, moduleClass.create(params));
+      return this;
     },
 
     /**
@@ -145,9 +150,6 @@
       * refresh observes the world's state, and the current scene - it should automatically
       * be triggered when any of these things change to ensure an up-to-date Visualization.
       *
-      * Note: because Ember Observers currently only watch Array collections (@each), not Object-maps,
-      * This will (sadly) not currently watch 'modules.@each.dataset'...
-      *
       * @method refresh
       * @return {void}
      */
@@ -156,7 +158,7 @@
       if (this.get('world.loaded')) {
         return (_ref = this.get('currentScene')) != null ? _ref.reload() : void 0;
       }
-    }).observes('currentScene', 'world.worldObj', 'world.loaded', 'world.width', 'world.height'),
+    }).observes('currentScene', 'world.loaded', 'world.width', 'world.height'),
 
     /**
       * useScenes updates the Visualizer's scenes collection with the inputScenes parameter.
@@ -165,28 +167,30 @@
       *
       * @method useScenes
       * @param {Array} inputScenes A set of scenes to create and use for Visualization.
-      * @return {void}
+      * @chainable
      */
     useScenes: function(inputScenes) {
-      var scene, _i, _len, _results;
+      var scene, _i, _len, _ref;
       if (inputScenes == null) {
         inputScenes = [];
       }
       if (!Visualizer.Utils.isArray(inputScenes)) {
         if (typeof console !== "undefined" && console !== null) {
           if (typeof console.log === "function") {
-            console.log("Object({})-type input for useScenes is deprecated - please pass an Array instead...");
+            console.log("Object({})-type input for useScenes is deprecated - please pass an Array instead.");
           }
         }
         inputScenes = inputScenes.visualizer_scenes;
       }
-      _results = [];
       for (_i = 0, _len = inputScenes.length; _i < _len; _i++) {
         scene = inputScenes[_i];
         scene.visualizer = this;
-        _results.push(this.set("scenes." + scene.identifier, Visualizer.Scene.create(scene)));
+        this.set("scenes." + scene.identifier, Visualizer.Scene.create(scene));
       }
-      return _results;
+      if (!this.get('currentScene')) {
+        this.setScene((_ref = inputScenes[0]) != null ? _ref.identifier : void 0);
+      }
+      return this;
     },
 
     /**
@@ -667,7 +671,7 @@
         moduleKey[widget.view] = true;
       }
       return moduleList;
-    }).property('widgets.@each'),
+    }).property('widgets.[]'),
 
     /**
       * clearUnusedViews sends a "clear" request to each ModuleView used by the current
@@ -683,13 +687,15 @@
       for (moduleName in _ref) {
         if (!__hasProp.call(_ref, moduleName)) continue;
         module = _ref[moduleName];
-        _ref1 = module.get('moduleViews');
+        _ref1 = module != null ? module.get('moduleViews') : void 0;
         for (viewName in _ref1) {
           if (!__hasProp.call(_ref1, viewName)) continue;
           view = _ref1[viewName];
           if (!this.get("requestedModuleViews." + moduleName + "." + viewName)) {
-            if (typeof view.clear === "function") {
-              view.clear();
+            if (view != null) {
+              if (typeof view.clear === "function") {
+                view.clear();
+              }
             }
           }
         }
@@ -863,7 +869,7 @@
     _bindWorldEvents: (function() {
       var $world;
       if (($world = this.$()).length) {
-        return $world.off("click", ".phasedButton").on("click", ".phasedButton", _handlePhasedButtonClick);
+        return $world.off("click", ".phasedButton", _handlePhasedButtonClick).on("click", ".phasedButton", _handlePhasedButtonClick);
       }
     }).observes('worldObj').on('init')
   });
@@ -943,8 +949,6 @@
 }).call(this);
 
 (function() {
-  var __hasProp = {}.hasOwnProperty;
-
   Ember.Object.reopen({
 
     /**
@@ -955,12 +959,12 @@
       * @return {Array} The values
      */
     values: function() {
-      var key, value, _results;
+      var key, _i, _len, _ref, _results;
+      _ref = Object.keys(this);
       _results = [];
-      for (key in this) {
-        if (!__hasProp.call(this, key)) continue;
-        value = this[key];
-        _results.push(value);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        _results.push(this[key]);
       }
       return _results;
     }
@@ -1490,19 +1494,35 @@
 
     /**
       * content is the full set of data (in Array , Ember.Array) form that is
-      * available to this Module.
+      * available to this Module. It is computed based on `model` and should
+      * not be set directly.
       *
       * Note: this attribute should only be accessed from the
-      * data-management side of your app; it's where you dump data, and it's
+      * data-management side of your app; it's
       * what you generally access for front-end filtering. This Module's
       * ModuleViews should not access the content, however - they should access
       * the dataset (which is a subset of content).
       *
+      * FIXME (deprecation): Setting `content` directly is deprecated as of Ember 1.7 and will likely
+      *                      be removed at a later date.
+      *                      Some module subclasses may still set content directly and as a result
+      *                      we will temporarily continue to alias `content` to `model`.
+      *
       * @property content
       * @type Ember.Array
-      * @required
+      * @readOnly
      */
-    content: (Ember.computed(function() {
+    content: Em.computed.alias('model'),
+
+    /**
+      * `model` is the array which you should set or append when dumping
+      * data. To access data, you should use `content` or, when applicable,
+      * `dataset`.
+      *
+      * @property model
+      * @type Ember.Array
+     */
+    model: (Ember.computed(function() {
       return Ember.A();
     })).property(),
 
@@ -1519,7 +1539,7 @@
       * @type Ember.Array
       * @required
      */
-    dataset: Ember.computed.alias('arrangedContent'),
+    dataset: Ember.computed.defaultTo('arrangedContent'),
 
     /**
       * moduleViews an object dictionary/map of Visualizer ModuleView objects,
@@ -1537,6 +1557,93 @@
     })).property(),
 
     /**
+      * defaultViews is an Object containing of key-value pairs, where the key
+      * represents the common name for the view (as specified in the Scene JSON,
+      * for example, one might be 'wordcloud'), and the value represents the class of
+      * the view, for instantiation purposes.
+      *
+      * Style:
+      * {
+      *   'viewKey': ViewClass,
+      *   'pieChart': VisualizerCharts.PieChart
+      * }
+      *
+      * @property defaultViews
+      * @type Object
+      * @required
+     */
+    defaultViews: Ember.computed(function() {
+      return {};
+    }),
+
+    /**
+      * setDefaultViews iterates over the requestedViews
+      * (specified in the current scene's JSON), and attempts to instantiate
+      * all relevant ModuleViews.
+      *
+      * This method is called by default when the current scene or it's
+      * widgets/requirements change. Is run in a debounce to keep it fast.
+      *
+      * @todo Requires test specs!!!
+      *
+      * @method setDefaultViews
+      * @return {void}
+     */
+    setDefaultViews: (function() {
+      return Visualizer.Utils.waitForRepeatingEvents(((function(_this) {
+        return function() {
+          var viewKey, _i, _len, _ref, _results;
+          _ref = _this.get('requestedViews').uniq();
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            viewKey = _ref[_i];
+            _results.push(_this.addView(viewKey));
+          }
+          return _results;
+        };
+      })(this)), 10, "Set Default Views for Module " + (this.get('key')), this.get('visualizer.timers'));
+    }).observes('requestedViews.[]').on('init'),
+
+    /**
+      * addView takes a (key) name and ModuleView Class as parameters, and uses these to create
+      * a ModuleView for this module, and store it under the key's name. If no class is passed,
+      * this will look to the defaultViews index to attempt to find the relevant ModuleView.
+      *
+      * If the ModuleView already exists, it will simply return that, if it successfully creates
+      * a ModuleView, the resulting view will be returns. Otherwise the result will be undefined.
+      *
+      * @method addView
+      * @param {String} viewKey Name (key) for the view to be stored under.
+      * @param {ModuleView Class} [viewClass=defaultViews.viewKey] The class to View
+      * @return {ModuleView} (or null if doesn't exist and there is no class to instantiate...)
+     */
+    addView: function(viewKey, viewClass) {
+      var _view;
+      if (viewClass == null) {
+        viewClass = this.get("defaultViews." + viewKey);
+      }
+      _view = this.get("moduleViews." + viewKey);
+      if ((!_view) && (viewClass != null)) {
+        _view = new viewClass(this);
+        this.set("moduleViews." + viewKey, _view);
+        this.requestRedraw();
+      }
+      return _view || null;
+    },
+
+    /**
+      * requestedViews is an Array of keys (Strings) that represent Views that the
+      * currentScene will be attempting to draw for this particular module.
+      *
+      * @property requestedViews
+      * @type Array
+      * @required
+     */
+    requestedViews: (function() {
+      return Object.keys(this.get("visualizer.currentScene.requestedModuleViews." + (this.get('key'))) || {});
+    }).property('visualizer.currentScene.requestedModuleViews'),
+
+    /**
       * init is called upon creation of a Visualizer Module Object.
       * It is responsible for the initial processing and setup of the Object.
       *
@@ -1548,9 +1655,9 @@
       *
       * @constructor
      */
-    init: function() {
+    trySetDefaultViews: (function() {
       return typeof this.setDefaultViews === "function" ? this.setDefaultViews() : void 0;
-    },
+    }).on('init'),
 
     /**
       * requestRedraw sends a request to the current scene
@@ -1871,7 +1978,7 @@
     hardReset: (function() {
       this.set('dimensionsDidChange', true);
       return this.get('module').requestRedraw();
-    }).observes('data'),
+    }).observes('data.[]'),
 
     /**
       * widgetParamedOutlineCSS provides an Object where keys/values map to CSS attributes

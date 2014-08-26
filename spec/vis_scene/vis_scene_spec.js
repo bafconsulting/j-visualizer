@@ -1,4 +1,12 @@
-var _vis, _defaultScene, _specDrawWait, _specWait;
+var _vis,
+    _defaultScene,
+    _specDrawWait,
+    _specWait
+    addSpecViews = function(){
+      for(var i = 0; i < 3; i++){
+        _vis.get('modules.'+i).addView('specView');
+      }
+    };
 module("Visualizer.Scene Unit Test", {
 
   /**
@@ -7,6 +15,7 @@ module("Visualizer.Scene Unit Test", {
   setup: function() {
     _vis = getSpecVisualizer();
     _defaultScene = _vis.get('currentScene');
+    addSpecViews();
     _specDrawWait = 30;
     _specWait = (_specDrawWait + _defaultScene.get('fullRefreshWait'))*1.1;
   },

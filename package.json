@@ -1,6 +1,10 @@
 {
   "name": "j-visualizer",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jugnoo/j-visualizer.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-uglify": "~0.2.2",

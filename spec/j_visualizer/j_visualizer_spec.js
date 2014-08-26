@@ -46,7 +46,7 @@ test('Visualizer::addModule', 5, function() {
   startModuleCount = Object.keys(test_visualizer.get('modules')).length
   equal(startModuleCount, 0, "The visualizer's 'modules' Object is empty (no \"own\" properties)");
 
-  var testModuleContent = [1];
+  var testModuleContent = {x: "OKAY"};
   var testModuleName = "testmod"
   test_visualizer.addModule(Visualizer.Module, testModuleName, testModuleContent)
 
@@ -56,7 +56,7 @@ test('Visualizer::addModule', 5, function() {
   equal(test_visualizer.get('modules.'+testModuleName).constructor, Visualizer.Module, "The added module is an instance of Visualizer.Module");
 
   // Test content argument
-  equal(test_visualizer.get('modules.'+testModuleName+'.content'), testModuleContent, "The default content parameter is used as the Module's content");
+  equal(test_visualizer.get('modules.'+testModuleName+'.x'), "OKAY", "The content parameter is used for the Module's parameters");
 });
 
 test('Visualizer::useScenes , Visualizer::setScene', function() {
@@ -73,6 +73,7 @@ test('Visualizer::useScenes , Visualizer::setScene', function() {
   test_visualizer.useScenes(testScenes);
   newSceneCount = Object.keys(test_visualizer.get('scenes')).length;
   ok(newSceneCount > startSceneCount, "The visualizer's 'scenes' Object has more entries than before");
+  equal(test_visualizer.get('currentScene.identifier'), testScenes[0].identifier, "The first scene provided is used currentScene");
 
   // Test setScene for a present scene
   test_visualizer.setScene("main");

@@ -114,7 +114,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/build_js_j-visualizer.js.html#l1453"><code>build&#x2F;js&#x2F;j-visualizer.js:1453</code></a>
+            Defined in: <a href="../files/build_js_j-visualizer.js.html#l1457"><code>build&#x2F;js&#x2F;j-visualizer.js:1457</code></a>
         </div>
     
 
@@ -169,6 +169,13 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_addView">addView</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_forceLimit">forceLimit</a>
 
                                 
@@ -184,6 +191,13 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_requestRedraw">requestRedraw</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setDefaultViews">setDefaultViews</a>
 
                                 
                                 
@@ -214,6 +228,13 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_defaultViews">defaultViews</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_maxLength">maxLength</a>
 
                                 
@@ -221,7 +242,21 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_model">model</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_moduleViews">moduleViews</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_requestedViews">requestedViews</a>
 
                                 
                                 
@@ -294,7 +329,7 @@ define and take care of how a given Module&#39;s data can be displayed.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1625"><code>build&#x2F;js&#x2F;j-visualizer.js:1625</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1732"><code>build&#x2F;js&#x2F;j-visualizer.js:1732</code></a>
         
         </p>
 
@@ -359,6 +394,140 @@ caches the groups (making redraws far more efficient)</p>
 </div>
 
                 
+                    <div id="method_addView" class="method item">
+    <h3 class="name"><code>addView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>viewKey</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[viewClass=defaultViews.viewKey]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">ModuleView</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1607"><code>build&#x2F;js&#x2F;j-visualizer.js:1607</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>addView takes a (key) name and ModuleView Class as parameters, and uses these to create
+a ModuleView for this module, and store it under the key&#39;s name. If no class is passed,
+this will look to the defaultViews index to attempt to find the relevant ModuleView.</p>
+<p>If the ModuleView already exists, it will simply return that, if it successfully creates
+a ModuleView, the resulting view will be returns. Otherwise the result will be undefined.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">viewKey</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name (key) for the view to be stored under.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[viewClass=defaultViews.viewKey]</code>
+                        <span class="type">ModuleView Class</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The class to View</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">ModuleView</span>:
+                    
+                    <p>(or null if doesn&#39;t exist and there is no class to instantiate...)</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_forceLimit" class="method item">
     <h3 class="name"><code>forceLimit</code></h3>
 
@@ -405,7 +574,7 @@ caches the groups (making redraws far more efficient)</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1571"><code>build&#x2F;js&#x2F;j-visualizer.js:1571</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1678"><code>build&#x2F;js&#x2F;j-visualizer.js:1678</code></a>
         
         </p>
 
@@ -513,7 +682,7 @@ the limit to the viewed-data&#39;s size is enforced.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1593"><code>build&#x2F;js&#x2F;j-visualizer.js:1593</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1700"><code>build&#x2F;js&#x2F;j-visualizer.js:1700</code></a>
         
         </p>
 
@@ -617,7 +786,7 @@ is simply O(1) as it simply grabs the previous data. Say what??? :P</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1555"><code>build&#x2F;js&#x2F;j-visualizer.js:1555</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1662"><code>build&#x2F;js&#x2F;j-visualizer.js:1662</code></a>
         
         </p>
 
@@ -630,6 +799,81 @@ is simply O(1) as it simply grabs the previous data. Say what??? :P</p>
     <div class="description">
         <p>requestRedraw sends a request to the current scene
 to redraw the widgets relevant to this module (and no others).</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Void</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_setDefaultViews" class="method item">
+    <h3 class="name"><code>setDefaultViews</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1579"><code>build&#x2F;js&#x2F;j-visualizer.js:1579</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>setDefaultViews iterates over the requestedViews
+(specified in the current scene&#39;s JSON), and attempts to instantiate
+all relevant ModuleViews.</p>
+<p>This method is called by default when the current scene or it&#39;s
+widgets/requirements change. Is run in a debounce to keep it fast.</p>
 
     </div>
 
@@ -684,7 +928,7 @@ to redraw the widgets relevant to this module (and no others).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1491"><code>build&#x2F;js&#x2F;j-visualizer.js:1491</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1495"><code>build&#x2F;js&#x2F;j-visualizer.js:1495</code></a>
         
         </p>
 
@@ -695,12 +939,17 @@ to redraw the widgets relevant to this module (and no others).</p>
 
     <div class="description">
         <p>content is the full set of data (in Array , Ember.Array) form that is
-available to this Module.</p>
+available to this Module. It is computed based on <code>model</code> and should
+not be set directly.</p>
 <p>Note: this attribute should only be accessed from the
-data-management side of your app; it&#39;s where you dump data, and it&#39;s
+data-management side of your app; it&#39;s
 what you generally access for front-end filtering. This Module&#39;s
 ModuleViews should not access the content, however - they should access
 the dataset (which is a subset of content).</p>
+<p>FIXME (deprecation): Setting <code>content</code> directly is deprecated as of Ember 1.7 and will likely
+                     be removed at a later date.
+                     Some module subclasses may still set content directly and as a result
+                     we will temporarily continue to alias <code>content</code> to <code>model</code>.</p>
 
     </div>
 
@@ -735,7 +984,7 @@ the dataset (which is a subset of content).</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1509"><code>build&#x2F;js&#x2F;j-visualizer.js:1509</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1529"><code>build&#x2F;js&#x2F;j-visualizer.js:1529</code></a>
         
         </p>
 
@@ -750,6 +999,59 @@ It can potentially be the exact same data as content, in full,
 but it can also be a limited/truncated version (often using the
 maxLength property). It may also filtered down by properties, etc.</p>
 <p>ModuleViews should only look here for their Module data.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_defaultViews" class="property item">
+    <h3 class="name"><code>defaultViews</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1559"><code>build&#x2F;js&#x2F;j-visualizer.js:1559</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>defaultViews is an Object containing of key-value pairs, where the key
+represents the common name for the view (as specified in the Scene JSON,
+for example, one might be &#39;wordcloud&#39;), and the value represents the class of
+the view, for instantiation purposes.</p>
+<p>Style:
+{
+  &#39;viewKey&#39;: ViewClass,
+  &#39;pieChart&#39;: VisualizerCharts.PieChart
+}</p>
 
     </div>
 
@@ -784,7 +1086,7 @@ maxLength property). It may also filtered down by properties, etc.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1479"><code>build&#x2F;js&#x2F;j-visualizer.js:1479</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1483"><code>build&#x2F;js&#x2F;j-visualizer.js:1483</code></a>
         
         </p>
 
@@ -798,6 +1100,53 @@ maxLength property). It may also filtered down by properties, etc.</p>
 Sometimes a project will collect more data than is practical to display
 to the user (either because it will be confusing, or otherwise too slow);
 this property represents that limit.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_model" class="property item">
+    <h3 class="name"><code>model</code></h3>
+    <span class="type">Ember.Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1517"><code>build&#x2F;js&#x2F;j-visualizer.js:1517</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p><code>model</code> is the array which you should set or append when dumping
+data. To access data, you should use <code>content</code> or, when applicable,
+<code>dataset</code>.</p>
 
     </div>
 
@@ -832,7 +1181,7 @@ this property represents that limit.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1524"><code>build&#x2F;js&#x2F;j-visualizer.js:1524</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1544"><code>build&#x2F;js&#x2F;j-visualizer.js:1544</code></a>
         
         </p>
 
@@ -846,6 +1195,52 @@ this property represents that limit.</p>
 each of which must be relevant to this particular Module&#39;s data structuring.</p>
 <p>For example, if this Module is a set of words with frequencies, a WordCloud
 may be an applicable ModuleView.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_requestedViews" class="property item">
+    <h3 class="name"><code>requestedViews</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/build_js_j-visualizer.js.html#l1634"><code>build&#x2F;js&#x2F;j-visualizer.js:1634</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>requestedViews is an Array of keys (Strings) that represent Views that the
+currentScene will be attempting to draw for this particular module.</p>
 
     </div>
 
@@ -880,7 +1275,7 @@ may be an applicable ModuleView.</p>
             
         
         
-        <a href="../files/build_js_j-visualizer.js.html#l1470"><code>build&#x2F;js&#x2F;j-visualizer.js:1470</code></a>
+        <a href="../files/build_js_j-visualizer.js.html#l1474"><code>build&#x2F;js&#x2F;j-visualizer.js:1474</code></a>
         
         </p>
 
