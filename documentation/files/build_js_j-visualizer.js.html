@@ -1650,6 +1650,21 @@
     dataset: Ember.computed.defaultTo(&#x27;arrangedContent&#x27;),
 
     /**
+      * reflectModelData updates the dataset to reflect the current state of
+      * the model/content. This method is called automatically when the model/content
+      * is changed to ensure that the dataset is up-to-date and relevant
+      *
+      * @method reflectModelData
+      * @return {void}
+     */
+    reflectModelData: (function() {
+      return Ember.run.next(this, function() {
+        this.set(&#x27;dataset&#x27;, this.get(&#x27;arrangedContent&#x27;));
+        return this.forceLimit();
+      });
+    }).observes(&#x27;model&#x27;),
+
+    /**
       * moduleViews an object dictionary/map of Visualizer ModuleView objects,
       * each of which must be relevant to this particular Module&#x27;s data structuring.
       *

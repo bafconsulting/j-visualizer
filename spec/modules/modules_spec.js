@@ -84,6 +84,21 @@ test('dataset, limits', function() {
   equal(reducedDataset, '32', "Dataset lost the smallest value (1), kept the 3 and the 2");
 });
 
+// dataset syncs to content/model
+asyncTest('dataset, limits', function() {
+  // Dataset default
+  _testModule.set('content', testContent);
+  equal(_testModule.get('content'), _testModule.get('dataset'), "By default, dataset is equal to content");
+
+  var newContent = [{val: 9001, type: 'no way'}];
+  _testModule.set('content', newContent);
+  equal(_testModule.get('content'), newContent, "New content value is set");
+  notEqual(_testModule.get('dataset.0.val'), 9001, "Dataset is updated to the new content");
+  Ember.run.next(this, function(){
+    equal(_testModule.get('dataset.0.val'), 9001, "Dataset is updated to the new content");
+    start();
+  });
+});
 
 // groupedBy:
 test('groupedBy', function() {
