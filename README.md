@@ -1,4 +1,5 @@
 # JVisualizer Core
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jugnoo/j-visualizer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 JVisualizer is a framework for simplifying data visualization in web applications by
 defining structuring conventions relevant to creating views of data:
